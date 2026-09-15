@@ -129,10 +129,10 @@ export default function InstitutionPortal() {
               Module 4 • Financial Institution Portal
             </span>
             <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-              Lender & Investor Underwriting Console
+              Lender &amp; Investor Underwriting Console
             </h1>
             <p className="text-xs sm:text-sm text-[#a89f91] mt-1">
-              Deploy capital into pre-evaluated, bank-ready rural MSMEs with verified DSCR (>1.35x) and PMEGP subsidy clearance.
+              Deploy capital into pre-evaluated, bank-ready rural MSMEs with verified DSCR (&gt;1.35x) and PMEGP subsidy clearance.
             </p>
           </div>
 

@@ -93,7 +93,15 @@ export default function HeroSlideshowBanner() {
   };
 
   // Small Business to Big Enterprise Growth Data
-  const growthData = {
+  const growthDataMap: Record<number, {
+    tag: string;
+    title: string;
+    desc: string;
+    scaleMetric: string;
+    subMetric: string;
+    dscr: string;
+    radius: string;
+  }> = {
     1: {
       tag: "1. Seed Phase",
       title: "Grassroots Savings (₹1.0L)",
@@ -121,15 +129,9 @@ export default function HeroSlideshowBanner() {
       dscr: "1.82x Solvency Passed",
       radius: "Regional Mandi Hub",
     },
-  }[growthStage] || {
-    tag: "1. Seed Phase",
-    title: "Grassroots Savings (₹1.0L)",
-    desc: "Unorganized dairy stall with volatile mandi pricing, high spoilage, and zero formal bank access.",
-    scaleMetric: "₹1.0L Own Capital",
-    subMetric: "Unorganized",
-    dscr: "N/A",
-    radius: "Local Village Only",
   };
+
+  const growthData = growthDataMap[growthStage] || growthDataMap[1];
 
   return (
     <section className="relative bg-[#fcfaf7] border-b border-[#e7e1d8] overflow-hidden">

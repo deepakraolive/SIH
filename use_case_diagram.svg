@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 1150" width="100%" height="100%">
+  <defs>
+    <style>
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 42px; font-weight: 800; fill: #0046dc; }
+      .sub-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 15px; fill: #64748b; }
+      .h2 { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 20px; font-weight: 700; fill: #0f172a; }
+      .body-txt { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 700; fill: #0f172a; }
+      .sub-txt { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13.5px; fill: #64748b; }
+      .actor-txt { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 17px; font-weight: 700; fill: #1e293b; }
+      .vert-txt { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 21px; font-weight: 800; fill: #166534; letter-spacing: 0.5px; }
+      .line { stroke: #000000; stroke-width: 3; fill: none; }
+      .dash-box { stroke: #475569; stroke-width: 2.5; stroke-dasharray: 10 10; fill: #ffffff; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#000000" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="2000" height="1150" fill="#ffffff" />
+
+  <!-- Titles -->
+  <text x="1000" y="55" text-anchor="middle" class="title">Use Case Diagram</text>
+  <text x="1000" y="95" text-anchor="middle" class="sub-title">GramVest — AI-Driven Hyper-Local Business Advisory and Financial Structuring Assistant</text>
+
+  <!-- ========================================== -->
+  <!-- LEFT ACTORS -->
+  <!-- ========================================== -->
+  <!-- User (Rural Entrepreneur) -->
+  <g transform="translate(150, 240)">
+    <circle cx="0" cy="0" r="18" fill="none" stroke="#1e293b" stroke-width="4"/>
+    <line x1="0" y1="18" x2="0" y2="65" stroke="#1e293b" stroke-width="4"/>
+    <polyline points="-24,42 0,30 24,42" fill="none" stroke="#1e293b" stroke-width="4"/>
+    <line x1="0" y1="65" x2="-20" y2="110" stroke="#1e293b" stroke-width="4"/>
+    <line x1="0" y1="65" x2="20" y2="110" stroke="#1e293b" stroke-width="4"/>
+    <text x="0" y="132" text-anchor="middle" class="actor-txt">Rural Entrepreneur</text>
+  </g>
+
+  <!-- Authorities Box -->
+  <rect x="60" y="470" width="180" height="450" rx="4" fill="#ffffff" stroke="#1e293b" stroke-width="2.5"/>
+  <text x="150" y="948" text-anchor="middle" class="actor-txt">Authorities</text>
+
+  <!-- Admin -->
+  <g transform="translate(150, 540)">
+    <circle cx="0" cy="0" r="18" fill="none" stroke="#b91c1c" stroke-width="4"/>
+    <line x1="0" y1="18" x2="0" y2="65" stroke="#b91c1c" stroke-width="4"/>
+    <polyline points="-24,42 0,30 24,42" fill="none" stroke="#b91c1c" stroke-width="4"/>
+    <line x1="0" y1="65" x2="-20" y2="110" stroke="#b91c1c" stroke-width="4"/>
+    <line x1="0" y1="65" x2="20" y2="110" stroke="#b91c1c" stroke-width="4"/>
+    <text x="0" y="132" text-anchor="middle" class="actor-txt" fill="#b91c1c">Admin</text>
+  </g>
+
+  <!-- Bank / SCA Officer -->
+  <g transform="translate(150, 730)">
+    <circle cx="0" cy="0" r="18" fill="none" stroke="#b91c1c" stroke-width="4"/>
+    <line x1="0" y1="18" x2="0" y2="65" stroke="#b91c1c" stroke-width="4"/>
+    <polyline points="-24,42 0,30 24,42" fill="none" stroke="#b91c1c" stroke-width="4"/>
+    <line x1="0" y1="65" x2="-20" y2="110" stroke="#b91c1c" stroke-width="4"/>
+    <line x1="0" y1="65" x2="20" y2="110" stroke="#b91c1c" stroke-width="4"/>
+    <text x="0" y="132" text-anchor="middle" class="actor-txt" fill="#b91c1c">Bank / SCA Officer</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- ACCESS / PRE-DASHBOARD BLOCKS -->
+  <!-- ========================================== -->
+  <!-- 1. Government Scheme Explorer -->
+  <rect x="330" y="210" width="340" height="95" fill="#c7dffc" stroke="#000000" stroke-width="2.5"/>
+  <text x="500" y="250" text-anchor="middle" class="body-txt">Government Scheme Explorer</text>
+  <text x="500" y="278" text-anchor="middle" class="body-txt">&amp; Concessional Credit Policy</text>
+
+  <!-- 2. Multilingual AI Advisor -->
+  <rect x="330" y="390" width="340" height="95" fill="#ffffff" stroke="#000000" stroke-width="2.5"/>
+  <text x="500" y="432" text-anchor="middle" class="body-txt">Multilingual AI Advisor</text>
+  <text x="500" y="460" text-anchor="middle" class="body-txt">&amp; Voice Chat Assistant</text>
+
+  <!-- 3. Authentication & e-KYC -->
+  <rect x="330" y="560" width="340" height="85" fill="#ffffff" stroke="#000000" stroke-width="2.5"/>
+  <!-- Fingerprint Icon -->
+  <circle cx="370" cy="602" r="18" fill="none" stroke="#0284c7" stroke-width="3"/>
+  <circle cx="370" cy="602" r="10" fill="none" stroke="#0284c7" stroke-width="2"/>
+  <text x="515" y="610" text-anchor="middle" class="body-txt">Authentication &amp; e-KYC</text>
+
+  <!-- 4. Digital Signature & e-Sign -->
+  <rect x="330" y="720" width="340" height="85" fill="#fca5a5" stroke="#000000" stroke-width="2.5"/>
+  <!-- Key icon -->
+  <rect x="355" y="752" width="25" height="15" fill="#000000"/>
+  <circle cx="385" cy="760" r="12" fill="none" stroke="#000000" stroke-width="3"/>
+  <text x="515" y="756" text-anchor="middle" class="body-txt">Digital Signature</text>
+  <text x="515" y="782" text-anchor="middle" class="body-txt">&amp; Loan Sanction e-Sign</text>
+
+  <!-- ========================================== -->
+  <!-- CENTER: USER DASHBOARD -->
+  <!-- ========================================== -->
+  <rect x="760" y="170" width="410" height="780" class="dash-box"/>
+  <rect x="850" y="152" width="230" height="34" fill="#ffffff"/>
+  <text x="965" y="176" text-anchor="middle" class="h2">GramVest User Dashboard</text>
+
+  <!-- Card 1: Market Radar -->
+  <rect x="795" y="210" width="340" height="95" fill="#ffffff" stroke="#000000" stroke-width="2.5"/>
+  <text x="965" y="250" text-anchor="middle" class="body-txt">Hyper-Local Market &amp;</text>
+  <text x="965" y="278" text-anchor="middle" class="body-txt">Competitor Radar (5–10km)</text>
+
+  <!-- Card 2: Opportunity & SWOT -->
+  <rect x="795" y="380" width="340" height="95" fill="#e9d5ff" stroke="#000000" stroke-width="2.5"/>
+  <text x="965" y="420" text-anchor="middle" class="body-txt">Opportunity Analysis &amp;</text>
+  <text x="965" y="448" text-anchor="middle" class="body-txt">Localized SWOT / Risk</text>
+
+  <!-- Card 3: Smart Scheme Calculator -->
+  <rect x="795" y="550" width="340" height="95" fill="#ffffff" stroke="#000000" stroke-width="2.5"/>
+  <text x="965" y="590" text-anchor="middle" class="body-txt">Smart Financial Calculator</text>
+  <text x="965" y="618" text-anchor="middle" class="body-txt">&amp; Scheme Router (10%/90%)</text>
+
+  <!-- Card 4: What-If & DPR -->
+  <rect x="795" y="720" width="340" height="95" fill="#fed7aa" stroke="#000000" stroke-width="2.5"/>
+  <text x="965" y="760" text-anchor="middle" class="body-txt">What-If Stress Simulator</text>
+  <text x="965" y="788" text-anchor="middle" class="body-txt">&amp; Bank-Ready DPR Dossier</text>
+
+  <!-- Downward arrows inside dashboard -->
+  <line x1="965" y1="305" x2="965" y2="375" class="line" marker-end="url(#arrow)"/>
+  <line x1="965" y1="475" x2="965" y2="545" class="line" marker-end="url(#arrow)"/>
+  <line x1="965" y1="645" x2="965" y2="715" class="line" marker-end="url(#arrow)"/>
+
+  <!-- ========================================== -->
+  <!-- MIDDLEWARE: GREEN ENCRYPTION / API BAR -->
+  <!-- ========================================== -->
+  <rect x="1270" y="170" width="110" height="780" fill="#bbf7d0" stroke="#16a34a" stroke-width="3"/>
+  <text x="1335" y="560" text-anchor="middle" transform="rotate(-90 1335 560)" class="vert-txt">API Gateway &amp; Data Encryption Layer</text>
+
+  <!-- ========================================== -->
+  <!-- RIGHT: BACKEND INFRASTRUCTURE -->
+  <!-- ========================================== -->
+  <!-- FastAPI Web Server -->
+  <rect x="1480" y="510" width="340" height="115" fill="#ffffff" stroke="#000000" stroke-width="2.5"/>
+  <!-- Server Icon -->
+  <rect x="1505" y="535" width="40" height="65" fill="#0284c7" stroke="#0369a1" stroke-width="2"/>
+  <line x1="1512" y1="555" x2="1538" y2="555" stroke="#ffffff" stroke-width="2"/>
+  <line x1="1512" y1="575" x2="1538" y2="575" stroke="#ffffff" stroke-width="2"/>
+  <circle cx="1535" cy="588" r="3" fill="#22c55e"/>
+  <text x="1650" y="555" text-anchor="middle" class="h2">FastAPI Web Server</text>
+  <text x="1650" y="585" text-anchor="middle" class="sub-txt">(REST API &amp; Deterministic Engine)</text>
+
+  <!-- Database Cylinder (Top) -->
+  <g transform="translate(1570, 190)">
+    <!-- cylinder body -->
+    <path d="M 0,25 L 0,135 A 80,25 0 0,0 160,135 L 160,25 Z" fill="#f3e8ff" stroke="#9333ea" stroke-width="2.5"/>
+    <path d="M 0,75 A 80,25 0 0,0 160,75" fill="none" stroke="#9333ea" stroke-width="2"/>
+    <path d="M 0,105 A 80,25 0 0,0 160,105" fill="none" stroke="#9333ea" stroke-width="2"/>
+    <!-- cylinder top ellipse -->
+    <ellipse cx="80" cy="25" rx="80" ry="25" fill="#f3e8ff" stroke="#9333ea" stroke-width="2.5"/>
+    <text x="80" y="65" text-anchor="middle" class="body-txt" fill="#6b21a8">PostgreSQL +</text>
+    <text x="80" y="90" text-anchor="middle" class="body-txt" fill="#6b21a8">PostGIS Database</text>
+    <text x="80" y="115" text-anchor="middle" class="sub-txt" fill="#6b21a8">(Spatial Demographics)</text>
+  </g>
+
+  <!-- Vector Store & Feeds (Bottom) -->
+  <rect x="1480" y="740" width="340" height="135" fill="#fae8ff" stroke="#000000" stroke-width="2.5"/>
+  <!-- Connected cubes icon -->
+  <rect x="1600" y="760" width="28" height="24" fill="#ea580c" stroke="#c2410c" stroke-width="2"/>
+  <rect x="1636" y="760" width="28" height="24" fill="#ea580c" stroke="#c2410c" stroke-width="2"/>
+  <rect x="1672" y="760" width="28" height="24" fill="#ea580c" stroke="#c2410c" stroke-width="2"/>
+  <line x1="1628" y1="772" x2="1636" y2="772" stroke="#000000" stroke-width="2"/>
+  <line x1="1664" y1="772" x2="1672" y2="772" stroke="#000000" stroke-width="2"/>
+  <text x="1650" y="820" text-anchor="middle" class="body-txt">pgvector RAG Store</text>
+  <text x="1650" y="848" text-anchor="middle" class="sub-txt">&amp; Agmarknet Mandi Feeds</text>
+
+  <!-- ========================================== -->
+  <!-- CONNECTING ARROWS -->
+  <!-- ========================================== -->
+  <!-- User -> AI Advisor -->
+  <path d="M 180,270 L 280,270 L 280,437 L 325,437" class="line" marker-end="url(#arrow)"/>
+
+  <!-- User -> Authentication -->
+  <path d="M 280,437 L 280,602 L 325,602" class="line" marker-end="url(#arrow)"/>
+
+  <!-- AI Advisor <-> Scheme Explorer (Double arrow) -->
+  <line x1="500" y1="390" x2="500" y2="310" class="line" marker-end="url(#arrow)"/>
+  <line x1="500" y1="310" x2="500" y2="385" class="line" marker-end="url(#arrow)"/>
+
+  <!-- Bank / SCA Officer -> Digital Signature -->
+  <path d="M 240,760 L 325,760" class="line" marker-end="url(#arrow)"/>
+
+  <!-- Digital Signature -> Authentication -->
+  <line x1="500" y1="720" x2="500" y2="650" class="line" marker-end="url(#arrow)"/>
+
+  <!-- Authentication -> User Dashboard -->
+  <line x1="670" y1="602" x2="755" y2="602" class="line" marker-end="url(#arrow)"/>
+
+  <!-- User Dashboard -> API Gateway -> Server -->
+  <line x1="1170" y1="565" x2="1270" y2="565" class="line"/>
+  <line x1="1380" y1="565" x2="1475" y2="565" class="line" marker-end="url(#arrow)"/>
+
+  <!-- Server <-> Database (Double arrow) -->
+  <line x1="1650" y1="510" x2="1650" y2="360" class="line" marker-end="url(#arrow)"/>
+  <line x1="1650" y1="360" x2="1650" y2="505" class="line" marker-end="url(#arrow)"/>
+
+  <!-- Server <-> Vector Store (Double arrow) -->
+  <line x1="1650" y1="625" x2="1650" y2="735" class="line" marker-end="url(#arrow)"/>
+  <line x1="1650" y1="735" x2="1650" y2="630" class="line" marker-end="url(#arrow)"/>
+</svg>

@@ -1,0 +1,2995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GramVest — Rural Business Decision Engine & Institution Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Module 2 Color Tokens */
+      --color-surface: #fff8f2;
+      --color-surface-dim: #dfd9d3;
+      --color-surface-bright: #fff8f2;
+      --color-surface-container-lowest: #ffffff;
+      --color-surface-container-low: #f9f3ec;
+      --color-surface-container: #f3ede6;
+      --color-surface-container-high: #ede7e1;
+      --color-surface-container-highest: #e7e2db;
+      --color-on-surface: #1d1b18;
+      --color-on-surface-variant: #706c63;
+      --color-outline: #8a726b;
+      --color-outline-variant: #ddd6c9;
+      --color-primary: #9d3e21;
+      --color-primary-terracotta: #c75d3e;
+      --color-primary-hover: #b04f32;
+      --color-primary-container: #fbebe4;
+      --color-secondary: #536346;
+      --color-secondary-container: #d4e6c1;
+      --color-tertiary: #735c00;
+      --color-tertiary-container: #ffe088;
+      --color-dark-bg: #151311;
+      --color-dark-card: #201c18;
+      --color-dark-border: #332d27;
+      
+      /* Typography */
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'Space Mono', monospace;
+      
+      /* Shadows & Radii */
+      --shadow-subtle: 0 2px 10px rgba(29, 27, 24, 0.04);
+      --shadow-card: 0 4px 20px rgba(29, 27, 24, 0.07);
+      --shadow-hover: 0 12px 32px rgba(29, 27, 24, 0.12);
+      --shadow-glow: 0 0 30px rgba(199, 93, 62, 0.25);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+      --radius-full: 9999px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background-color: var(--color-surface);
+      color: var(--color-on-surface);
+      font-family: var(--font-sans);
+      line-height: 1.55;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* Topology-style Technical Coordinate Top Bar */
+    .top-utility-bar {
+      background-color: var(--color-dark-bg);
+      color: #a89f91;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 6px 24px;
+      border-bottom: 1px solid var(--color-dark-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      letter-spacing: 0.04em;
+    }
+
+    .top-utility-bar .coords {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .top-utility-bar .tag-verified {
+      color: #8ed081;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .top-utility-bar .tag-verified::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background-color: #8ed081;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #8ed081;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    /* Main Navigation */
+    header.main-header {
+      background: rgba(255, 248, 242, 0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--color-outline-variant);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .header-inner {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 16px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--color-on-surface);
+      cursor: pointer;
+    }
+
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, var(--color-primary-terracotta), var(--color-primary));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      box-shadow: 0 4px 12px rgba(199, 93, 62, 0.28);
+    }
+
+    .brand-title {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-title span.vest {
+      color: var(--color-primary-terracotta);
+    }
+
+    .brand-sub {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-on-surface-variant);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--color-on-surface);
+      font-size: 14px;
+      font-weight: 600;
+      transition: color 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-primary-terracotta);
+    }
+
+    .portal-toggle-pill {
+      background-color: var(--color-surface-container);
+      border: 1px solid var(--color-outline-variant);
+      border-radius: var(--radius-full);
+      padding: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .portal-toggle-btn {
+      border: none;
+      background: transparent;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--color-on-surface-variant);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .portal-toggle-btn.active {
+      background-color: var(--color-surface-container-lowest);
+      color: var(--color-on-surface);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .portal-toggle-btn.institution-btn.active {
+      background-color: var(--color-dark-bg);
+      color: #fff;
+    }
+
+    .cta-btn-primary {
+      background-color: var(--color-primary-terracotta);
+      color: white;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 9px 20px;
+      border-radius: var(--radius-sm);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 4px 14px rgba(199, 93, 62, 0.24);
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .cta-btn-primary:hover {
+      background-color: var(--color-primary-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(199, 93, 62, 0.32);
+    }
+
+    /* MODULE 1: LANDING PAGE */
+    #module-landing {
+      display: block;
+    }
+
+    /* MODULE 4: INSTITUTION PORTAL */
+    #module-institution {
+      display: none;
+    }
+
+    /* SECTION 1: KKR-INSPIRED HERO BANNER WITH ANIMATION */
+    .hero-banner-section {
+      position: relative;
+      background: radial-gradient(circle at 80% 20%, rgba(212, 230, 193, 0.45), transparent 50%),
+                  radial-gradient(circle at 10% 80%, rgba(251, 235, 228, 0.7), transparent 60%),
+                  var(--color-surface);
+      border-bottom: 1px solid var(--color-outline-variant);
+      padding: 56px 28px 72px;
+      overflow: hidden;
+    }
+
+    .hero-container {
+      max-width: 1360px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .hero-badge-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .pill-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      background-color: var(--color-surface-container-lowest);
+      border: 1px solid var(--color-outline-variant);
+      border-radius: var(--radius-full);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-on-surface);
+    }
+
+    .pill-badge.accent {
+      background-color: var(--color-primary-container);
+      border-color: rgba(199, 93, 62, 0.25);
+      color: var(--color-primary);
+    }
+
+    .pill-badge.green {
+      background-color: var(--color-secondary-container);
+      border-color: rgba(83, 99, 70, 0.2);
+      color: var(--color-secondary);
+    }
+
+    /* Kinetic Rotating Typography (KKR-style) */
+    .kinetic-typography-stage {
+      position: relative;
+      min-height: 180px;
+    }
+
+    .kinetic-headline {
+      font-size: 46px;
+      font-weight: 800;
+      line-height: 1.14;
+      letter-spacing: -0.035em;
+      color: var(--color-on-surface);
+      display: none;
+      animation: kkrFadeInUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .kinetic-headline.active {
+      display: block;
+    }
+
+    .kinetic-headline span.highlight-terracotta {
+      color: var(--color-primary-terracotta);
+      position: relative;
+      display: inline-block;
+    }
+
+    .kinetic-headline span.highlight-green {
+      color: var(--color-secondary);
+    }
+
+    @keyframes kkrFadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(22px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-subtext {
+      font-size: 18px;
+      color: var(--color-on-surface-variant);
+      max-width: 620px;
+      line-height: 1.6;
+    }
+
+    /* KKR-style Banner Progress & Controls */
+    .banner-controls {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding-top: 8px;
+    }
+
+    .progress-track {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+      max-width: 280px;
+    }
+
+    .progress-bar-segment {
+      height: 4px;
+      flex: 1;
+      background-color: var(--color-outline-variant);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background-color: var(--color-primary-terracotta);
+      border-radius: var(--radius-full);
+      transition: width 0.1s linear;
+    }
+
+    .progress-bar-segment.active .progress-bar-fill {
+      background-color: var(--color-primary-terracotta);
+    }
+
+    .play-pause-btn {
+      background: var(--color-surface-container-lowest);
+      border: 1px solid var(--color-outline-variant);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--color-on-surface);
+      transition: all 0.2s ease;
+    }
+
+    .play-pause-btn:hover {
+      background-color: var(--color-surface-container);
+    }
+
+    .hero-action-buttons {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-secondary {
+      background-color: var(--color-surface-container-lowest);
+      color: var(--color-on-surface);
+      border: 1px solid var(--color-outline-variant);
+      padding: 10px 22px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--color-outline);
+      background-color: var(--color-surface-container);
+    }
+
+    /* RIGHT COLUMN: KKR-INSPIRED VISUAL STAGE (BUILDING SMALL BUSINESS BIG) */
+    .hero-visual-card {
+      background-color: var(--color-surface-container-lowest);
+      border: 1px solid var(--color-outline-variant);
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      box-shadow: var(--shadow-card);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .visual-stage-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--color-surface-container);
+      padding-bottom: 14px;
+      margin-bottom: 18px;
+    }
+
+    .stage-title-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .stage-live-dot {
+      width: 8px;
+      height: 8px;
+      background-color: #10b981;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #10b981;
+    }
+
+    .stage-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-on-surface);
+    }
+
+    .stage-selector {
+      display: flex;
+      gap: 6px;
+    }
+
+    .stage-step-btn {
+      border: 1px solid var(--color-outline-variant);
+      background: var(--color-surface-container-low);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      color: var(--color-on-surface-variant);
+      transition: all 0.2s ease;
+    }
+
+    .stage-step-btn.active {
+      background: var(--color-primary-terracotta);
+      color: white;
+      border-color: var(--color-primary-terracotta);
+    }
+
+    /* The Interactive Growth Canvas Stage */
+    .growth-stage-viewport {
+      background: linear-gradient(180deg, var(--color-surface-container-low) 0%, var(--color-surface-container) 100%);
+      border: 1px solid var(--color-outline-variant);
+      border-radius: var(--radius-lg);
+      padding: 24px 20px;
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Dynamic Visual Animation SVG Graphics */
+    .growth-illustration-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 10px 0;
+      position: relative;
+    }
+
+    .enterprise-node-cluster {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      width: 100%;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .growth-circle-portal {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fff 40%, var(--color-primary-container) 100%);
+      border: 3px solid var(--color-primary-terracotta);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      box-shadow: 0 10px 28px rgba(199, 93, 62, 0.2);
+      transition: all 0.5s ease;
+    }
+
+    .growth-circle-portal svg {
+      width: 60px;
+      height: 60px;
+      color: var(--color-primary-terracotta);
+      transition: all 0.4s ease;
+    }
+
+    .growth-circle-portal .portal-caption {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Floating Metric Badges (21shares & Topology style) */
+    .floating-badge {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--color-outline-variant);
+      border-radius: var(--radius-md);
+      padding: 8px 14px;
+      box-shadow: var(--shadow-subtle);
+      transition: all 0.4s ease;
+      font-size: 12px;
+    }
+
+    .floating-badge.badge-top-left {
+      top: 10px;
+      left: 10px;
+    }
+
+    .floating-badge.badge-bottom-right {
+      bottom: 12px;
+      right: 10px;
+    }
+
+    .floating-badge .metric-label {
+      font-size: 10px;
+      color: var(--color-on-surface-variant);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .floating-badge .metric-val {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--color-on-surface);
+    }
+
+    .floating-badge .metric-val.green {
+      color: var(--color-secondary);
+    }
+
+    .floating-badge .metric-val.terracotta {
+      color: var(--color-primary-terracotta);
+    }
+
+    /* Stage Growth Comparison Cards */
+    .growth-summary-pills {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .summary-pill-box {
+      background: var(--color-surface-container-lowest);
+      border: 1px solid var(--color-outline-variant);
+      border-radius: var(--radius-md);
+      padding: 10px 12px;
+      text-align: center;
+    }
+
+    .summary-pill-box .pill-num {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--color-on-surface);
+      font-family: var(--font-mono);
+    }
+
+    .summary-pill-box .pill-desc {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--color-on-surface-variant);
+      text-transform: uppercase;
+    }
+
+    /* SECTION 2: CURRENT GOVERNMENT SCHEMES & FINANCING OPTIONS (BANNERS 2 & 3) */
+    .schemes-section {
+      padding: 80px 28px;
+      max-width: 1360px;
+      margin: 0 auto;
+    }
+
+    .section-header-centered {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 48px;
+    }
+
+    .section-header-centered h2 {
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--color-on-surface);
+      margin-top: 10px;
+      margin-bottom: 14px;
+    }
+
+    .section-header-centered p {
+      font-size: 16px;
+      color: var(--color-on-surface-variant);
+    }
+
+    /* 21shares-style Scheme Product Grid */
+    .schemes-card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .scheme-product-card {
+      background: var(--color-surface-container-lowest);
+      border: 1px solid var(--color-outline-variant);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-subtle);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .scheme-product-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--color-primary-terracotta);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .scheme-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+
+    .scheme-ticker {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 13px;
+      background: var(--color-surface-container);
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      color: var(--color-on-surface);
+      border: 1px solid var(--color-outline-variant);
+    }
+
+    .subsidy-badge {
+      background: var(--color-secondary-container);
+      color: var(--color-secondary);
+      font-weight: 800;
+      font-size: 13px;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .scheme-title {
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--color-on-surface);
+      margin-bottom: 6px;
+    }
+
+    .scheme-desc {
+      font-size: 13px;
+      color: var(--color-on-surface-variant);
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .scheme-metrics-table {
+      background: var(--color-surface-container-low);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .metric-cell .cell-lbl {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--color-on-surface-variant);
+    }
+
+    .metric-cell .cell-val {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--color-on-surface);
+      font-family: var(--font-mono);
+    }
+
+    .scheme-action-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--color-surface-container);
+      padding-top: 14px;
+    }
+
+    .scheme-action-row span.authority {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-on-surface-variant);
+    }
+
+    .scheme-action-row a.check-btn {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--color-primary-terracotta);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Banner 3: Concessional Financing Tiers */
+    .financing-tiers-banner {
+      background: var(--color-dark-bg);
+      color: #fff;
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      margin-top: 48px;
+      border: 1px solid var(--color-dark-border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .financing-tiers-banner::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(199, 93, 62, 0.25), transparent 70%);
+      pointer-events: none;
+    }
+
+    .tiers-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .tiers-header-row h3 {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .tiers-header-row p {
+      color: #a89f91;
+      font-size: 14px;
+      max-width: 540px;
+    }
+
+    .tiers-card-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .tier-box {
+      background: var(--color-dark-card);
+      border: 1px solid var(--color-dark-border);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .tier-box.highlight {
+      border-color: var(--color-primary-terracotta);
+    }
+
+    .tier-type-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: #dfd9d3;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+
+    .tier-interest-rate {
+      font-size: 32px;
+      font-weight: 800;
+      color: #fff;
+      font-family: var(--font-mono);
+      margin-bottom: 12px;
+    }
+
+    .tier-interest-rate span {
+      font-size: 14px;
+      color: #a89f91;
+      font-weight: 500;
+    }
+
+    .tier-specs {
+      list-style: none;
+      font-size: 13px;
+      color: #c9c1b5;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .tier-specs li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tier-specs li::before {
+      content: '✓';
+      color: #8ed081;
+      font-weight: bold;
+    }
+
+    /* SECTION 3: THE CYCLE OF BUSINESS & CAPITAL STRUCTURING ENGINE */
+    .business-cycle-section {
+      background-color: var(--color-surface-container-low);
+      border-top: 1px solid var(--color-outline-variant);
+      border-bottom: 1px solid var(--color-outline-variant);
+      padding: 80px 28px;
+    }
+
+    .cycle-inner-container {
+      max-width: 1360px;
+      margin: 0 auto;
+    }
+
+    /* 4-Step Interactive Lifecycle Timeline */
+    .lifecycle-steps-nav {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .lifecycle-step-card {
+      background: var(--color-surface-container-lowest);
+      border: 1px solid var(--color-outline-variant);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+
+    .lifecycle-step-card.active {
+      border-color: var(--color-primary-terracotta);
+      box-shadow: 0 4px 16px rgba(199, 93, 62, 0.16);
+      background: #fff;
+    }
+
+    .lifecycle-step-card.active::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 16px;
+      height: 16px;
+      background: #fff;
+      border-right: 1px solid var(--color-primary-terracotta);
+      border-bottom: 1px solid var(--color-primary-terracotta);
+      transform: translateX(-50%) rotate(45deg);
+    }
+
+    .step-counter-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--color-primary-terracotta);
+      margin-bottom: 4px;
+    }
+
+    .step-card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--color-on-surface);
+    }
+
+    /* Interactive Capital Structuring Simulator */
+    .capital-structuring-box {
+      background: var(--color-surface-container-lowest);
+      border: 1px solid var(--color-outline-variant);
+      border-radius: var(--radius-xl);
+      padding: 36px;
+      box-shadow: var(--shadow-card);
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .slider-pane-header h3 {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--color-on-surface);
+      margin-bottom: 6px;
+    }
+
+    .slider-pane-header p {
+      font-size: 14px;
+      color: var(--color-on-surface-variant);
+      margin-bottom: 24px;
+    }
+
+    .slider-control-group {
+      margin-bottom: 24px;
+    }
+
+    .slider-label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 10px;
+    }
+
+    .slider-label-row label {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .slider-label-row .slider-val-display {
+      font-family: var(--font-mono);
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--color-primary-terracotta);
+    }
+
+    input[type=range].custom-slider {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 8px;
+      border-radius: var(--radius-full);
+      background: var(--color-surface-container);
+      outline: none;
+    }
+
+    input[type=range].custom-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--color-primary-terracotta);
+      cursor: pointer;
+      border: 3px solid #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      transition: transform 0.1s ease;
+    }
+
+    input[type=range].custom-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+    }
+
+    /* Stacked Breakdown Visualization Bar */
+    .capital-stack-bar {
+      height: 38px;
+      width: 100%;
+      background: var(--color-surface-container);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: flex;
+      margin: 20px 0 12px;
+      border: 1px solid var(--color-outline-variant);
+    }
+
+    .stack-segment {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: #fff;
+      transition: width 0.3s ease;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding: 0 6px;
+    }
+
+    .stack-margin { background-color: var(--color-tertiary); }
+    .stack-subsidy { background-color: var(--color-secondary); }
+    .stack-loan { background-color: var(--color-primary-terracotta); }
+    .stack-equity { background-color: #2b3a4a; }
+
+    /* Breakdown Legend & Metrics Grid */
+    .capital-legend-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .legend-item-card {
+      background: var(--color-surface-container-low);
+      border: 1px solid var(--color-outline-variant);
+      border-radius: var(--radius-md);
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .legend-item-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .color-chip {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+    }
+
+    .legend-item-card .amount {
+      font-family: var(--font-mono);
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--color-on-surface);
+    }
+
+    .legend-item-card .sub-caption {
+      font-size: 11px;
+      color: var(--color-on-surface-variant);
+    }
+
+    /* Solvency Verdict Callout */
+    .solvency-box {
+      background: var(--color-primary-container);
+      border: 1px solid rgba(199, 93, 62, 0.3);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .solvency-box .dscr-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .solvency-box .dscr-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--color-primary);
+      text-transform: uppercase;
+    }
+
+    .solvency-box .dscr-val {
+      font-family: var(--font-mono);
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--color-primary);
+    }
+
+    .solvency-verdict-tag {
+      background: #fff;
+      color: var(--color-secondary);
+      font-weight: 700;
+      font-size: 12px;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(83, 99, 70, 0.2);
+    }
+
+    /* SECTION 4: HYPER-LOCAL CATCHMENT RADAR TEASER */
+    .market-radar-section {
+      padding: 80px 28px;
+      max-width: 1360px;
+      margin: 0 auto;
+    }
+
+    .radar-console-box {
+      background: var(--color-dark-bg);
+      color: #fff;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--color-dark-border);
+      padding: 36px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .radar-console-left h3 {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .radar-console-left p {
+      color: #a89f91;
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .radar-specs-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .radar-spec-row {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--color-dark-border);
+      padding-bottom: 8px;
+      font-size: 13px;
+    }
+
+    .radar-spec-row span.spec-k {
+      color: #a89f91;
+      font-family: var(--font-mono);
+    }
+
+    .radar-spec-row span.spec-v {
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .radar-screen-display {
+      background: var(--color-dark-card);
+      border: 1px solid var(--color-dark-border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      position: relative;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .radar-map-grid {
+      border: 1px dashed rgba(255,255,255,0.15);
+      border-radius: var(--radius-md);
+      height: 180px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: radial-gradient(circle at center, rgba(142, 208, 129, 0.08) 0%, transparent 70%);
+    }
+
+    .radar-crosshair {
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      background: rgba(255,255,255,0.1);
+    }
+    .radar-crosshair.vert {
+      width: 1px;
+      height: 100%;
+    }
+
+    .radar-circle-pulse {
+      width: 100px;
+      height: 100px;
+      border: 1px solid #8ed081;
+      border-radius: 50%;
+      position: absolute;
+      animation: radarScan 3s infinite linear;
+    }
+
+    @keyframes radarScan {
+      0% { transform: scale(0.4); opacity: 0.8; }
+      100% { transform: scale(2.2); opacity: 0; }
+    }
+
+    /* MODULE 4: FINANCIAL INSTITUTION PORTAL STYLES */
+    .institution-wrapper {
+      padding: 40px 28px 80px;
+      max-width: 1360px;
+      margin: 0 auto;
+    }
+
+    .institution-header-banner {
+      background: var(--color-dark-bg);
+      color: #fff;
+      border-radius: var(--radius-xl);
+      padding: 32px 36px;
+      border: 1px solid var(--color-dark-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .inst-role-selector {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .inst-select-dropdown {
+      background: var(--color-dark-card);
+      color: #fff;
+      border: 1px solid var(--color-dark-border);
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 600;
+      outline: none;
+      cursor: pointer;
+    }
+
+    /* Institution Mandate Configuration Panel */
+    .mandate-config-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 28px;
+      margin-bottom: 36px;
+    }
+
+    .mandate-card {
+      background: var(--color-surface-container-lowest);
+      border: 1px solid var(--color-outline-variant);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-subtle);
+    }
+
+    .mandate-card h3 {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 18px;
+      color: var(--color-on-surface);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .mandate-form-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .form-field-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--color-on-surface-variant);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .form-field-group input, .form-field-group select {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid var(--color-outline-variant);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+      font-size: 14px;
+      background: var(--color-surface-container-low);
+      color: var(--color-on-surface);
+      font-weight: 600;
+    }
+
+    .mandate-stats-strip {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .inst-stat-box {
+      background: var(--color-surface-container-low);
+      border: 1px solid var(--color-outline-variant);
+      border-radius: var(--radius-md);
+      padding: 16px;
+    }
+
+    .inst-stat-box .lbl {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-on-surface-variant);
+      text-transform: uppercase;
+    }
+
+    .inst-stat-box .val {
+      font-family: var(--font-mono);
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--color-on-surface);
+      margin-top: 4px;
+    }
+
+    .inst-stat-box .val.terracotta { color: var(--color-primary-terracotta); }
+    .inst-stat-box .val.green { color: var(--color-secondary); }
+
+    /* Live Deal Flow Pipeline Table */
+    .pipeline-section {
+      background: var(--color-surface-container-lowest);
+      border: 1px solid var(--color-outline-variant);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-subtle);
+    }
+
+    .pipeline-header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .pipeline-filters {
+      display: flex;
+      gap: 8px;
+    }
+
+    .filter-chip {
+      background: var(--color-surface-container-low);
+      border: 1px solid var(--color-outline-variant);
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-chip.active {
+      background: var(--color-on-surface);
+      color: #fff;
+      border-color: var(--color-on-surface);
+    }
+
+    table.dealflow-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    table.dealflow-table th {
+      text-align: left;
+      padding: 12px 14px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--color-on-surface-variant);
+      border-bottom: 2px solid var(--color-surface-container);
+    }
+
+    table.dealflow-table td {
+      padding: 16px 14px;
+      border-bottom: 1px solid var(--color-surface-container);
+      color: var(--color-on-surface);
+      vertical-align: middle;
+    }
+
+    table.dealflow-table tr:hover td {
+      background-color: var(--color-surface-container-low);
+    }
+
+    .applicant-profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .applicant-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--color-primary-container);
+      color: var(--color-primary);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+
+    .applicant-name {
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .applicant-loc {
+      font-size: 11px;
+      color: var(--color-on-surface-variant);
+    }
+
+    .rank-gauge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+    }
+
+    .rank-gauge.high { background: #e8f5e9; color: #2e7d32; }
+    .rank-gauge.medium { background: #fff3e0; color: #e65100; }
+
+    /* Modal / Drawer for Detailed DPR Review */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(15, 13, 11, 0.7);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .modal-backdrop.active {
+      display: flex;
+    }
+
+    .dpr-dossier-card {
+      background: var(--color-surface-container-lowest);
+      border-radius: var(--radius-xl);
+      max-width: 820px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      border: 1px solid var(--color-outline-variant);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+      animation: modalSlideUp 0.3s ease;
+    }
+
+    @keyframes modalSlideUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .dossier-header {
+      background: var(--color-dark-bg);
+      color: #fff;
+      padding: 24px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .dossier-close-btn {
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .dossier-body {
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* Footer */
+    footer.main-footer {
+      background-color: var(--color-dark-bg);
+      color: #a89f91;
+      padding: 60px 28px 30px;
+      border-top: 1px solid var(--color-dark-border);
+      font-size: 13px;
+    }
+
+    .footer-inner {
+      max-width: 1360px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+
+    .footer-col h4 {
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-col a {
+      color: #a89f91;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover {
+      color: #fff;
+    }
+
+    .footer-bottom {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding-top: 24px;
+      border-top: 1px solid var(--color-dark-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .hero-container {
+        grid-template-columns: 1fr;
+      }
+      .capital-structuring-box {
+        grid-template-columns: 1fr;
+      }
+      .mandate-config-grid {
+        grid-template-columns: 1fr;
+      }
+      .radar-console-box {
+        grid-template-columns: 1fr;
+      }
+      .lifecycle-steps-nav {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .lifecycle-steps-nav { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .kinetic-headline { font-size: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Topology-style Spatial Coordinate Bar -->
+  <div class="top-utility-bar">
+    <div class="coords">
+      <span>[SYS-26091] PUNJAB RURAL DECISION ENGINE</span>
+      <span>LAT: 30.9010° N</span>
+      <span>LONG: 75.8573° E</span>
+      <span class="tag-verified">PAU AGRI BENCHMARK VERIFIED</span>
+    </div>
+    <div class="status">
+      <span>RBI PSL COMPLIANT • ZERO NUMERICAL HALLUCINATION</span>
+    </div>
+  </div>
+
+  <!-- Main Navigation Bar -->
+  <header class="main-header">
+    <div class="header-inner">
+      <div class="brand-logo" onclick="switchPortal('landing')">
+        <div class="brand-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+            <path d="M3 21h18"></path>
+            <path d="M5 21V7l7-4 7 4v14"></path>
+            <path d="M9 10a3 3 0 1 0 6 0"></path>
+            <path d="M9 21v-4a3 3 0 0 1 6 0v4"></path>
+          </svg>
+        </div>
+        <div>
+          <div class="brand-title">Gram<span class="vest">Vest</span></div>
+          <div class="brand-sub">Hyper-Local Decision Engine</div>
+        </div>
+      </div>
+
+      <!-- Navigation Links -->
+      <ul class="nav-links">
+        <li><a href="#hero-section">Overview</a></li>
+        <li><a href="#schemes-section">Govt Schemes</a></li>
+        <li><a href="#cycle-section">Business Cycle</a></li>
+        <li><a href="#radar-section">Catchment Radar</a></li>
+      </ul>
+
+      <!-- Portal Switcher Pill -->
+      <div class="portal-toggle-pill">
+        <button id="btn-portal-msme" class="portal-toggle-btn active" onclick="switchPortal('landing')">
+          MSME Entrepreneur
+        </button>
+        <button id="btn-portal-inst" class="portal-toggle-btn institution-btn" onclick="switchPortal('institution')">
+          Financial Institution
+        </button>
+      </div>
+
+      <!-- Fast Action CTA -->
+      <div id="nav-cta-container">
+        <button class="cta-btn-primary" onclick="scrollToCycle()">
+          <span>Start Feasibility Check</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================= -->
+  <!-- MODULE 1: LANDING PAGE                                                    -->
+  <!-- ========================================================================= -->
+  <div id="module-landing">
+
+    <!-- SECTION 1: KKR-INSPIRED HERO BANNER WITH ANIMATION -->
+    <section class="hero-banner-section" id="hero-section">
+      <div class="hero-container">
+        
+        <!-- Left: Kinetic Typographic Engine -->
+        <div class="hero-left">
+          <div class="hero-badge-row">
+            <span class="pill-badge accent">Module 1 • Decision Engine</span>
+            <span class="pill-badge green">PMEGP 35% Capital Grant Active</span>
+            <span class="pill-badge">RBI Priority Sector Lending</span>
+          </div>
+
+          <!-- Kinetic Typography Statements (KKR-style) -->
+          <div class="kinetic-typography-stage">
+            <h1 class="kinetic-headline active" id="headline-0">
+              Building small business <span class="highlight-terracotta">big</span> from rural seed to scaled enterprise.
+            </h1>
+            <h1 class="kinetic-headline" id="headline-1">
+              Know your mandi demand & competition <span class="highlight-terracotta">before</span> you borrow.
+            </h1>
+            <h1 class="kinetic-headline" id="headline-2">
+              Unlock <span class="highlight-green">35% sovereign grants</span> with zero broker exploitation.
+            </h1>
+            <h1 class="kinetic-headline" id="headline-3">
+              Institutional credit structuring with <span class="highlight-terracotta">auditable 1.8x DSCR</span>.
+            </h1>
+          </div>
+
+          <p class="hero-subtext">
+            GramVest empowers rural entrepreneurs and MSMEs across Punjab to streamline feasibility, claim government capital subsidies, and secure institutional bank financing with zero guesswork.
+          </p>
+
+          <!-- Banner Controls & Timer Track (KKR-style) -->
+          <div class="banner-controls">
+            <button class="play-pause-btn" id="hero-play-pause" onclick="toggleHeroAnimation()" title="Pause/Play animation">
+              <svg id="icon-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <rect x="6" y="4" width="4" height="16"></rect>
+                <rect x="14" y="4" width="4" height="16"></rect>
+              </svg>
+              <svg id="icon-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:none;">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+            </button>
+            <div class="progress-track">
+              <div class="progress-bar-segment" onclick="setHeroSlide(0)"><div class="progress-bar-fill" id="fill-0"></div></div>
+              <div class="progress-bar-segment" onclick="setHeroSlide(1)"><div class="progress-bar-fill" id="fill-1"></div></div>
+              <div class="progress-bar-segment" onclick="setHeroSlide(2)"><div class="progress-bar-fill" id="fill-2"></div></div>
+              <div class="progress-bar-segment" onclick="setHeroSlide(3)"><div class="progress-bar-fill" id="fill-3"></div></div>
+            </div>
+            <span style="font-family: var(--font-mono); font-size: 11px; color: var(--color-on-surface-variant);" id="hero-slide-num">01 / 04</span>
+          </div>
+
+          <!-- Hero Action CTAs -->
+          <div class="hero-action-buttons">
+            <button class="cta-btn-primary" onclick="scrollToCycle()">
+              <span>Explore Business Cycle</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+            <button class="btn-secondary" onclick="switchPortal('institution')">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 10h18M5 10v11M19 10v11M9 10v11M15 10v11M12 3l9 7H3z"/></svg>
+              <span>Institution Login</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right: Visual Stage (Building Small Business Big Visual Engine) -->
+        <div class="hero-visual-card">
+          <div class="visual-stage-header">
+            <div class="stage-title-group">
+              <span class="stage-live-dot"></span>
+              <span class="stage-title">Enterprise Scaling Engine</span>
+            </div>
+            <div class="stage-selector">
+              <button class="stage-step-btn active" id="stage-btn-1" onclick="setGrowthStage(1)">1. Seed</button>
+              <button class="stage-step-btn" id="stage-btn-2" onclick="setGrowthStage(2)">2. Feasibility</button>
+              <button class="stage-step-btn" id="stage-btn-3" onclick="setGrowthStage(3)">3. Scaled ₹50L</button>
+            </div>
+          </div>
+
+          <!-- Interactive Growth Viewport -->
+          <div class="growth-stage-viewport" id="growth-viewport">
+            
+            <!-- Top Left Floating Badge -->
+            <div class="floating-badge badge-top-left" id="badge-growth-status">
+              <div class="metric-label">Mandi Demand Status</div>
+              <div class="metric-val green" id="growth-status-val">3,800 L/Day Deficit</div>
+            </div>
+
+            <!-- Central Visual Circle Portal (KKR-style Visual Focus) -->
+            <div class="growth-illustration-box">
+              <div class="enterprise-node-cluster">
+                <div class="growth-circle-portal" id="growth-portal">
+                  <svg id="growth-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <!-- Milk dairy chilling unit icon -->
+                    <path d="M7 21h10a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z"></path>
+                    <path d="M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"></path>
+                    <line x1="9" y1="12" x2="15" y2="12"></line>
+                    <line x1="12" y1="9" x2="12" y2="15"></line>
+                  </svg>
+                  <span class="portal-caption" id="growth-stage-caption">Stage 1: Seed Idea</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bottom Right Floating Badge -->
+            <div class="floating-badge badge-bottom-right" id="badge-financial-status">
+              <div class="metric-label">Sanction Viability</div>
+              <div class="metric-val terracotta" id="growth-viability-val">74 / 100 Grade A</div>
+            </div>
+
+            <!-- Micro Description Banner -->
+            <div style="background: rgba(255,255,255,0.9); padding: 10px 14px; border-radius: var(--radius-sm); border: 1px solid var(--color-outline-variant); font-size: 12px; color: var(--color-on-surface); line-height: 1.4;" id="growth-detail-text">
+              <strong>Jagraon Block (Ludhiana):</strong> Gurpreet contributes ₹1.0L margin savings. GramVest structures a ₹10.0L Milk Chilling Unit with ₹3.15L PMEGP subsidy.
+            </div>
+          </div>
+
+          <!-- Bottom Stat Strip -->
+          <div class="growth-summary-pills">
+            <div class="summary-pill-box">
+              <div class="pill-num" id="stat-project-cost">₹10,00,000</div>
+              <div class="pill-desc">Project Cost</div>
+            </div>
+            <div class="summary-pill-box">
+              <div class="pill-num" style="color: var(--color-secondary);" id="stat-subsidy">₹3,15,000</div>
+              <div class="pill-desc">Govt Subsidy</div>
+            </div>
+            <div class="summary-pill-box">
+              <div class="pill-num" style="color: var(--color-primary-terracotta);" id="stat-dscr">1.62x</div>
+              <div class="pill-desc">DSCR Coverage</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 2: CURRENT GOVERNMENT SCHEMES & FINANCING OPTIONS (BANNERS 2 & 3) -->
+    <section class="schemes-section" id="schemes-section">
+      <div class="section-header-centered">
+        <span class="pill-badge accent">Banner 2 • Sovereign Entitlement</span>
+        <h2>Current Government Schemes & Grants</h2>
+        <p>
+          GramVest deterministically routes your enterprise parameters to eligible central and state capital subsidies. No middlemen, no commissions, direct bank transfer (DBT).
+        </p>
+      </div>
+
+      <!-- 21shares-style Scheme Product Cards -->
+      <div class="schemes-card-grid">
+        
+        <!-- Scheme 1: PMEGP -->
+        <div class="scheme-product-card" onclick="highlightScheme('pmegp')">
+          <div>
+            <div class="scheme-card-top">
+              <span class="scheme-ticker">PMEGP-RURAL</span>
+              <span class="subsidy-badge">35% CAPITAL GRANT</span>
+            </div>
+            <h3 class="scheme-title">Prime Minister Employment Generation</h3>
+            <p class="scheme-desc">
+              Non-repayable capital subsidy for rural manufacturing & processing units up to ₹50 Lakh project cost.
+            </p>
+            <div class="scheme-metrics-table">
+              <div class="metric-cell">
+                <div class="cell-lbl">Max Project Cost</div>
+                <div class="cell-val">₹50.0 Lakh</div>
+              </div>
+              <div class="metric-cell">
+                <div class="cell-lbl">Own Margin Req</div>
+                <div class="cell-val">5% – 10%</div>
+              </div>
+              <div class="metric-cell">
+                <div class="cell-lbl">Concessional Debt</div>
+                <div class="cell-val">60% – 65%</div>
+              </div>
+              <div class="metric-cell">
+                <div class="cell-lbl">Lock-in Period</div>
+                <div class="cell-val">3 Years</div>
+              </div>
+            </div>
+          </div>
+          <div class="scheme-action-row">
+            <span class="authority">KVIC / DIC Punjab</span>
+            <a href="#cycle-section" class="check-btn">Apply in DPR →</a>
+          </div>
+        </div>
+
+        <!-- Scheme 2: AIF -->
+        <div class="scheme-product-card" onclick="highlightScheme('aif')">
+          <div>
+            <div class="scheme-card-top">
+              <span class="scheme-ticker">AIF-AGRI</span>
+              <span class="subsidy-badge">3% SUBVENTION</span>
+            </div>
+            <h3 class="scheme-title">Agriculture Infrastructure Fund</h3>
+            <p class="scheme-desc">
+              Interest subvention and credit guarantee for post-harvest management infrastructure & primary processing.
+            </p>
+            <div class="scheme-metrics-table">
+              <div class="metric-cell">
+                <div class="cell-lbl">Max Loan Ceiling</div>
+                <div class="cell-val">₹2.00 Crore</div>
+              </div>
+              <div class="metric-cell">
+                <div class="cell-lbl">Interest Relief</div>
+                <div class="cell-val">3.0% p.a.</div>
+              </div>
+              <div class="metric-cell">
+                <div class="cell-lbl">Moratorium Period</div>
+                <div class="cell-val">Up to 24 Mos</div>
+              </div>
+              <div class="metric-cell">
+                <div class="cell-lbl">Tenure</div>
+                <div class="cell-val">7 Years</div>
+              </div>
+            </div>
+          </div>
+          <div class="scheme-action-row">
+            <span class="authority">Ministry of Agriculture</span>
+            <a href="#cycle-section" class="check-btn">Apply in DPR →</a>
+          </div>
+        </div>
+
+        <!-- Scheme 3: PMFME -->
+        <div class="scheme-product-card" onclick="highlightScheme('pmfme')">
+          <div>
+            <div class="scheme-card-top">
+              <span class="scheme-ticker">PMFME-ODOP</span>
+              <span class="subsidy-badge">35% CREDIT LINKED</span>
+            </div>
+            <h3 class="scheme-title">Micro Food Enterprises Scheme</h3>
+            <p class="scheme-desc">
+              Targeted assistance for One District One Product (ODOP) spice mills, mustard oil expellers, and agro packaging.
+            </p>
+            <div class="scheme-metrics-table">
+              <div class="metric-cell">
+                <div class="cell-lbl">Max Grant Cap</div>
+                <div class="cell-val">₹10.0 Lakh</div>
+              </div>
+              <div class="metric-cell">
+                <div class="cell-lbl">Own Equity</div>
+                <div class="cell-val">10% Min</div>
+              </div>
+              <div class="metric-cell">
+                <div class="cell-lbl">Bank Term Loan</div>
+                <div class="cell-val">90% Coverage</div>
+              </div>
+              <div class="metric-cell">
+                <div class="cell-lbl">Handholding</div>
+                <div class="cell-val">SNA Support</div>
+              </div>
+            </div>
+          </div>
+          <div class="scheme-action-row">
+            <span class="authority">MoFPI / Punjab Agro</span>
+            <a href="#cycle-section" class="check-btn">Apply in DPR →</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Banner 3: Concessional Financing Options & Lending Tiers -->
+      <div class="financing-tiers-banner">
+        <div class="tiers-header-row">
+          <div>
+            <span class="pill-badge green" style="margin-bottom: 12px;">Banner 3 • Financing Architecture</span>
+            <h3>Formal Financing Tiers & Concessional Lending</h3>
+            <p>
+              Under State Channelizing Agency guidelines, rural borrowers access multi-tiered concessional rates. GramVest calculates exact debt coverage to guarantee bank loan clearance.
+            </p>
+          </div>
+          <button class="cta-btn-primary" onclick="scrollToCycle()">
+            Run Loan Amortization →
+          </button>
+        </div>
+
+        <div class="tiers-card-strip">
+          
+          <!-- Micro Finance Tier -->
+          <div class="tier-box">
+            <div>
+              <div class="tier-type-tag">Tier 1 • Micro Finance (≤ ₹1.40L)</div>
+              <div class="tier-interest-rate">6.5% <span>p.a. concessional</span></div>
+              <ul class="tier-specs">
+                <li>Loan limit up to ₹1,40,000</li>
+                <li>3-Year quarterly repayment tenure</li>
+                <li>3-Month initial moratorium period</li>
+                <li>No collateral / personal guarantee only</li>
+              </ul>
+            </div>
+            <div style="font-size: 11px; color: #a89f91; font-family: var(--font-mono);">
+              SCA Channelized Concession
+            </div>
+          </div>
+
+          <!-- Term Loan Tier -->
+          <div class="tier-box highlight">
+            <div>
+              <div class="tier-type-tag" style="color: var(--color-primary-terracotta);">Tier 2 • MSME Term Loan (₹1.4L - ₹50L)</div>
+              <div class="tier-interest-rate">8.0% <span>p.a. term debt</span></div>
+              <ul class="tier-specs">
+                <li>Loan quantum up to ₹50,00,000</li>
+                <li>7-Year repayment amortization schedule</li>
+                <li>6-Month machinery commissioning moratorium</li>
+                <li>CGTMSE collateral guarantee covered</li>
+              </ul>
+            </div>
+            <div style="font-size: 11px; color: #a89f91; font-family: var(--font-mono);">
+              Lead District Bank Scheme
+            </div>
+          </div>
+
+          <!-- Co-Financing & Impact Equity Tier -->
+          <div class="tier-box">
+            <div>
+              <div class="tier-type-tag">Tier 3 • Co-Investment & Growth Tranche</div>
+              <div class="tier-interest-rate">Syndicated <span>Debt + Equity</span></div>
+              <ul class="tier-specs">
+                <li>Venture Debt & Angel impact participation</li>
+                <li>Ticket sizes from ₹20 Lakh to ₹1.5 Crore</li>
+                <li>Mezzanine structured cash-flow sharing</li>
+                <li>Direct underwriting through Module 4</li>
+              </ul>
+            </div>
+            <div style="font-size: 11px; color: #a89f91; font-family: var(--font-mono);">
+              Institution Syndicate Desk
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: THE CYCLE OF BUSINESS & CAPITAL STRUCTURING ENGINE -->
+    <section class="business-cycle-section" id="cycle-section">
+      <div class="cycle-inner-container">
+        
+        <div class="section-header-centered">
+          <span class="pill-badge accent">The Cycle of Business</span>
+          <h2>From Ideation to Subsidy & Bank Loan</h2>
+          <p>
+            See how GramVest guides first-time entrepreneurs through the entire lifecycle: eliminating blind speculation, unlocking capital grants, and structuring bankable debt.
+          </p>
+        </div>
+
+        <!-- 4-Step Interactive Lifecycle Timeline -->
+        <div class="lifecycle-steps-nav">
+          <div class="lifecycle-step-card active" onclick="selectCycleStep(1)" id="step-nav-1">
+            <div class="step-counter-tag">STEP 01</div>
+            <div class="step-card-title">Ideation & Catchment Feasibility</div>
+          </div>
+          <div class="lifecycle-step-card" onclick="selectCycleStep(2)" id="step-nav-2">
+            <div class="step-counter-tag">STEP 02</div>
+            <div class="step-card-title">Project Engineering & DPR</div>
+          </div>
+          <div class="lifecycle-step-card" onclick="selectCycleStep(3)" id="step-nav-3">
+            <div class="step-counter-tag">STEP 03</div>
+            <div class="step-card-title">Sovereign Grant Matching</div>
+          </div>
+          <div class="lifecycle-step-card" onclick="selectCycleStep(4)" id="step-nav-4">
+            <div class="step-counter-tag">STEP 04</div>
+            <div class="step-card-title">Bank Sanction & Loan Disbursal</div>
+          </div>
+        </div>
+
+        <!-- Interactive Capital Structuring Simulator Visualizer -->
+        <div class="capital-structuring-box">
+          
+          <!-- Left: Sliders & Adjustments -->
+          <div class="slider-pane">
+            <div class="slider-pane-header">
+              <span class="pill-badge">Interactive Capital Structuring</span>
+              <h3 style="margin-top: 8px;">Simulate Total Enterprise Outlay</h3>
+              <p>Drag the slider to test how project scale alters own margin, government grant, and required bank loan.</p>
+            </div>
+
+            <!-- Project Outlay Slider -->
+            <div class="slider-control-group">
+              <div class="slider-label-row">
+                <label>Total Project Investment</label>
+                <span class="slider-val-display" id="display-project-cost">₹10,00,000</span>
+              </div>
+              <input type="range" min="200000" max="5000000" step="100000" value="1000000" class="custom-slider" id="input-cost-slider" oninput="updateCapitalCalculations()">
+              <div style="display: flex; justify-content: space-between; font-size: 11px; color: var(--color-on-surface-variant); margin-top: 6px; font-family: var(--font-mono);">
+                <span>₹2.00 Lakh (Micro)</span>
+                <span>₹25.00 Lakh</span>
+                <span>₹50.00 Lakh (Max PMEGP)</span>
+              </div>
+            </div>
+
+            <!-- Category Selector (Special category gets 35% vs 25%) -->
+            <div style="margin-bottom: 20px;">
+              <label style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--color-on-surface-variant); display: block; margin-bottom: 6px;">
+                Beneficiary Category (Determines Subsidy %)
+              </label>
+              <select id="select-category" onchange="updateCapitalCalculations()" style="width: 100%; padding: 10px; border-radius: var(--radius-sm); border: 1px solid var(--color-outline-variant); font-size: 13px; font-weight: 600; background: var(--color-surface-container-low);">
+                <option value="35">Rural Special Category (SC/ST/OBC/Women/Ex-Servicemen) — 35% Grant</option>
+                <option value="25">Rural General Category — 25% Grant</option>
+              </select>
+            </div>
+
+            <!-- Operational Solvency Verdict Box -->
+            <div class="solvency-box">
+              <div class="dscr-group">
+                <span class="dscr-label">Debt Service Coverage (DSCR)</span>
+                <span class="dscr-val" id="calc-dscr-display">1.62x</span>
+              </div>
+              <span class="solvency-verdict-tag" id="calc-verdict-badge">✓ Bank Hurdle Passed (>1.30x)</span>
+            </div>
+          </div>
+
+          <!-- Right: Visual Stack & Breakdown Cards -->
+          <div class="breakdown-pane">
+            <h4 style="font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-on-surface-variant);">
+              Capital Stack Composition
+            </h4>
+
+            <!-- Stacked Color Bar -->
+            <div class="capital-stack-bar">
+              <div class="stack-segment stack-margin" id="stack-bar-margin" style="width: 10%;">Margin 10%</div>
+              <div class="stack-segment stack-subsidy" id="stack-bar-subsidy" style="width: 35%;">Grant 35%</div>
+              <div class="stack-segment stack-loan" id="stack-bar-loan" style="width: 55%;">Bank Loan 55%</div>
+            </div>
+
+            <!-- Financial Legend Grid (21shares-style chips) -->
+            <div class="capital-legend-grid">
+              
+              <div class="legend-item-card">
+                <div class="legend-item-top">
+                  <div class="color-chip" style="background-color: var(--color-tertiary);"></div>
+                  <span>Own Margin (10%)</span>
+                </div>
+                <div class="amount" id="calc-val-margin">₹1,00,000</div>
+                <div class="sub-caption">Entrepreneur contribution</div>
+              </div>
+
+              <div class="legend-item-card">
+                <div class="legend-item-top">
+                  <div class="color-chip" style="background-color: var(--color-secondary);"></div>
+                  <span id="calc-lbl-subsidy">PMEGP Grant (35%)</span>
+                </div>
+                <div class="amount" style="color: var(--color-secondary);" id="calc-val-subsidy">₹3,50,000</div>
+                <div class="sub-caption">100% Non-repayable grant</div>
+              </div>
+
+              <div class="legend-item-card">
+                <div class="legend-item-top">
+                  <div class="color-chip" style="background-color: var(--color-primary-terracotta);"></div>
+                  <span>Bank Term Debt</span>
+                </div>
+                <div class="amount" style="color: var(--color-primary-terracotta);" id="calc-val-loan">₹5,50,000</div>
+                <div class="sub-caption">7-Yr tenure @ 8.0% p.a.</div>
+              </div>
+
+              <div class="legend-item-card">
+                <div class="legend-item-top">
+                  <div class="color-chip" style="background-color: #2b3a4a;"></div>
+                  <span>Quarterly Repayment</span>
+                </div>
+                <div class="amount" id="calc-val-emi">₹25,840</div>
+                <div class="sub-caption">Quarterly principal + interest</div>
+              </div>
+
+            </div>
+
+            <div style="margin-top: 18px; text-align: right;">
+              <button class="cta-btn-primary" onclick="openDossierModal('gurpreet')">
+                <span>View Bank-Ready DPR Dossier</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 4: HYPER-LOCAL CATCHMENT RADAR TEASER -->
+    <section class="market-radar-section" id="radar-section">
+      <div class="radar-console-box">
+        <div class="radar-console-left">
+          <span class="pill-badge" style="background: rgba(255,255,255,0.1); color: #fff; border-color: rgba(255,255,255,0.2);">
+            Spatial Feasibility Intelligence
+          </span>
+          <h3 style="margin-top: 12px;">5km – 10km Catchment Scan</h3>
+          <p>
+            Unlike urban aggregators, GramVest ingests Punjab APMC Mandi arrival logs, rural 3-phase feeder stability, and OpenStreetMap competitor pins to assess true market deficit.
+          </p>
+
+          <div class="radar-specs-list">
+            <div class="radar-spec-row">
+              <span class="spec-k">PRIMARY APMC MANDI:</span>
+              <span class="spec-v">Jagraon Grain & Milk Market (Punjab)</span>
+            </div>
+            <div class="radar-spec-row">
+              <span class="spec-k">POWER GRID CATEGORY:</span>
+              <span class="spec-v">Rural Feeder A-1 (8h day / 8h night)</span>
+            </div>
+            <div class="radar-spec-row">
+              <span class="spec-k">COMPETITION SATURATION:</span>
+              <span class="spec-v">Low (2 units operating at 40% capacity)</span>
+            </div>
+            <div class="radar-spec-row">
+              <span class="spec-k">UNSERVED DEMAND GAP:</span>
+              <span class="spec-v" style="color: #8ed081;">68% Deficit (~3,800 Ltrs / Day)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="radar-screen-display">
+          <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; color: #a89f91;">
+            <span>RADAR: LIVE 10KM RADIUS</span>
+            <span style="color: #8ed081;">PINS DETECTED: 2</span>
+          </div>
+
+          <div class="radar-map-grid">
+            <div class="radar-crosshair"></div>
+            <div class="radar-crosshair vert"></div>
+            <div class="radar-circle-pulse"></div>
+            <div style="position: absolute; width: 10px; height: 10px; background: #8ed081; border-radius: 50%; box-shadow: 0 0 10px #8ed081;"></div>
+            <div style="position: absolute; top: 35px; right: 55px; width: 8px; height: 8px; background: #ef4444; border-radius: 50%;" title="Competitor 1"></div>
+            <div style="position: absolute; bottom: 40px; left: 65px; width: 8px; height: 8px; background: #ef4444; border-radius: 50%;" title="Competitor 2"></div>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; font-size: 11px; color: #a89f91; border-top: 1px solid var(--color-dark-border); padding-top: 10px;">
+            <span>Target Site: Sidhwan Bet, Ludhiana</span>
+            <span style="color: #8ed081;">✓ Optimal Plant Location</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODULE 4: FINANCIAL INSTITUTION PORTAL                                    -->
+  <!-- ========================================================================= -->
+  <div id="module-institution" class="institution-wrapper">
+    
+    <!-- Institution Welcome & Persona Switcher -->
+    <div class="institution-header-banner">
+      <div>
+        <span class="pill-badge accent" style="margin-bottom: 8px;">Module 4 • Financial Institution Portal</span>
+        <h2 style="font-size: 26px; font-weight: 800; letter-spacing: -0.02em;">Lender & Investor Underwriting Console</h2>
+        <p style="color: #a89f91; font-size: 13px; margin-top: 4px;">
+          Deploy capital into pre-evaluated, bank-ready rural MSMEs with verified DSCR (>1.35x) and PMEGP subsidy clearance.
+        </p>
+      </div>
+
+      <div class="inst-role-selector">
+        <label style="font-size: 12px; color: #a89f91; font-family: var(--font-mono);">LOGGED IN AS:</label>
+        <select class="inst-select-dropdown" id="inst-role-picker" onchange="switchInstitutionRole()">
+          <option value="sbi">SBI — Lead District Credit Officer (Ludhiana)</option>
+          <option value="omnivore">Omnivore Capital — Rural Impact Debt Partner</option>
+          <option value="pgb">Punjab Gramin Bank — Rural Branch Manager</option>
+          <option value="kvic">KVIC / DIC Punjab — Subsidy Sanction Officer</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Mandate & Fund Allocation Settings -->
+    <div class="mandate-config-grid">
+      
+      <!-- Form Card: Set Underwriting Thesis -->
+      <div class="mandate-card">
+        <h3>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          <span>Underwriting Mandate & Investment Criteria</span>
+        </h3>
+
+        <div class="mandate-form-row">
+          <div class="form-field-group">
+            <label>Target Ticket Size (Min - Max)</label>
+            <select id="mandate-ticket-size" onchange="filterPipeline()">
+              <option value="all">All Sizes (₹2.0L to ₹50.0L)</option>
+              <option value="micro">Micro (₹2.0L – ₹10.0L)</option>
+              <option value="sme">MSME Term (₹10.0L – ₹50.0L)</option>
+            </select>
+          </div>
+
+          <div class="form-field-group">
+            <label>Minimum DSCR Hurdle</label>
+            <select id="mandate-dscr" onchange="filterPipeline()">
+              <option value="1.30">≥ 1.30x (Standard RBI Hurdle)</option>
+              <option value="1.50">≥ 1.50x (Conservative)</option>
+              <option value="1.60">≥ 1.60x (Strict Institutional)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="mandate-form-row">
+          <div class="form-field-group">
+            <label>Preferred Sector Focus</label>
+            <select id="mandate-sector" onchange="filterPipeline()">
+              <option value="all">All Rural Sectors</option>
+              <option value="dairy">Dairy & Milk Processing</option>
+              <option value="agro">Food & Spice Processing</option>
+              <option value="chc">Farm Mechanization (CHC)</option>
+            </select>
+          </div>
+
+          <div class="form-field-group">
+            <label>Geographic Focus (District)</label>
+            <select id="mandate-district" onchange="filterPipeline()">
+              <option value="all">All Punjab Districts</option>
+              <option value="ludhiana">Ludhiana (Jagraon / Samrala)</option>
+              <option value="sangrur">Sangrur (Dhuri)</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end;">
+          <button class="btn-secondary" onclick="resetMandateFilters()">Reset to Defaults</button>
+        </div>
+      </div>
+
+      <!-- Stats Card: Portfolio & Fund Allocation -->
+      <div class="mandate-card">
+        <h3>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          <span>Active Allocation & Capital Deployed</span>
+        </h3>
+
+        <div class="mandate-stats-strip">
+          <div class="inst-stat-box">
+            <div class="lbl">Total Fund Allocation</div>
+            <div class="val" id="stat-total-pool">₹25.0 Cr</div>
+          </div>
+          <div class="inst-stat-box">
+            <div class="lbl">Capital Deployed</div>
+            <div class="val terracotta" id="stat-deployed">₹18.4 Cr</div>
+          </div>
+          <div class="inst-stat-box">
+            <div class="lbl">Available to Commit</div>
+            <div class="val green" id="stat-available">₹6.6 Cr</div>
+          </div>
+          <div class="inst-stat-box">
+            <div class="lbl">On-Time Repayment</div>
+            <div class="val" style="color: #2e7d32;">99.2%</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Live Deal Flow Pipeline Table -->
+    <div class="pipeline-section">
+      <div class="pipeline-header-bar">
+        <div>
+          <h3 style="font-size: 19px; font-weight: 800;">Live Rural MSME Deal Flow Pipeline</h3>
+          <p style="font-size: 13px; color: var(--color-on-surface-variant);">
+            Showing applications with algorithmic viability scores, verified mandi deficits, and PMEGP subsidy status.
+          </p>
+        </div>
+
+        <div class="pipeline-filters">
+          <button class="filter-chip active" onclick="setPipelineCategoryFilter('all', this)">All Deals (4)</button>
+          <button class="filter-chip" onclick="setPipelineCategoryFilter('dairy', this)">Dairy Units</button>
+          <button class="filter-chip" onclick="setPipelineCategoryFilter('agro', this)">Agro Processing</button>
+          <button class="filter-chip" onclick="setPipelineCategoryFilter('chc', this)">Farm Mechanization</button>
+        </div>
+      </div>
+
+      <div style="overflow-x: auto;">
+        <table class="dealflow-table">
+          <thead>
+            <tr>
+              <th>Applicant & Venture</th>
+              <th>Tehsil / District</th>
+              <th>Project Outlay</th>
+              <th>Requested Debt</th>
+              <th>Govt Subsidy</th>
+              <th>Viability Rank</th>
+              <th>DSCR Ratio</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="dealflow-table-body">
+            
+            <!-- Deal 1: Gurpreet Singh -->
+            <tr data-sector="dairy" data-district="ludhiana" data-cost="900000" data-dscr="1.62">
+              <td>
+                <div class="applicant-profile">
+                  <div class="applicant-avatar">GS</div>
+                  <div>
+                    <div class="applicant-name">Gurpreet Singh</div>
+                    <div class="applicant-loc">1,000L Bulk Milk Chilling Unit</div>
+                  </div>
+                </div>
+              </td>
+              <td>Sidhwan Bet, Ludhiana</td>
+              <td>₹9,00,000</td>
+              <td><strong>₹6,00,000</strong></td>
+              <td><span class="subsidy-badge">₹3.15L (PMEGP)</span></td>
+              <td><span class="rank-gauge high">74 / 100</span></td>
+              <td><strong>1.62x</strong></td>
+              <td>
+                <button class="btn-secondary" style="padding: 6px 12px; font-size: 12px;" onclick="openDossierModal('gurpreet')">Review DPR</button>
+                <button class="cta-btn-primary" style="padding: 6px 12px; font-size: 12px;" onclick="issueSanction('Gurpreet Singh', '₹6,00,000')">Sanction</button>
+              </td>
+            </tr>
+
+            <!-- Deal 2: Harpreet Kaur -->
+            <tr data-sector="agro" data-district="sangrur" data-cost="820000" data-dscr="1.74">
+              <td>
+                <div class="applicant-profile">
+                  <div class="applicant-avatar" style="background:#e0f2fe; color:#0284c7;">HK</div>
+                  <div>
+                    <div class="applicant-name">Harpreet Kaur</div>
+                    <div class="applicant-loc">Spice & Flour Processing Mill</div>
+                  </div>
+                </div>
+              </td>
+              <td>Dhuri, Sangrur</td>
+              <td>₹8,20,000</td>
+              <td><strong>₹5,33,000</strong></td>
+              <td><span class="subsidy-badge">₹2.87L (PMFME)</span></td>
+              <td><span class="rank-gauge high">79 / 100</span></td>
+              <td><strong>1.74x</strong></td>
+              <td>
+                <button class="btn-secondary" style="padding: 6px 12px; font-size: 12px;" onclick="openDossierModal('harpreet')">Review DPR</button>
+                <button class="cta-btn-primary" style="padding: 6px 12px; font-size: 12px;" onclick="issueSanction('Harpreet Kaur', '₹5,33,000')">Sanction</button>
+              </td>
+            </tr>
+
+            <!-- Deal 3: Jaswinder Singh -->
+            <tr data-sector="chc" data-district="ludhiana" data-cost="2200000" data-dscr="1.88">
+              <td>
+                <div class="applicant-profile">
+                  <div class="applicant-avatar" style="background:#fef3c7; color:#d97706;">JS</div>
+                  <div>
+                    <div class="applicant-name">Jaswinder Singh</div>
+                    <div class="applicant-loc">Custom Hiring Farm Center</div>
+                  </div>
+                </div>
+              </td>
+              <td>Samrala, Ludhiana</td>
+              <td>₹22,00,000</td>
+              <td><strong>₹13,20,000</strong></td>
+              <td><span class="subsidy-badge">₹8.80L (SMAM)</span></td>
+              <td><span class="rank-gauge high">82 / 100</span></td>
+              <td><strong>1.88x</strong></td>
+              <td>
+                <button class="btn-secondary" style="padding: 6px 12px; font-size: 12px;" onclick="openDossierModal('jaswinder')">Review DPR</button>
+                <button class="cta-btn-primary" style="padding: 6px 12px; font-size: 12px;" onclick="issueSanction('Jaswinder Singh', '₹13,20,000')">Sanction</button>
+              </td>
+            </tr>
+
+            <!-- Deal 4: Baljit Singh -->
+            <tr data-sector="agro" data-district="ludhiana" data-cost="950000" data-dscr="1.45">
+              <td>
+                <div class="applicant-profile">
+                  <div class="applicant-avatar" style="background:#f3e8ff; color:#9333ea;">BS</div>
+                  <div>
+                    <div class="applicant-name">Baljit Singh</div>
+                    <div class="applicant-loc">Certified Bio-Input Supply Hub</div>
+                  </div>
+                </div>
+              </td>
+              <td>Raikot, Ludhiana</td>
+              <td>₹9,50,000</td>
+              <td><strong>₹7,60,000</strong></td>
+              <td><span class="subsidy-badge">Mudra Tarun</span></td>
+              <td><span class="rank-gauge medium">68 / 100</span></td>
+              <td><strong>1.45x</strong></td>
+              <td>
+                <button class="btn-secondary" style="padding: 6px 12px; font-size: 12px;" onclick="openDossierModal('baljit')">Review DPR</button>
+                <button class="cta-btn-primary" style="padding: 6px 12px; font-size: 12px;" onclick="issueSanction('Baljit Singh', '₹7,60,000')">Sanction</button>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: BANK-READY DETAILED PROJECT REPORT (DPR) DOSSIER                   -->
+  <!-- ========================================================================= -->
+  <div class="modal-backdrop" id="dossier-modal" onclick="closeDossierModal(event)">
+    <div class="dpr-dossier-card" onclick="event.stopPropagation()">
+      <div class="dossier-header">
+        <div>
+          <span style="font-family: var(--font-mono); font-size: 11px; color: #8ed081;">[CMA-REPORT-26091] AUDITABLE BANK DOSSIER</span>
+          <h3 id="dossier-modal-title" style="font-size: 20px; font-weight: 800; margin-top: 4px;">Gurpreet Singh — Bulk Milk Chilling Unit</h3>
+        </div>
+        <button class="dossier-close-btn" onclick="closeDossierModalDirect()">✕</button>
+      </div>
+
+      <div class="dossier-body">
+        
+        <!-- Summary Stats Strip -->
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
+          <div class="legend-item-card">
+            <span class="sub-caption">Total Project Cost</span>
+            <span class="amount" id="modal-cost">₹9,00,000</span>
+          </div>
+          <div class="legend-item-card">
+            <span class="sub-caption">Own Equity Margin</span>
+            <span class="amount" id="modal-margin">₹3,00,000</span>
+          </div>
+          <div class="legend-item-card">
+            <span class="sub-caption">PMEGP Subsidy</span>
+            <span class="amount" style="color: var(--color-secondary);" id="modal-subsidy">₹3,15,000</span>
+          </div>
+          <div class="legend-item-card">
+            <span class="sub-caption">DSCR Hurdle</span>
+            <span class="amount" style="color: var(--color-primary-terracotta);" id="modal-dscr">1.62x (Clear)</span>
+          </div>
+        </div>
+
+        <!-- 5-Year Cash Flow & Balance Sheet Projections -->
+        <div>
+          <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 12px;">1. 5-Year Operating Financials & Repayment Capacity</h4>
+          <table style="width: 100%; border-collapse: collapse; font-size: 12px; font-family: var(--font-mono);">
+            <thead>
+              <tr style="background: var(--color-surface-container); text-align: left;">
+                <th style="padding: 8px;">Metric (₹ in Lakh)</th>
+                <th style="padding: 8px;">Year 1</th>
+                <th style="padding: 8px;">Year 2</th>
+                <th style="padding: 8px;">Year 3</th>
+                <th style="padding: 8px;">Year 4</th>
+                <th style="padding: 8px;">Year 5</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td style="padding: 8px; font-weight: 600;">Gross Receipts (Milk Procurement)</td><td>₹18.40</td><td>₹21.20</td><td>₹23.50</td><td>₹26.00</td><td>₹28.50</td></tr>
+              <tr><td style="padding: 8px; font-weight: 600;">Operational Expenses & Power</td><td>₹12.60</td><td>₹14.10</td><td>₹15.20</td><td>₹16.80</td><td>₹18.20</td></tr>
+              <tr><td style="padding: 8px; font-weight: 600;">EBITDA (Cash Profit)</td><td>₹5.80</td><td>₹7.10</td><td>₹8.30</td><td>₹9.20</td><td>₹10.30</td></tr>
+              <tr><td style="padding: 8px; font-weight: 600;">Debt Service Obligation</td><td>₹1.60</td><td>₹1.60</td><td>₹1.60</td><td>₹1.60</td><td>₹1.60</td></tr>
+              <tr style="background: var(--color-surface-container-low); font-weight: bold; color: var(--color-primary-terracotta);">
+                <td style="padding: 8px;">DSCR Coverage Ratio</td><td>1.62x</td><td>1.78x</td><td>1.92x</td><td>2.10x</td><td>2.35x</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- OEM Machinery Schedule & Quotations -->
+        <div>
+          <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 8px;">2. Machinery & Capital Expenditure Schedule</h4>
+          <ul style="font-size: 13px; color: var(--color-on-surface); line-height: 1.6; padding-left: 20px;">
+            <li><strong>1,000L Bulk Milk Cooler (BMC):</strong> Stainless Steel SS-304 with Copeland condensing unit — ₹4,80,000 (Vetted OEM quotation).</li>
+            <li><strong>15 kVA Diesel Generator Set:</strong> Automatic Phase Changer backup for 3-phase grid supply — ₹1,85,000.</li>
+            <li><strong>Electronic Milk Fat & SNF Testing Analyzer:</strong> Ultratronic digital testing suite — ₹65,000.</li>
+            <li><strong>Civil Shed & Electrical Infrastructure:</strong> Concrete floor & high-tension cable line — ₹1,70,000.</li>
+          </ul>
+        </div>
+
+        <!-- Modal Action Footer -->
+        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--color-outline-variant); padding-top: 18px;">
+          <span style="font-size: 12px; color: var(--color-on-surface-variant);">
+            Pre-cleared under RBI Priority Sector Lending guidelines
+          </span>
+          <div style="display: flex; gap: 10px;">
+            <button class="btn-secondary" onclick="alert('DPR dossier downloaded successfully as a print-ready PDF!')">Download Official PDF</button>
+            <button class="cta-btn-primary" onclick="alert('Formal In-Principle Sanction Letter generated with reference #GV-26091-8849.')">Issue In-Principle Sanction</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4 style="display: flex; align-items: center; gap: 8px;">
+          <span style="color: var(--color-primary-terracotta);">GramVest</span> The Rural Decision Engine
+        </h4>
+        <p style="margin-bottom: 16px; line-height: 1.6;">
+          Smart India Hackathon 2026 Problem Statement 26091. Transforming rural micro-entrepreneurs into bank-funded enterprises through spatial feasibility, sovereign subsidy matching, and institutional capital underwriting.
+        </p>
+        <span class="tag-verified">100% Deterministic Financial Calculations</span>
+      </div>
+
+      <div class="footer-col">
+        <h4>Product Modules</h4>
+        <ul>
+          <li><a href="#hero-section">Module 1: Landing Page</a></li>
+          <li><a href="#schemes-section">Module 1: Scheme Banners</a></li>
+          <li><a href="#cycle-section">Module 1: Business Cycle</a></li>
+          <li><a href="#module-institution" onclick="switchPortal('institution')">Module 4: Institution Login</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Sovereign Schemes</h4>
+        <ul>
+          <li><a href="#schemes-section">PMEGP 35% Capital Grant</a></li>
+          <li><a href="#schemes-section">AIF 3% Interest Subvention</a></li>
+          <li><a href="#schemes-section">PMFME Micro Subsidy</a></li>
+          <li><a href="#schemes-section">CGTMSE Credit Guarantee</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Institutional Partners</h4>
+        <ul>
+          <li><a href="#module-institution" onclick="switchPortal('institution')">State Bank of India Lead District</a></li>
+          <li><a href="#module-institution" onclick="switchPortal('institution')">Punjab Gramin Bank</a></li>
+          <li><a href="#module-institution" onclick="switchPortal('institution')">NABARD Rural Development</a></li>
+          <li><a href="#module-institution" onclick="switchPortal('institution')">SIDBI Concessional Window</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 GRAMVEST TEAM • SMART INDIA HACKATHON PROBLEM STATEMENT 26091</span>
+      <span>PUNJAB AGRICULTURAL UNIVERSITY (PAU) BENCHMARKS • FASTAPI & REACT 19</span>
+    </div>
+  </footer>
+
+  <!-- ========================================================================= -->
+  <!-- JAVASCRIPT: DYNAMIC ANIMATIONS, KKR HERO ROTATOR, AND CAPITAL SIMULATOR   -->
+  <!-- ========================================================================= -->
+  <script>
+    // --- KKR-INSPIRED KINETIC TYPOGRAPHIC BANNER ENGINE ---
+    let currentSlide = 0;
+    const totalSlides = 4;
+    let isPlaying = true;
+    let slideTimer = null;
+    let progressTimer = null;
+    let progressPct = 0;
+    const slideDuration = 4500; // ms
+
+    const growthStages = {
+      1: {
+        caption: "Stage 1: Seed Idea",
+        status: "3,800 L/Day Deficit",
+        viability: "74 / 100 Grade A",
+        cost: "₹10,00,000",
+        subsidy: "₹3,15,000",
+        dscr: "1.62x",
+        detail: "<strong>Jagraon Block (Ludhiana):</strong> Gurpreet contributes ₹1.0L margin savings. GramVest structures a ₹10.0L Milk Chilling Unit with ₹3.15L PMEGP subsidy.",
+        icon: '<path d="M7 21h10a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z"></path><path d="M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"></path><line x1="9" y1="12" x2="15" y2="12"></line><line x1="12" y1="9" x2="12" y2="15"></line>'
+      },
+      2: {
+        caption: "Stage 2: Feasibility Radar",
+        status: "68% Mandi Deficit",
+        viability: "79 / 100 High",
+        cost: "₹15,00,000",
+        subsidy: "₹5,07,500",
+        dscr: "1.74x",
+        detail: "<strong>Catchment Scan:</strong> 14 Gram Panchayats verified within 12km radius. 3-phase rural power feeder guaranteed 16h/day. Two competitors operating at low capacity.",
+        icon: '<circle cx="12" cy="12" r="10"></circle><path d="m4.93 4.93 4.24 4.24"></path><path d="m14.83 9.17 4.24-4.24"></path><path d="m14.83 14.83 4.24 4.24"></path><path d="m9.17 14.83-4.24 4.24"></path>'
+      },
+      3: {
+        caption: "Stage 3: Scaled ₹50L Enterprise",
+        status: "Bank Sanctioned",
+        viability: "86 / 100 Top Quartile",
+        cost: "₹50,00,000",
+        subsidy: "₹12,50,000",
+        dscr: "1.92x",
+        detail: "<strong>Full Enterprise Scale:</strong> Syndicated term loan with Lead District Bank. 12-page CMA dossier approved. Direct integration with institutional dairy processors.",
+        icon: '<path d="M3 21h18"></path><path d="M5 21V7l7-4 7 4v14"></path><path d="M9 10a3 3 0 1 0 6 0"></path><path d="M9 21v-4a3 3 0 0 1 6 0v4"></path>'
+      }
+    };
+
+    function startHeroSlider() {
+      if (slideTimer) clearInterval(slideTimer);
+      if (progressTimer) clearInterval(progressTimer);
+
+      progressPct = 0;
+      progressTimer = setInterval(() => {
+        if (!isPlaying) return;
+        progressPct += (100 / (slideDuration / 50));
+        if (progressPct > 100) progressPct = 100;
+        const fillEl = document.getElementById(`fill-${currentSlide}`);
+        if (fillEl) fillEl.style.width = progressPct + "%";
+      }, 50);
+
+      slideTimer = setInterval(() => {
+        if (!isPlaying) return;
+        nextHeroSlide();
+      }, slideDuration);
+    }
+
+    function setHeroSlide(index) {
+      // Clear current active
+      for (let i = 0; i < totalSlides; i++) {
+        document.getElementById(`headline-${i}`).classList.remove('active');
+        const fill = document.getElementById(`fill-${i}`);
+        if (fill) fill.style.width = i < index ? "100%" : "0%";
+      }
+
+      currentSlide = index;
+      document.getElementById(`headline-${currentSlide}`).classList.add('active');
+      document.getElementById('hero-slide-num').innerText = `0${currentSlide + 1} / 04`;
+
+      // Synchronize visual growth stage with headline slide
+      const targetStage = currentSlide === 0 ? 1 : (currentSlide === 1 ? 2 : 3);
+      setGrowthStage(targetStage, false);
+
+      progressPct = 0;
+    }
+
+    function nextHeroSlide() {
+      const next = (currentSlide + 1) % totalSlides;
+      setHeroSlide(next);
+    }
+
+    function toggleHeroAnimation() {
+      isPlaying = !isPlaying;
+      document.getElementById('icon-pause').style.display = isPlaying ? 'block' : 'none';
+      document.getElementById('icon-play').style.display = isPlaying ? 'none' : 'block';
+    }
+
+    function setGrowthStage(stageNum, manualClick = true) {
+      for (let i = 1; i <= 3; i++) {
+        const btn = document.getElementById(`stage-btn-${i}`);
+        if (btn) btn.classList.toggle('active', i === stageNum);
+      }
+
+      const stage = growthStages[stageNum];
+      if (!stage) return;
+
+      document.getElementById('growth-stage-caption').innerText = stage.caption;
+      document.getElementById('growth-status-val').innerText = stage.status;
+      document.getElementById('growth-viability-val').innerText = stage.viability;
+      document.getElementById('stat-project-cost').innerText = stage.cost;
+      document.getElementById('stat-subsidy').innerText = stage.subsidy;
+      document.getElementById('stat-dscr').innerText = stage.dscr;
+      document.getElementById('growth-detail-text').innerHTML = stage.detail;
+      document.getElementById('growth-icon').innerHTML = stage.icon;
+
+      // Scale effect on portal
+      const portal = document.getElementById('growth-portal');
+      const scale = stageNum === 1 ? 1 : (stageNum === 2 ? 1.08 : 1.16);
+      portal.style.transform = `scale(${scale})`;
+
+      if (manualClick) {
+        // Temporarily pause slider so user can inspect stage
+        isPlaying = false;
+        document.getElementById('icon-pause').style.display = 'none';
+        document.getElementById('icon-play').style.display = 'block';
+      }
+    }
+
+    // --- CAPITAL STRUCTURING CALCULATOR ENGINE ---
+    function updateCapitalCalculations() {
+      const slider = document.getElementById('input-cost-slider');
+      const cost = parseInt(slider.value, 10);
+      const categorySubsidyPct = parseInt(document.getElementById('select-category').value, 10);
+
+      // Display formatted cost
+      document.getElementById('display-project-cost').innerText = formatCurrencyINR(cost);
+
+      // Calculate Margin (10%), Subsidy (25% or 35%), Loan (remainder)
+      const marginPct = 10;
+      let subsidyPct = categorySubsidyPct;
+      
+      // Maximum PMEGP subsidy cap is ₹17.5 Lakh (35% of ₹50L)
+      let rawSubsidy = Math.round(cost * (subsidyPct / 100));
+      const subsidyAmount = Math.min(rawSubsidy, 1750000);
+      const effectiveSubsidyPct = Math.round((subsidyAmount / cost) * 100);
+
+      const marginAmount = Math.round(cost * (marginPct / 100));
+      const loanAmount = cost - subsidyAmount - marginAmount;
+      const effectiveLoanPct = 100 - marginPct - effectiveSubsidyPct;
+
+      // Update Stack bar widths
+      document.getElementById('stack-bar-margin').style.width = `${marginPct}%`;
+      document.getElementById('stack-bar-margin').innerText = `Margin ${marginPct}%`;
+
+      document.getElementById('stack-bar-subsidy').style.width = `${effectiveSubsidyPct}%`;
+      document.getElementById('stack-bar-subsidy').innerText = `Grant ${effectiveSubsidyPct}%`;
+
+      document.getElementById('stack-bar-loan').style.width = `${effectiveLoanPct}%`;
+      document.getElementById('stack-bar-loan').innerText = `Bank Loan ${effectiveLoanPct}%`;
+
+      // Update Amounts in Legend Cards
+      document.getElementById('calc-val-margin').innerText = formatCurrencyINR(marginAmount);
+      document.getElementById('calc-val-subsidy').innerText = formatCurrencyINR(subsidyAmount);
+      document.getElementById('calc-val-loan').innerText = formatCurrencyINR(loanAmount);
+      document.getElementById('calc-lbl-subsidy').innerText = `PMEGP Grant (${effectiveSubsidyPct}%)`;
+
+      // Compute Quarterly Repayment (7 years @ 8% p.a., quarterly EMI)
+      // Quarterly interest r = 0.08 / 4 = 0.02, n = 7 * 4 = 28 quarters
+      const r = 0.02;
+      const n = 28;
+      const quarterlyEMI = Math.round(loanAmount * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1));
+      document.getElementById('calc-val-emi').innerText = formatCurrencyINR(quarterlyEMI);
+
+      // Compute DSCR (Debt Service Coverage Ratio)
+      // Standard annual operating surplus estimated based on empirical Punjab PAU dairy/agro models:
+      // Annual Net Cash Profit roughly 28% to 32% of capital outlay
+      const annualEBITDA = cost * 0.29;
+      const annualDebtService = quarterlyEMI * 4;
+      const dscr = (annualEBITDA / annualDebtService).toFixed(2);
+      document.getElementById('calc-dscr-display').innerText = `${dscr}x`;
+
+      const verdictBadge = document.getElementById('calc-verdict-badge');
+      if (parseFloat(dscr) >= 1.30) {
+        verdictBadge.innerText = '✓ Bank Hurdle Passed (>1.30x)';
+        verdictBadge.style.color = 'var(--color-secondary)';
+        verdictBadge.style.borderColor = 'rgba(83, 99, 70, 0.3)';
+      } else {
+        verdictBadge.innerText = '⚠ Strict Collateral Scrutiny (<1.30x)';
+        verdictBadge.style.color = '#c2410c';
+        verdictBadge.style.borderColor = '#c2410c';
+      }
+    }
+
+    function formatCurrencyINR(amount) {
+      return new Intl.NumberFormat('en-IN', {
+        style: 'currency',
+        currency: 'INR',
+        maximumFractionDigits: 0
+      }).format(amount);
+    }
+
+    function selectCycleStep(stepNum) {
+      for (let i = 1; i <= 4; i++) {
+        const el = document.getElementById(`step-nav-${i}`);
+        if (el) el.classList.toggle('active', i === stepNum);
+      }
+    }
+
+    function scrollToCycle() {
+      document.getElementById('cycle-section').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function highlightScheme(schemeKey) {
+      scrollToCycle();
+    }
+
+    // --- MODULE 4: FINANCIAL INSTITUTION PORTAL SCRIPTS ---
+    function switchPortal(portalType) {
+      const isLanding = portalType === 'landing';
+      document.getElementById('module-landing').style.display = isLanding ? 'block' : 'none';
+      document.getElementById('module-institution').style.display = isLanding ? 'none' : 'block';
+
+      document.getElementById('btn-portal-msme').classList.toggle('active', isLanding);
+      document.getElementById('btn-portal-inst').classList.toggle('active', !isLanding);
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function switchInstitutionRole() {
+      const picker = document.getElementById('inst-role-picker');
+      const role = picker.value;
+      const poolEl = document.getElementById('stat-total-pool');
+      const depEl = document.getElementById('stat-deployed');
+      const availEl = document.getElementById('stat-available');
+
+      if (role === 'sbi') {
+        poolEl.innerText = "₹50.0 Cr";
+        depEl.innerText = "₹38.2 Cr";
+        availEl.innerText = "₹11.8 Cr";
+      } else if (role === 'omnivore') {
+        poolEl.innerText = "₹25.0 Cr";
+        depEl.innerText = "₹18.4 Cr";
+        availEl.innerText = "₹6.6 Cr";
+      } else if (role === 'pgb') {
+        poolEl.innerText = "₹15.0 Cr";
+        depEl.innerText = "₹11.5 Cr";
+        availEl.innerText = "₹3.5 Cr";
+      } else {
+        poolEl.innerText = "₹100.0 Cr";
+        depEl.innerText = "₹72.0 Cr";
+        availEl.innerText = "₹28.0 Cr";
+      }
+    }
+
+    function filterPipeline() {
+      const sector = document.getElementById('mandate-sector').value;
+      const district = document.getElementById('mandate-district').value;
+      const dscrHurdle = parseFloat(document.getElementById('mandate-dscr').value);
+
+      const rows = document.querySelectorAll('#dealflow-table-body tr');
+      rows.forEach(row => {
+        const rowSector = row.getAttribute('data-sector');
+        const rowDistrict = row.getAttribute('data-district');
+        const rowDscr = parseFloat(row.getAttribute('data-dscr'));
+
+        let show = true;
+        if (sector !== 'all' && rowSector !== sector) show = false;
+        if (district !== 'all' && rowDistrict !== district) show = false;
+        if (rowDscr < dscrHurdle) show = false;
+
+        row.style.display = show ? '' : 'none';
+      });
+    }
+
+    function resetMandateFilters() {
+      document.getElementById('mandate-sector').value = 'all';
+      document.getElementById('mandate-district').value = 'all';
+      document.getElementById('mandate-dscr').value = '1.30';
+      document.getElementById('mandate-ticket-size').value = 'all';
+      filterPipeline();
+    }
+
+    function setPipelineCategoryFilter(cat, btn) {
+      document.querySelectorAll('.pipeline-filters .filter-chip').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const rows = document.querySelectorAll('#dealflow-table-body tr');
+      rows.forEach(row => {
+        const rSector = row.getAttribute('data-sector');
+        if (cat === 'all' || rSector === cat) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    }
+
+    function issueSanction(applicantName, loanAmount) {
+      const ref = "GV-" + Math.floor(10000 + Math.random() * 90000);
+      alert(`✓ IN-PRINCIPLE SANCTION ISSUED!\n\nApplicant: ${applicantName}\nFacility: MSME Term Debt (${loanAmount})\nReference: ${ref}\nStatus: Approved under RBI Priority Sector Lending.`);
+    }
+
+    // --- MODAL: BANK-READY DPR DOSSIER ---
+    const dossierData = {
+      gurpreet: {
+        title: "Gurpreet Singh — 1,000L Milk Chilling Unit (Jagraon)",
+        cost: "₹9,00,000",
+        margin: "₹3,00,000 (33.3%)",
+        subsidy: "₹3,15,000 (35% PMEGP)",
+        dscr: "1.62x (Hurdle > 1.30x Clear)"
+      },
+      harpreet: {
+        title: "Harpreet Kaur — Spice & Atta Processing Mill (Dhuri)",
+        cost: "₹8,20,000",
+        margin: "₹2,87,000 (35%)",
+        subsidy: "₹2,87,000 (35% PMFME)",
+        dscr: "1.74x (High Coverage)"
+      },
+      jaswinder: {
+        title: "Jaswinder Singh — Custom Hiring Center (Samrala)",
+        cost: "₹22,00,000",
+        margin: "₹4,40,000 (20%)",
+        subsidy: "₹8,80,000 (40% SMAM)",
+        dscr: "1.88x (Top Quartile)"
+      },
+      baljit: {
+        title: "Baljit Singh — Bio-Input Agro Store (Raikot)",
+        cost: "₹9,50,000",
+        margin: "₹1,90,000 (20%)",
+        subsidy: "Mudra Tarun (Collateral Free)",
+        dscr: "1.45x (Solvent)"
+      }
+    };
+
+    function openDossierModal(applicantKey) {
+      const data = dossierData[applicantKey] || dossierData.gurpreet;
+      document.getElementById('dossier-modal-title').innerText = data.title;
+      document.getElementById('modal-cost').innerText = data.cost;
+      document.getElementById('modal-margin').innerText = data.margin;
+      document.getElementById('modal-subsidy').innerText = data.subsidy;
+      document.getElementById('modal-dscr').innerText = data.dscr;
+
+      document.getElementById('dossier-modal').classList.add('active');
+    }
+
+    function closeDossierModal(event) {
+      document.getElementById('dossier-modal').classList.remove('active');
+    }
+
+    function closeDossierModalDirect() {
+      document.getElementById('dossier-modal').classList.remove('active');
+    }
+
+    // Initialize Slider & KKR animation on load
+    window.addEventListener('DOMContentLoaded', () => {
+      startHeroSlider();
+      updateCapitalCalculations();
+    });
+  </script>
+</body>
+</html>

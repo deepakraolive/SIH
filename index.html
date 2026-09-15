@@ -1,0 +1,1754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GramVest - SIH 2026 Presentation | The Rural Decision Engine</title>
+  <style>
+    :root {
+      --primary: #0084d1;
+      --primary-dark: #0066a4;
+      --primary-light: #e0f2fe;
+      --text-dark: #0f172a;
+      --text-muted: #475569;
+      --text-subtle: #64748b;
+      --bg-slide: #ffffff;
+      --card-bg: #ffffff;
+      --card-border: #e2e8f0;
+      --surface-light: #f8fafc;
+      --accent-green: #10b981;
+      --accent-amber: #f59e0b;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.12);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-pill: 9999px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background: #0b1320;
+      color: var(--text-dark);
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    /* Top Control Bar */
+    .control-bar {
+      width: 100%;
+      max-width: 1400px;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #94a3b8;
+      font-size: 14px;
+      background: rgba(15, 23, 42, 0.94);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid #1e293b;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      color: #f8fafc;
+      font-size: 16px;
+    }
+    .brand-badge .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--primary);
+    }
+    .brand-badge span.vest {
+      color: var(--primary);
+    }
+
+    .nav-buttons {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      background: #1e293b;
+      color: #f8fafc;
+      border: 1px solid #334155;
+      padding: 7px 14px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn:hover {
+      background: #334155;
+      color: #ffffff;
+      border-color: #475569;
+    }
+    .btn.primary {
+      background: var(--primary);
+      border-color: var(--primary-dark);
+      color: #ffffff;
+    }
+    .btn.primary:hover {
+      background: var(--primary-dark);
+    }
+    .slide-indicator {
+      font-weight: 600;
+      color: #f8fafc;
+      padding: 0 8px;
+    }
+
+    /* Main Slide Stage */
+    .stage {
+      width: 100%;
+      max-width: 1360px;
+      padding: 24px 20px 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+    }
+
+    /* 16:9 Presentation Frame */
+    .slide-wrapper {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: var(--bg-slide);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      position: relative;
+      display: none;
+    }
+
+    .slide-wrapper.active {
+      display: flex;
+      flex-direction: column;
+      animation: fadeIn 0.25s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Slide Header Bar (Clean Canva Style) */
+    .slide-top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 42px 0 42px;
+      font-size: 12.5px;
+      color: var(--text-subtle);
+      letter-spacing: 0.3px;
+    }
+    .slide-top-bar .left-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .pill-tag {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+    .pill-tag.dark {
+      background: #0f172a;
+      color: #ffffff;
+    }
+    .pill-tag.green {
+      background: #d1fae5;
+      color: #065f46;
+    }
+
+    /* Slide Content Canvas */
+    .slide-body {
+      flex: 1;
+      padding: 16px 42px 16px 42px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Slide Title Area */
+    .slide-title-wrap {
+      margin-bottom: 18px;
+    }
+    .slide-title {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--text-dark);
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+    }
+    .slide-subtitle {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-top: 6px;
+      line-height: 1.45;
+      max-width: 980px;
+    }
+
+    /* Slide Footer */
+    .slide-footer {
+      padding: 10px 42px 14px 42px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11.5px;
+      color: var(--text-subtle);
+      border-top: 1px solid rgba(226, 232, 240, 0.8);
+      background: #ffffff;
+      z-index: 2;
+    }
+
+    /* ==========================================================================
+       SLIDE 1: TITLE SLIDE
+       ========================================================================== */
+    .title-slide-container {
+      display: grid;
+      grid-template-columns: 1.18fr 0.82fr;
+      height: 100%;
+      position: relative;
+    }
+    .title-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 46px 44px;
+      z-index: 3;
+    }
+    .title-brand {
+      font-size: 64px;
+      font-weight: 900;
+      color: #0f172a;
+      line-height: 1;
+      letter-spacing: -1.5px;
+      margin-bottom: 10px;
+    }
+    .title-brand span.vest {
+      color: var(--primary);
+    }
+    .title-tagline {
+      font-size: 23px;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 14px;
+      letter-spacing: -0.3px;
+    }
+    .title-quote {
+      font-size: 17px;
+      font-style: italic;
+      color: var(--text-muted);
+      line-height: 1.45;
+      margin-bottom: 30px;
+      padding-left: 14px;
+      border-left: 3px solid var(--primary);
+      max-width: 580px;
+    }
+    .title-meta-box {
+      background: var(--surface-light);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      max-width: 580px;
+    }
+    .title-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin-bottom: 7px;
+    }
+    .title-meta-row:last-child {
+      margin-bottom: 0;
+    }
+    .title-meta-row strong {
+      color: var(--text-dark);
+      min-width: 85px;
+    }
+
+    .title-right {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      padding: 36px;
+      overflow: hidden;
+    }
+    .title-right::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      height: 38%;
+      background: var(--primary);
+      border-top-left-radius: 90px;
+      z-index: 1;
+    }
+    .title-graphic-card {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      box-shadow: var(--shadow-lg);
+      width: 100%;
+      max-width: 380px;
+      z-index: 2;
+      border: 1px solid rgba(0, 132, 209, 0.2);
+    }
+    .graphic-header {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--primary);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .graphic-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 12px;
+    }
+    .feature-pill-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .f-pill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--text-dark);
+      background: var(--surface-light);
+      padding: 7px 10px;
+      border-radius: var(--radius-sm);
+      border-left: 3px solid var(--primary);
+    }
+    .title-sih-tag {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 5;
+    }
+
+    /* ==========================================================================
+       SLIDE 2: PROBLEM STATEMENT (4 CARDS)
+       ========================================================================== */
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .problem-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 20px 18px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .problem-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--primary);
+    }
+    .card-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #0f172a;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+    .problem-card:nth-child(3) .card-num {
+      background: var(--primary);
+    }
+    .card-heading {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .card-desc {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .problem-callout-strip {
+      margin-top: 18px;
+      background: var(--surface-light);
+      border-left: 4px solid #ef4444;
+      padding: 10px 16px;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-size: 12.5px;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* ==========================================================================
+       SLIDE 3: PROPOSED SOLUTION
+       ========================================================================== */
+    .solution-flow-bar {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: 10px;
+      align-items: center;
+      background: var(--surface-light);
+      padding: 12px 18px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--card-border);
+      margin-bottom: 18px;
+    }
+    .flow-step-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .flow-step-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .flow-step-text h4 {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+    .flow-step-text p {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .flow-arrow {
+      color: #94a3b8;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .solution-modules-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    .module-card {
+      background: #ffffff;
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+    }
+    .module-card.featured {
+      border-top: 4px solid var(--primary);
+    }
+    .module-card.green-featured {
+      border-top: 4px solid var(--accent-green);
+    }
+    .module-badge {
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 4px;
+    }
+    .module-card.featured .module-badge { color: var(--primary); }
+    .module-card.green-featured .module-badge { color: var(--accent-green); }
+    .module-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+    }
+    .module-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 12.5px;
+      color: var(--text-muted);
+    }
+    .module-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.45;
+    }
+    .module-list li strong {
+      color: var(--text-dark);
+    }
+    .bullet-check {
+      color: var(--primary);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* ==========================================================================
+       SLIDE 4: PROCESS FLOW (FLOWCHART)
+       ========================================================================== */
+    .flow-slide-grid {
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr;
+      gap: 20px;
+      height: 100%;
+      align-items: center;
+    }
+    .flowchart-img-container {
+      background: #f8fafc;
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 8px;
+      height: 390px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .flowchart-img-container img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 6px;
+      transition: transform 0.25s ease;
+    }
+    .flowchart-img-container:hover img {
+      transform: scale(1.02);
+    }
+    .flowchart-zoom-hint {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: rgba(15, 23, 42, 0.85);
+      color: #ffffff;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 10.5px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .flow-steps-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .flow-step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: var(--surface-light);
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--card-border);
+    }
+    .flow-item-idx {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #0f172a;
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .flow-item-idx.blue { background: var(--primary); }
+    .flow-item-idx.green { background: var(--accent-green); }
+    .flow-item-content h5 {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 2px;
+    }
+    .flow-item-content p {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+
+    /* ==========================================================================
+       SLIDE 5: TECH STACK & SYSTEM ARCHITECTURE
+       ========================================================================== */
+    .tech-stack-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .tech-card {
+      background: #ffffff;
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+    }
+    .tech-card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .tech-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 7px;
+      background: var(--primary-light);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 13px;
+    }
+    .tech-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+    .tech-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .tech-badge-item {
+      background: #f1f5f9;
+      color: #334155;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 10.5px;
+      font-weight: 600;
+      border: 1px solid #e2e8f0;
+    }
+    .tech-badge-item.highlight {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      border-color: #bae6fd;
+    }
+    .tech-desc-list {
+      list-style: none;
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      line-height: 1.4;
+    }
+    .golden-rule-bar {
+      margin-top: 16px;
+      background: linear-gradient(90deg, #0f172a 0%, #1e293b 100%);
+      color: #ffffff;
+      padding: 10px 18px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12.5px;
+    }
+    .golden-rule-bar strong {
+      color: #38bdf8;
+      font-size: 13.5px;
+    }
+
+    /* ==========================================================================
+       SLIDE 6: FUTURE SCOPE & ROADMAP
+       ========================================================================== */
+    .roadmap-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 8px;
+    }
+    .roadmap-card {
+      background: #ffffff;
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 18px 16px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      box-shadow: var(--shadow-sm);
+    }
+    .roadmap-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: #94a3b8;
+      border-top-left-radius: var(--radius-md);
+      border-top-right-radius: var(--radius-md);
+    }
+    .roadmap-card:nth-child(1)::before { background: var(--primary); }
+    .roadmap-card:nth-child(2)::before { background: var(--accent-green); }
+    .roadmap-card:nth-child(3)::before { background: var(--accent-amber); }
+    .roadmap-card:nth-child(4)::before { background: #8b5cf6; }
+
+    .phase-badge {
+      font-size: 10.5px;
+      font-weight: 800;
+      color: var(--text-subtle);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 5px;
+    }
+    .roadmap-card:nth-child(1) .phase-badge { color: var(--primary); }
+    .roadmap-card:nth-child(2) .phase-badge { color: var(--accent-green); }
+    .roadmap-card:nth-child(3) .phase-badge { color: #d97706; }
+    .roadmap-card:nth-child(4) .phase-badge { color: #7c3aed; }
+
+    .phase-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .phase-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.45;
+      margin-bottom: 12px;
+      flex: 1;
+    }
+    .phase-impact {
+      background: var(--surface-light);
+      padding: 7px 9px;
+      border-radius: var(--radius-sm);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-dark);
+      border: 1px dashed var(--card-border);
+    }
+
+    /* ==========================================================================
+       SLIDE 7: IMPACT & CONCLUSION
+       ========================================================================== */
+    .impact-metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .impact-stat-card {
+      background: #ffffff;
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 18px 16px;
+      box-shadow: var(--shadow-sm);
+      text-align: center;
+    }
+    .impact-number {
+      font-size: 34px;
+      font-weight: 900;
+      color: var(--primary);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .impact-stat-card:nth-child(2) .impact-number { color: #0f172a; }
+    .impact-stat-card:nth-child(3) .impact-number { color: var(--accent-green); }
+    .impact-stat-card:nth-child(4) .impact-number { color: #8b5cf6; }
+
+    .impact-label {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 5px;
+    }
+    .impact-subtext {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+
+    .closing-banner {
+      background: linear-gradient(135deg, #0084d1 0%, #005a8e 100%);
+      color: #ffffff;
+      padding: 24px 30px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: var(--shadow-md);
+    }
+    .closing-text h3 {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 5px;
+      letter-spacing: -0.3px;
+    }
+    .closing-text p {
+      font-size: 14px;
+      opacity: 0.92;
+    }
+    .closing-tags {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      text-align: right;
+    }
+
+    /* ==========================================================================
+       PRESENTER NOTES DRAWER
+       ========================================================================== */
+    .notes-drawer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #0f172a;
+      color: #e2e8f0;
+      border-top: 3px solid var(--primary);
+      padding: 18px 30px;
+      max-height: 280px;
+      overflow-y: auto;
+      box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.4);
+      z-index: 150;
+      display: none;
+      animation: slideUp 0.25s ease;
+    }
+    .notes-drawer.open {
+      display: block;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+    .notes-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #334155;
+    }
+    .notes-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #38bdf8;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .notes-close {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      cursor: pointer;
+      font-size: 18px;
+    }
+    .notes-body {
+      display: grid;
+      grid-template-columns: 1.8fr 1.2fr;
+      gap: 20px;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    .notes-script {
+      background: #1e293b;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      border-left: 3px solid var(--accent-green);
+    }
+    .notes-script h5 {
+      color: #a7f3d0;
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 5px;
+    }
+    .notes-qa {
+      background: #1e293b;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      border-left: 3px solid var(--accent-amber);
+    }
+    .notes-qa h5 {
+      color: #fde68a;
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 5px;
+    }
+
+    /* Modal for Flowchart Zoom */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(5px);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-backdrop.open {
+      display: flex;
+    }
+    .modal-content {
+      background: #ffffff;
+      border-radius: var(--radius-md);
+      max-width: 90vw;
+      max-height: 90vh;
+      overflow: auto;
+      position: relative;
+      padding: 14px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 14px;
+      background: #0f172a;
+      color: #ffffff;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 16px;
+      z-index: 10;
+    }
+    .modal-content img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 6px;
+    }
+
+    /* ==========================================================================
+       PRINT STYLES FOR CLEAN 16:9 PDF EXPORT
+       ========================================================================== */
+    @media print {
+      body {
+        background: #ffffff !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      .control-bar, .notes-drawer, .modal-backdrop, .flowchart-zoom-hint {
+        display: none !important;
+      }
+      .stage {
+        padding: 0 !important;
+        max-width: 100% !important;
+      }
+      .slide-wrapper {
+        display: flex !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        page-break-after: always;
+        break-after: page;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+      }
+      @page {
+        size: 16in 9in;
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation & Presentation Toolbar -->
+  <div class="control-bar">
+    <div class="brand-badge">
+      <div class="dot"></div>
+      <div>Gram<span class="vest">Vest</span> <span style="font-weight: 400; color: #64748b; font-size: 13px;">| SIH 2026 Round 1</span></div>
+    </div>
+
+    <div class="nav-buttons">
+      <button class="btn" onclick="prevSlide()" title="Previous Slide (Left Arrow)">◀ Prev</button>
+      <span class="slide-indicator" id="slideIndicator">Slide 1 / 7</span>
+      <button class="btn" onclick="nextSlide()" title="Next Slide (Right Arrow or Space)">Next ▶</button>
+      <button class="btn" onclick="toggleNotes()" id="notesBtn" title="Toggle Presenter Speech Notes (P)">🎙️ Notes (P)</button>
+      <button class="btn" onclick="toggleFullscreen()" title="Toggle Fullscreen Mode (F)">⛶ Fullscreen (F)</button>
+      <button class="btn primary" onclick="window.print()" title="Export clean PDF presentation">🖨️ Print to PDF</button>
+    </div>
+  </div>
+
+  <!-- Stage Container -->
+  <div class="stage">
+
+    <!-- ====================================================================
+         SLIDE 1: TITLE SLIDE
+         ==================================================================== -->
+    <div class="slide-wrapper active" id="slide-1" data-slide="1">
+      <div class="title-slide-container">
+        <div class="title-left">
+          <div style="display: flex; gap: 8px; margin-bottom: 18px;">
+            <span class="pill-tag dark">SIH 2026 · SOFTWARE</span>
+            <span class="pill-tag">PS ID: 26091</span>
+          </div>
+
+          <div class="title-brand">Gram<span class="vest">Vest</span></div>
+          <div class="title-tagline">The Rural Decision Engine</div>
+
+          <div class="title-quote">
+            &ldquo;Know your market, your competition, and your capital — before you invest a single rupee.&rdquo;
+          </div>
+
+          <div class="title-meta-box">
+            <div class="title-meta-row">
+              <strong>Team:</strong>
+              <span>Team GramVest</span>
+            </div>
+            <div class="title-meta-row">
+              <strong>Theme:</strong>
+              <span>Rural Entrepreneurship & Market Intelligence | MSME & Agri-Business</span>
+            </div>
+            <div class="title-meta-row">
+              <strong>Mission:</strong>
+              <span>AI-Driven Hyper-Local Business Advisory & Concessional Scheme Structuring</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="title-right">
+          <div class="title-sih-tag">
+            <span class="pill-tag green">ROUND 1 EVALUATION</span>
+          </div>
+
+          <div class="title-graphic-card">
+            <div class="graphic-header">Core Innovation</div>
+            <div class="graphic-title">Dual-Engine Decision System</div>
+            <div class="feature-pill-list">
+              <div class="f-pill">
+                <span>📍</span>
+                <div><strong>Hyper-Local GIS Radar:</strong> 5–10km catchment demand & competitor density</div>
+              </div>
+              <div class="f-pill">
+                <span>💰</span>
+                <div><strong>10% / 90% Scheme Router:</strong> Micro Finance vs. Term Loan auto-structuring</div>
+              </div>
+              <div class="f-pill">
+                <span>🛡️</span>
+                <div><strong>Deterministic Financial Truth:</strong> No hallucinated loan or EMI numbers</div>
+              </div>
+              <div class="f-pill">
+                <span>📄</span>
+                <div><strong>Bank-Ready DPR Dossier:</strong> One-click bankable feasibility report</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>GramVest | Smart India Hackathon 2026</span>
+        <span>Slide 1 of 7</span>
+      </div>
+    </div>
+
+    <!-- ====================================================================
+         SLIDE 2: PROBLEM STATEMENT
+         ==================================================================== -->
+    <div class="slide-wrapper" id="slide-2" data-slide="2">
+      <div class="slide-top-bar">
+        <div class="left-meta">
+          <span class="pill-tag dark">THE PROBLEM · SIH 26091</span>
+          <span>Grassroots Entrepreneurship Reality</span>
+        </div>
+        <div>GramVest | Smart India Hackathon 2026</div>
+      </div>
+
+      <div class="slide-body">
+        <div class="slide-title-wrap">
+          <h1 class="slide-title">Problem Statement</h1>
+          <p class="slide-subtitle">
+            The government provides 90% concessional credit with only 10% beneficiary margin. Yet, thousands of rural micro-enterprises stagnate or default within Year 1 due to two fatal blind spots: zero localized market intelligence and intimidating financial illiteracy.
+          </p>
+        </div>
+
+        <div class="problem-grid">
+          <!-- Card 1 -->
+          <div class="problem-card">
+            <div class="card-num">1</div>
+            <div class="card-heading">No Local Market Visibility</div>
+            <div class="card-desc">
+              Urban-centric research tools completely ignore villages. Prospective entrepreneurs cannot estimate 5–10km catchment demand, seasonal price dips, or customer purchasing power.
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="problem-card">
+            <div class="card-num">2</div>
+            <div class="card-heading">Competition is Invisible</div>
+            <div class="card-desc">
+              Beneficiaries select trades based on anecdotal hearsay. Opening the 5th kirana store or dairy stall in a single hamlet triggers instant market saturation and price wars.
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="problem-card">
+            <div class="card-num">3</div>
+            <div class="card-heading">Financing is Confusing</div>
+            <div class="card-desc">
+              Calculating 10% margin equity, 90% debt eligibility, Micro Finance (≤ ₹1.4L @ 6.5%) vs Term Loans (≤ ₹50L @ 8%), moratorium math, and bank DPR preparation is intimidating.
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="problem-card">
+            <div class="card-num">4</div>
+            <div class="card-heading">High Failure, Zero Guidance</div>
+            <div class="card-desc">
+              Formal business consultancies charge ₹15,000–₹50,000+ and don't operate in rural blocks. Without guidance, marginalized youth sink their life savings and default.
+            </div>
+          </div>
+        </div>
+
+        <div class="problem-callout-strip">
+          <span style="font-weight: 700; color: #dc2626;">THE BOTTLENECK:</span>
+          <span>Capital is available via SCAs and CAs, but institutional-grade feasibility intelligence has never reached the village doorstep.</span>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>GramVest | Smart India Hackathon 2026</span>
+        <span>Slide 2 of 7</span>
+      </div>
+    </div>
+
+    <!-- ====================================================================
+         SLIDE 3: SOLUTION OVERVIEW
+         ==================================================================== -->
+    <div class="slide-wrapper" id="slide-3" data-slide="3">
+      <div class="slide-top-bar">
+        <div class="left-meta">
+          <span class="pill-tag dark">OUR SOLUTION</span>
+          <span>Democratizing Enterprise Intelligence</span>
+        </div>
+        <div>GramVest | Smart India Hackathon 2026</div>
+      </div>
+
+      <div class="slide-body">
+        <div class="slide-title-wrap">
+          <h1 class="slide-title">Solution</h1>
+          <p class="slide-subtitle">
+            GramVest is a multilingual AI-driven advisory system and smart financial router. By taking 3 simple inputs, it instantly delivers hyper-local feasibility validation and bank-grade loan structuring in under 5 minutes.
+          </p>
+        </div>
+
+        <!-- 3-Step Flow Bar -->
+        <div class="solution-flow-bar">
+          <div class="flow-step-box">
+            <div class="flow-step-num">1</div>
+            <div class="flow-step-text">
+              <h4>You Enter</h4>
+              <p>Location (Block/Village), Margin Capital, Proposed Business</p>
+            </div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step-box">
+            <div class="flow-step-num">2</div>
+            <div class="flow-step-text">
+              <h4>GramVest Analyzes</h4>
+              <p>5-10km GIS catchment, competitor count & deterministic finance</p>
+            </div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step-box">
+            <div class="flow-step-num">3</div>
+            <div class="flow-step-text">
+              <h4>You Decide & Fund</h4>
+              <p>Viability Score, Indicative Scheme, EMI & Bank-Ready DPR</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Two Core Modules Grid -->
+        <div class="solution-modules-grid">
+          <!-- Module 1 -->
+          <div class="module-card featured">
+            <div class="module-badge">Module 1 · Problem Requirement</div>
+            <div class="module-title">Hyper-Local Business Feasibility Engine</div>
+            <ul class="module-list">
+              <li><span class="bullet-check">✔</span> <div><strong>Market Reach:</strong> 5–10km radius catchment population and distribution channels.</div></li>
+              <li><span class="bullet-check">✔</span> <div><strong>Opportunity Analysis:</strong> Pinpoints unserved demand gaps and product deficits.</div></li>
+              <li><span class="bullet-check">✔</span> <div><strong>Evidence-Based SWOT:</strong> Objective strengths & weaknesses tied to local economic facts.</div></li>
+              <li><span class="bullet-check">✔</span> <div><strong>Threats & Competitor Mapping:</strong> Real rival density, supply bottlenecks, seasonal volatility.</div></li>
+              <li><span class="bullet-check">✔</span> <div><strong>Product Market Value:</strong> Optimal pricing curves based on local rural purchasing power.</div></li>
+            </ul>
+          </div>
+
+          <!-- Module 2 -->
+          <div class="module-card green-featured">
+            <div class="module-badge">Module 2 · Problem Requirement</div>
+            <div class="module-title">Smart Scheme Calculator & Financial Router</div>
+            <ul class="module-list">
+              <li><span class="bullet-check">✔</span> <div><strong>Deterministic 10x Structuring:</strong> Auto-derives Project Cost = Margin / 10% (90% Loan).</div></li>
+              <li><span class="bullet-check">✔</span> <div><strong>Rule-Based Scheme Routing:</strong>
+                <br>• Project Cost ≤ ₹1.40L → <strong>Micro Finance Scheme</strong> (6.5% interest, 3-yr tenure, 3-mo moratorium)
+                <br>• Project Cost ₹1.40L–₹50L → <strong>Term Loan Scheme</strong> (8.0% interest, 7-yr tenure, 6-mo moratorium)
+              </div></li>
+              <li><span class="bullet-check">✔</span> <div><strong>EMI & Moratorium Generator:</strong> Quarterly debt schedule, operating cash flows, DSCR check.</div></li>
+              <li><span class="bullet-check">✔</span> <div><strong>Bank-Ready DPR Generation:</strong> One-click Detailed Project Report for bank/SCA submission.</div></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>GramVest | Smart India Hackathon 2026</span>
+        <span>Slide 3 of 7</span>
+      </div>
+    </div>
+
+    <!-- ====================================================================
+         SLIDE 4: PROCESS FLOW & USER JOURNEY
+         ==================================================================== -->
+    <div class="slide-wrapper" id="slide-4" data-slide="4">
+      <div class="slide-top-bar">
+        <div class="left-meta">
+          <span class="pill-tag dark">PROCESS WORKFLOW</span>
+          <span>End-to-End User Journey</span>
+        </div>
+        <div>GramVest | Smart India Hackathon 2026</div>
+      </div>
+
+      <div class="slide-body">
+        <div class="slide-title-wrap">
+          <h1 class="slide-title">Flow Chart</h1>
+          <p class="slide-subtitle">
+            How raw user parameters flow through spatial intelligence, deterministic math, and grounded RAG to produce an actionable business advisory.
+          </p>
+        </div>
+
+        <div class="flow-slide-grid">
+          <!-- Flowchart Image from Folder -->
+          <div class="flowchart-img-container" onclick="openFlowchartModal()" title="Click to view full-resolution flowchart">
+            <img src="FlowChart.jpeg" alt="GramVest Business Analysis Flow & Architecture" />
+            <div class="flowchart-zoom-hint">🔍 Click to inspect full diagram</div>
+          </div>
+
+          <!-- Step Details -->
+          <div class="flow-steps-timeline">
+            <div class="flow-step-item">
+              <div class="flow-item-idx">1</div>
+              <div class="flow-item-content">
+                <h5>User Input Layer</h5>
+                <p>Location (Gram Panchayat / Block), Available Capital (e.g. ₹1,00,000), Proposed Category (Dairy, Retail, Agro).</p>
+              </div>
+            </div>
+
+            <div class="flow-step-item">
+              <div class="flow-item-idx blue">2</div>
+              <div class="flow-item-content">
+                <h5>Data Engine & GIS Ingestion</h5>
+                <p>Fetches spatial 5–10km catchment, demographic density, local mandi prices, and economic indicators.</p>
+              </div>
+            </div>
+
+            <div class="flow-step-item">
+              <div class="flow-item-idx">3</div>
+              <div class="flow-item-content">
+                <h5>Feasibility & Threat Scoring</h5>
+                <p>Evaluates competition headroom, saturation index, supply vulnerabilities, and generates evidence-backed SWOT.</p>
+              </div>
+            </div>
+
+            <div class="flow-step-item">
+              <div class="flow-item-idx green">4</div>
+              <div class="flow-item-content">
+                <h5>Deterministic Financial Engine</h5>
+                <p>Computes Project Cost (₹10L), Loan (₹9L), quarterly EMI, operational margins, break-even point, and DSCR.</p>
+              </div>
+            </div>
+
+            <div class="flow-step-item">
+              <div class="flow-item-idx blue">5</div>
+              <div class="flow-item-content">
+                <h5>Scheme Router & Grounded AI Advisor</h5>
+                <p>Matches exact SCA/CA concessional scheme rules and explains options in local vernacular via RAG.</p>
+              </div>
+            </div>
+
+            <div class="flow-step-item">
+              <div class="flow-item-idx green">6</div>
+              <div class="flow-item-content">
+                <h5>Bank-Ready DPR & Action Roadmap</h5>
+                <p>Produces an official DPR PDF dossier ready for immediate loan appraisal at banks and SCAs.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>GramVest | Smart India Hackathon 2026</span>
+        <span>Slide 4 of 7</span>
+      </div>
+    </div>
+
+    <!-- ====================================================================
+         SLIDE 5: TECH STACK & SYSTEM ARCHITECTURE
+         ==================================================================== -->
+    <div class="slide-wrapper" id="slide-5" data-slide="5">
+      <div class="slide-top-bar">
+        <div class="left-meta">
+          <span class="pill-tag dark">SYSTEM ARCHITECTURE</span>
+          <span>Technical Stack & Reliability</span>
+        </div>
+        <div>GramVest | Smart India Hackathon 2026</div>
+      </div>
+
+      <div class="slide-body">
+        <div class="slide-title-wrap">
+          <h1 class="slide-title">Tech Stack</h1>
+          <p class="slide-subtitle">
+            Engineered for institutional trust. Numerical calculations are strictly deterministic; generative AI is used exclusively for grounded multilingual explanations.
+          </p>
+        </div>
+
+        <div class="tech-stack-grid">
+          <!-- Frontend -->
+          <div class="tech-card">
+            <div class="tech-card-header">
+              <div class="tech-icon">UI</div>
+              <div class="tech-title">Frontend & Interaction</div>
+            </div>
+            <div class="tech-badges">
+              <span class="tech-badge-item highlight">React.js</span>
+              <span class="tech-badge-item">Tailwind CSS</span>
+              <span class="tech-badge-item highlight">Leaflet / Mapbox</span>
+              <span class="tech-badge-item">Lucide Icons</span>
+            </div>
+            <ul class="tech-desc-list">
+              <li>• Responsive mobile-first dashboard for rural entrepreneurs.</li>
+              <li>• Interactive 5–10km catchment boundary visualization.</li>
+              <li>• Simple 3-step setup wizard & interactive What-If sliders.</li>
+            </ul>
+          </div>
+
+          <!-- Backend & API -->
+          <div class="tech-card">
+            <div class="tech-card-header">
+              <div class="tech-icon" style="color: #059669; background: #d1fae5;">API</div>
+              <div class="tech-title">Backend & Compute</div>
+            </div>
+            <div class="tech-badges">
+              <span class="tech-badge-item highlight">FastAPI (Python)</span>
+              <span class="tech-badge-item">NumPy / Decimal</span>
+              <span class="tech-badge-item">Pydantic Schemas</span>
+              <span class="tech-badge-item highlight">ReportLab</span>
+            </div>
+            <ul class="tech-desc-list">
+              <li>• <strong>Deterministic Financial Engine:</strong> Strict math for Project Cost, EMI, DSCR, and moratorium schedules.</li>
+              <li>• <strong>Versioned Scheme Rule Engine:</strong> Policy-driven JSON scheme matrix (Micro Finance vs. Term Loan).</li>
+              <li>• <strong>DPR PDF Generator:</strong> Institutional-grade printable dossier.</li>
+            </ul>
+          </div>
+
+          <!-- AI & GIS Layer -->
+          <div class="tech-card">
+            <div class="tech-card-header">
+              <div class="tech-icon" style="color: #7c3aed; background: #ede9fe;">AI</div>
+              <div class="tech-title">AI, GIS & Spatial Data</div>
+            </div>
+            <div class="tech-badges">
+              <span class="tech-badge-item highlight">PostgreSQL + PostGIS</span>
+              <span class="tech-badge-item highlight">pgvector / FAISS</span>
+              <span class="tech-badge-item">LangChain / RAG</span>
+              <span class="tech-badge-item">OpenStreetMap / Mandi API</span>
+            </div>
+            <ul class="tech-desc-list">
+              <li>• <strong>Spatial Radar:</strong> PostGIS spatial queries for competitor density and consumer catchment.</li>
+              <li>• <strong>Grounded RAG:</strong> Semantic retrieval over verified SCA/CA scheme gazettes with citations.</li>
+              <li>• <strong>Numerical Guardrail:</strong> AI cannot invent loan or interest numbers.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="golden-rule-bar">
+          <div>
+            <strong>Golden Engineering Principle:</strong> &ldquo;AI explains; software calculates.&rdquo; No hallucinated EMI or interest rates.
+          </div>
+          <span class="pill-tag green">100% AUDITABLE MATH</span>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>GramVest | Smart India Hackathon 2026</span>
+        <span>Slide 5 of 7</span>
+      </div>
+    </div>
+
+    <!-- ====================================================================
+         SLIDE 6: FUTURE SCOPE & ROADMAP
+         ==================================================================== -->
+    <div class="slide-wrapper" id="slide-6" data-slide="6">
+      <div class="slide-top-bar">
+        <div class="left-meta">
+          <span class="pill-tag dark">FUTURE SCOPE</span>
+          <span>Scalability & Post-Hackathon Roadmap</span>
+        </div>
+        <div>GramVest | Smart India Hackathon 2026</div>
+      </div>
+
+      <div class="slide-body">
+        <div class="slide-title-wrap">
+          <h1 class="slide-title">Future Scope</h1>
+          <p class="slide-subtitle">
+            A clear 4-stage evolutionary path to transform GramVest from a competitive hackathon prototype into national digital public infrastructure.
+          </p>
+        </div>
+
+        <div class="roadmap-grid">
+          <!-- Phase 1 -->
+          <div class="roadmap-card">
+            <div class="phase-badge">Phase 1 · Near Term</div>
+            <div class="phase-title">Vernacular Voice AI (Bhashini)</div>
+            <div class="phase-desc">
+              Integration with Government of India's Bhashini API for voice-in/voice-out in Hindi, Punjabi, Marathi, Tamil, and Bengali. Eliminates literacy barriers for rural artisans and women SHGs.
+            </div>
+            <div class="phase-impact">🎯 Impact: Zero-literacy accessibility</div>
+          </div>
+
+          <!-- Phase 2 -->
+          <div class="roadmap-card">
+            <div class="phase-badge">Phase 2 · Strategic</div>
+            <div class="phase-title">Direct SCA & Bank API Integration</div>
+            <div class="phase-desc">
+              Direct digital integration with State Channelizing Agencies (SCAs), JanSamarth portal, and public sector banks for seamless 1-click loan dossier submission and real-time sanction tracking.
+            </div>
+            <div class="phase-impact">🎯 Impact: Paperless loan appraisals</div>
+          </div>
+
+          <!-- Phase 3 -->
+          <div class="roadmap-card">
+            <div class="phase-badge">Phase 3 · Intelligence</div>
+            <div class="phase-title">Satellite & IoT Agro Data</div>
+            <div class="phase-desc">
+              Ingesting ISRO Bhuvan & Copernicus satellite imagery for real-time soil health, crop maturity cycles, and mandi demand spikes to power precision agri-business feasibility models.
+            </div>
+            <div class="phase-impact">🎯 Impact: Real-time supply analytics</div>
+          </div>
+
+          <!-- Phase 4 -->
+          <div class="roadmap-card">
+            <div class="phase-badge">Phase 4 · Sustainability</div>
+            <div class="phase-title">Post-Sanction WhatsApp Bot</div>
+            <div class="phase-desc">
+              Continuous lightweight WhatsApp micro-advisory tracking quarterly repayment reminders, raw material cost surges, and working capital health to prevent enterprise mortality.
+            </div>
+            <div class="phase-impact">🎯 Impact: Default prevention & NPL reduction</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>GramVest | Smart India Hackathon 2026</span>
+        <span>Slide 6 of 7</span>
+      </div>
+    </div>
+
+    <!-- ====================================================================
+         SLIDE 7: IMPACT & CONCLUSION
+         ==================================================================== -->
+    <div class="slide-wrapper" id="slide-7" data-slide="7">
+      <div class="slide-top-bar">
+        <div class="left-meta">
+          <span class="pill-tag green">IMPACT & CONCLUSION</span>
+          <span>Socio-Economic Value Creation</span>
+        </div>
+        <div>GramVest | Smart India Hackathon 2026</div>
+      </div>
+
+      <div class="slide-body">
+        <div class="slide-title-wrap">
+          <h1 class="slide-title">Impact & Conclusion</h1>
+          <p class="slide-subtitle">
+            GramVest replaces weeks of anecdotal guesswork with minutes of institutional-grade financial clarity, empowering marginalized entrepreneurs and protecting public capital.
+          </p>
+        </div>
+
+        <div class="impact-metrics-grid">
+          <!-- Metric 1 -->
+          <div class="impact-stat-card">
+            <div class="impact-number">65%</div>
+            <div class="impact-label">Rural Population Reach</div>
+            <div class="impact-subtext">Location-agnostic engine designed to scale across all 6,00,000+ Indian villages.</div>
+          </div>
+
+          <!-- Metric 2 -->
+          <div class="impact-stat-card">
+            <div class="impact-number">Weeks → 5m</div>
+            <div class="impact-label">Time to Feasibility</div>
+            <div class="impact-subtext">Slashes business evaluation time from 3 weeks of manual inquiry to under 5 minutes.</div>
+          </div>
+
+          <!-- Metric 3 -->
+          <div class="impact-stat-card">
+            <div class="impact-number">₹0</div>
+            <div class="impact-label">Consulting Cost</div>
+            <div class="impact-subtext">Replaces expensive ₹15,000–₹50,000 consultants with free, institutional-grade AI advisory.</div>
+          </div>
+
+          <!-- Metric 4 -->
+          <div class="impact-stat-card">
+            <div class="impact-number">90% : 10%</div>
+            <div class="impact-label">Deterministic Scheme Clarity</div>
+            <div class="impact-subtext">Exact debt-equity structuring, elimination of surprise shortfalls, and higher bank sanction rates.</div>
+          </div>
+        </div>
+
+        <div class="closing-banner">
+          <div class="closing-text">
+            <h3>&ldquo;Every village has a market. GramVest helps rural India see it clearly.&rdquo;</h3>
+            <p>Ready to empower the next 10 million rural micro-enterprises with data-backed conviction.</p>
+          </div>
+          <div class="closing-tags">
+            <span class="pill-tag dark" style="background: rgba(15,23,42,0.6); color: #fff;">Smart India Hackathon 2026</span>
+            <span style="font-size: 13px; font-weight: 700; letter-spacing: 0.5px;">Team GramVest · Thank You!</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>GramVest | Smart India Hackathon 2026</span>
+        <span>Slide 7 of 7</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Presenter Speech Notes Drawer (Toggle with 'P' key or button) -->
+  <div class="notes-drawer" id="notesDrawer">
+    <div class="notes-header">
+      <div class="notes-title">
+        <span>🎙️</span>
+        <span id="notesSlideTitle">Presenter Notes · Slide 1</span>
+      </div>
+      <button class="notes-close" onclick="toggleNotes()">✕</button>
+    </div>
+    <div class="notes-body">
+      <div class="notes-script">
+        <h5>Spoken Pitch Script (30–45 Seconds)</h5>
+        <div id="notesScriptText">
+          &ldquo;Respected judges, good morning. We are Team GramVest, presenting our solution for Problem Statement 26091: 'AI-Driven Hyper-Local Business Advisory and Financial Structuring Assistant for Rural Micro-Entrepreneurs'. Our platform, GramVest, is The Rural Decision Engine — designed to ensure that rural entrepreneurs know their local market, their actual competition, and their exact borrowing power before they invest a single rupee.&rdquo;
+        </div>
+      </div>
+      <div class="notes-qa">
+        <h5>Key Judge Focus & Defense Tip</h5>
+        <div id="notesQaText">
+          <strong>Key Pitch Highlight:</strong> Emphasize that GramVest bridges the fatal gap between government concessional credit (SCAs/CAs) and first-time rural entrepreneurs who lack market visibility.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for Flowchart Zoom -->
+  <div class="modal-backdrop" id="flowchartModal" onclick="closeFlowchartModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeFlowchartModal()">✕</button>
+      <img src="FlowChart.jpeg" alt="GramVest Architecture Flowchart Full Resolution" />
+    </div>
+  </div>
+
+  <!-- Presentation Script Logic -->
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 7;
+
+    const presenterNotes = {
+      1: {
+        title: "Slide 1: Title Slide & Introduction",
+        script: ""Respected judges, good morning. We are Team GramVest, presenting our solution for Problem Statement 26091: 'AI-Driven Hyper-Local Business Advisory and Financial Structuring Assistant for Rural Micro-Entrepreneurs'. Our platform, GramVest, is The Rural Decision Engine. Our core promise to Bharat is simple: know your market, your competition, and your capital — before you invest a single rupee."",
+        qa: "Highlight the brand GramVest and align directly with the Ministry theme of Rural Entrepreneurship and MSME empowerment."
+      },
+      2: {
+        title: "Slide 2: Problem Statement & Rural Reality",
+        script: ""The government offers generous schemes where beneficiaries contribute just 10% margin capital while State Channelizing Agencies provide 90% concessional credit. For instance, ₹1 Lakh gives access to a ₹10 Lakh unit. But here is the tragedy: over 60% of rural units fail within Year 1. Why? Because they invest completely blind. First, urban tools don't map villages. Second, competition is invisible — people open the 5th kirana on the same lane because of anecdotal hearsay. Third, scheme tiers like Micro Finance vs Term Loans, quarterly moratoriums, and bank DPRs are deeply confusing. And hiring a consultant costs ₹20,000, which they cannot afford."",
+        qa: "Be ready to cite the exact scheme parameters from the problem statement: Micro Finance (≤ ₹1.4L @ 6.5%, 3-yr tenure, 3-mo moratorium) vs Term Loan (₹1.4L–₹50L @ 8%, 7-yr tenure, 6-mo moratorium)."
+      },
+      3: {
+        title: "Slide 3: Proposed Solution (GramVest Dual-Engine Platform)",
+        script: ""To solve this, we built GramVest. An entrepreneur inputs just three simple parameters: their village location, available capital, and proposed business. In under 5 minutes, our system delivers two core modules: Module 1 is the Hyper-Local Feasibility Engine — mapping 5 to 10 km customer reach, unserved demand niches, evidence-based SWOT, localized risks, and optimal local pricing. Module 2 is the Smart Financial Calculator & Scheme Router — automatically structuring the 10x project cost, deterministically routing to Micro Finance or Term Loan schemes, calculating quarterly EMIs with moratoriums, and generating a bank-ready DPR."",
+        qa: "Emphasize that the system fulfills 100% of the functional requirements outlined in the hackathon brief."
+      },
+      4: {
+        title: "Slide 4: Process Flow & User Journey",
+        script: ""Here you see our end-to-end Decision Pipeline, mapped from our system design. It starts with user inputs, triggers spatial data ingestion for demographics and mandi prices, evaluates viability and saturation, executes deterministic financial formulas, matches scheme policies, grounds the explanation through a multilingual AI advisor, and generates a one-click DPR. Notice that every stage is traceable, auditable, and transparent."",
+        qa: "If judges ask to see details, click the diagram to open the full-resolution Flowchart Modal showing both the user journey and tech stack!"
+      },
+      5: {
+        title: "Slide 5: System Architecture & Tech Stack",
+        script: ""Our engineering adheres to one uncompromising golden rule: 'AI explains; software calculates.' Generative AI is phenomenal at summarizing and conversing in local dialects, but LLMs cannot be trusted to calculate EMIs or interest rates. Our financial engine is 100% deterministic Python code. Our spatial radar uses PostGIS for 5–10km geospatial buffering and OpenStreetMap for competitor clustering. Our AI layer uses RAG over verified official scheme gazettes stored in pgvector, with numerical guardrails to guarantee zero hallucination."",
+        qa: "Judges love hearing about guardrails against AI hallucinations. Point out that the numerical values come strictly from backend deterministic math, not the LLM."
+      },
+      6: {
+        title: "Slide 6: Future Scope & Roadmap",
+        script: ""Our roadmap beyond the hackathon focuses on real-world scalability. Phase 1 integrates Government of India's Bhashini voice engine for spoken vernacular interactions in Hindi, Punjabi, Tamil, and Marathi. Phase 2 connects directly with State Channelizing Agencies and JanSamarth APIs for digital loan forwarding. Phase 3 incorporates ISRO Bhuvan satellite imagery for crop-cycle intelligence, and Phase 4 deploys a WhatsApp micro-advisor to send quarterly EMI reminders and seasonal warnings to prevent loan default."",
+        qa: "Shows that GramVest is not just a student toy, but architected to scale into national digital public infrastructure."
+      },
+      7: {
+        title: "Slide 7: Expected Impact & Conclusion",
+        script: ""In conclusion, GramVest bridges Bharat's enterprise divide. We serve a rural population of 65% across 600,000 villages. We compress a 3-week, ₹25,000 feasibility study into 5 free minutes, while de-risking public lending and reducing NPAs for banks. Every village has an active market — GramVest ensures rural India can see it clearly before investing a single rupee. Thank you, and we look forward to your questions!"",
+        qa: "Deliver the closing line with high energy. Be confident, concise, and open for judge queries."
+      }
+    };
+
+    function showSlide(slideNum) {
+      if (slideNum < 1) slideNum = 1;
+      if (slideNum > totalSlides) slideNum = totalSlides;
+
+      currentSlide = slideNum;
+
+      document.querySelectorAll('.slide-wrapper').forEach(slide => {
+        slide.classList.remove('active');
+      });
+
+      const activeSlide = document.getElementById('slide-' + currentSlide);
+      if (activeSlide) {
+        activeSlide.classList.add('active');
+      }
+
+      document.getElementById('slideIndicator').innerText = 'Slide ' + currentSlide + ' / ' + totalSlides;
+      updateNotesContent();
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        showSlide(currentSlide + 1);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        showSlide(currentSlide - 1);
+      }
+    }
+
+    function toggleNotes() {
+      const drawer = document.getElementById('notesDrawer');
+      drawer.classList.toggle('open');
+      const btn = document.getElementById('notesBtn');
+      btn.classList.toggle('primary');
+    }
+
+    function updateNotesContent() {
+      const data = presenterNotes[currentSlide];
+      if (data) {
+        document.getElementById('notesSlideTitle').innerText = data.title;
+        document.getElementById('notesScriptText').innerText = data.script;
+        document.getElementById('notesQaText').innerHTML = data.qa;
+      }
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+          console.warn('Fullscreen request failed:', err);
+        });
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
+
+    function openFlowchartModal() {
+      document.getElementById('flowchartModal').classList.add('open');
+    }
+
+    function closeFlowchartModal() {
+      document.getElementById('flowchartModal').classList.remove('open');
+    }
+
+    // Keyboard Shortcuts
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key.toLowerCase() === 'p') {
+        e.preventDefault();
+        toggleNotes();
+      } else if (e.key.toLowerCase() === 'f') {
+        e.preventDefault();
+        toggleFullscreen();
+      } else if (e.key === 'Escape') {
+        closeFlowchartModal();
+        const drawer = document.getElementById('notesDrawer');
+        if (drawer.classList.contains('open')) {
+          drawer.classList.remove('open');
+        }
+      }
+    });
+
+    // Initialize
+    updateNotesContent();
+  </script>
+</body>
+</html>

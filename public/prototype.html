@@ -260,6 +260,106 @@
       display: none;
     }
 
+    /* TOP HERO SLIDESHOW BANNER STYLES */
+    .top-slideshow-nav {
+      max-width: 1360px;
+      margin: 0 auto 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      border-bottom: 1px solid var(--color-outline-variant);
+      padding-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .slideshow-tab-buttons {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+    }
+
+    .slideshow-tab-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--color-on-surface-variant);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .slideshow-tab-btn span.tab-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      opacity: 0.7;
+    }
+
+    .slideshow-tab-btn.active {
+      background: var(--color-on-surface);
+      color: #fff;
+      border-color: var(--color-on-surface);
+      box-shadow: 0 2px 8px rgba(29, 27, 24, 0.15);
+    }
+
+    .slideshow-tab-btn:hover:not(.active) {
+      color: var(--color-on-surface);
+      background: var(--color-surface-container);
+    }
+
+    .slideshow-controls-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .slideshow-arrow-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-outline-variant);
+      background: var(--color-surface-container-lowest);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-weight: 800;
+      font-size: 14px;
+      color: var(--color-on-surface);
+      transition: all 0.2s ease;
+    }
+
+    .slideshow-arrow-btn:hover {
+      background: var(--color-surface-container);
+    }
+
+    .hero-slide-pane {
+      display: none;
+      animation: heroSlideFadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .hero-slide-pane.active {
+      display: block;
+    }
+
+    @keyframes heroSlideFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     /* SECTION 1: KKR-INSPIRED HERO BANNER WITH ANIMATION */
     .hero-banner-section {
       position: relative;
@@ -267,7 +367,7 @@
                   radial-gradient(circle at 10% 80%, rgba(251, 235, 228, 0.7), transparent 60%),
                   var(--color-surface);
       border-bottom: 1px solid var(--color-outline-variant);
-      padding: 56px 28px 72px;
+      padding: 36px 28px 64px;
       overflow: hidden;
     }
 
@@ -1720,9 +1820,49 @@
   <!-- ========================================================================= -->
   <div id="module-landing">
 
-    <!-- SECTION 1: KKR-INSPIRED HERO BANNER WITH ANIMATION -->
+        <!-- UNIFIED TOP HERO SLIDESHOW BANNER (SLIDES 1, 2, & 3) -->
     <section class="hero-banner-section" id="hero-section">
-      <div class="hero-container">
+      
+      <!-- Top Slideshow Navigation Tabs & Auto-Advance Progress Controls -->
+      <div class="top-slideshow-nav">
+        <div class="slideshow-tab-buttons">
+          <button class="slideshow-tab-btn active" id="slideshow-tab-0" onclick="setHeroSlide(0)">
+            <span class="tab-num">01</span>
+            <span>What We Do &amp; Scaling MSMEs</span>
+          </button>
+          <button class="slideshow-tab-btn" id="slideshow-tab-1" onclick="setHeroSlide(1)">
+            <span class="tab-num">02</span>
+            <span>Government Schemes &amp; Subsidies</span>
+          </button>
+          <button class="slideshow-tab-btn" id="slideshow-tab-2" onclick="setHeroSlide(2)">
+            <span class="tab-num">03</span>
+            <span>Concessional Financing Options</span>
+          </button>
+        </div>
+
+        <div class="slideshow-controls-right">
+          <button class="play-pause-btn" id="hero-play-pause" onclick="toggleHeroAnimation()" title="Pause/Play slideshow rotation">
+            <svg id="icon-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <rect x="6" y="4" width="4" height="16"></rect>
+              <rect x="14" y="4" width="4" height="16"></rect>
+            </svg>
+            <svg id="icon-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:none;">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+          </button>
+          <div class="progress-track" style="width: 140px;">
+            <div class="progress-bar-segment" onclick="setHeroSlide(0)"><div class="progress-bar-fill" id="fill-0"></div></div>
+            <div class="progress-bar-segment" onclick="setHeroSlide(1)"><div class="progress-bar-fill" id="fill-1"></div></div>
+            <div class="progress-bar-segment" onclick="setHeroSlide(2)"><div class="progress-bar-fill" id="fill-2"></div></div>
+          </div>
+          <button class="slideshow-arrow-btn" onclick="prevHeroSlide()" title="Previous slide">←</button>
+          <button class="slideshow-arrow-btn" onclick="nextHeroSlide()" title="Next slide">→</button>
+        </div>
+      </div>
+
+      <!-- SLIDE 0: WHAT WE DO & SCALING SMALL BUSINESS BIG -->
+      <div class="hero-slide-pane active" id="hero-slide-0">
+<div class="hero-container">
         
         <!-- Left: Kinetic Typographic Engine -->
         <div class="hero-left">
@@ -1752,235 +1892,139 @@
             GramVest empowers rural entrepreneurs and MSMEs across Punjab to streamline feasibility, claim government capital subsidies, and secure institutional bank financing with zero guesswork.
           </p>
 
-          <!-- Banner Controls & Timer Track (KKR-style) -->
-          <div class="banner-controls">
-            <button class="play-pause-btn" id="hero-play-pause" onclick="toggleHeroAnimation()" title="Pause/Play animation">
-              <svg id="icon-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                <rect x="6" y="4" width="4" height="16"></rect>
-                <rect x="14" y="4" width="4" height="16"></rect>
-              </svg>
-              <svg id="icon-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:none;">
-                <polygon points="5 3 19 12 5 21 5 3"></polygon>
-              </svg>
-            </button>
-            <div class="progress-track">
-              <div class="progress-bar-segment" onclick="setHeroSlide(0)"><div class="progress-bar-fill" id="fill-0"></div></div>
+          
               <div class="progress-bar-segment" onclick="setHeroSlide(1)"><div class="progress-bar-fill" id="fill-1"></div></div>
               <div class="progress-bar-segment" onclick="setHeroSlide(2)"><div class="progress-bar-fill" id="fill-2"></div></div>
               <div class="progress-bar-segment" onclick="setHeroSlide(3)"><div class="progress-bar-fill" id="fill-3"></div></div>
             </div>
-            <span style="font-family: var(--font-mono); font-size: 11px; color: var(--color-on-surface-variant);" id="hero-slide-num">01 / 04</span>
-          </div>
+      </div>
 
-          <!-- Hero Action CTAs -->
-          <div class="hero-action-buttons">
-            <button class="cta-btn-primary" onclick="scrollToCycle()">
-              <span>Explore Business Cycle</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </button>
-            <button class="btn-secondary" onclick="switchPortal('institution')">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 10h18M5 10v11M19 10v11M9 10v11M15 10v11M12 3l9 7H3z"/></svg>
-              <span>Institution Login</span>
-            </button>
+      <!-- SLIDE 1: GOVERNMENT SCHEMES & SUBSIDIES (21SHARES STYLE) -->
+      <div class="hero-slide-pane" id="hero-slide-1">
+        <div style="max-width: 1360px; margin: 0 auto;">
+          <div class="section-header-centered" style="margin-bottom: 32px;">
+            <span class="pill-badge accent">Direct Sovereign Routing</span>
+            <h2>Current Government Schemes &amp; Capital Grants</h2>
+            <p>
+              GramVest deterministically routes your enterprise parameters to eligible central and state capital subsidies. No middlemen, no commissions, direct bank transfer (DBT).
+            </p>
           </div>
-        </div>
-
-        <!-- Right: Visual Stage (Building Small Business Big Visual Engine) -->
-        <div class="hero-visual-card">
-          <div class="visual-stage-header">
-            <div class="stage-title-group">
-              <span class="stage-live-dot"></span>
-              <span class="stage-title">Enterprise Scaling Engine</span>
-            </div>
-            <div class="stage-selector">
-              <button class="stage-step-btn active" id="stage-btn-1" onclick="setGrowthStage(1)">1. Seed</button>
-              <button class="stage-step-btn" id="stage-btn-2" onclick="setGrowthStage(2)">2. Feasibility</button>
-              <button class="stage-step-btn" id="stage-btn-3" onclick="setGrowthStage(3)">3. Scaled ₹50L</button>
-            </div>
-          </div>
-
-          <!-- Interactive Growth Viewport -->
-          <div class="growth-stage-viewport" id="growth-viewport">
+          <div class="schemes-card-grid">
             
-            <!-- Top Left Floating Badge -->
-            <div class="floating-badge badge-top-left" id="badge-growth-status">
-              <div class="metric-label">Mandi Demand Status</div>
-              <div class="metric-val green" id="growth-status-val">3,800 L/Day Deficit</div>
-            </div>
-
-            <!-- Central Visual Circle Portal (KKR-style Visual Focus) -->
-            <div class="growth-illustration-box">
-              <div class="enterprise-node-cluster">
-                <div class="growth-circle-portal" id="growth-portal">
-                  <svg id="growth-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                    <!-- Milk dairy chilling unit icon -->
-                    <path d="M7 21h10a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z"></path>
-                    <path d="M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"></path>
-                    <line x1="9" y1="12" x2="15" y2="12"></line>
-                    <line x1="12" y1="9" x2="12" y2="15"></line>
-                  </svg>
-                  <span class="portal-caption" id="growth-stage-caption">Stage 1: Seed Idea</span>
+            <!-- Scheme 1: PMEGP -->
+            <div class="scheme-product-card" onclick="highlightScheme('pmegp')">
+              <div>
+                <div class="scheme-card-top">
+                  <span class="scheme-ticker">PMEGP-RURAL</span>
+                  <span class="subsidy-badge">35% CAPITAL GRANT</span>
+                </div>
+                <h3 class="scheme-title">Prime Minister Employment Generation</h3>
+                <p class="scheme-desc">
+                  Non-repayable capital subsidy for rural manufacturing &amp; processing units up to ₹50 Lakh project cost.
+                </p>
+                <div class="scheme-metrics-table">
+                  <div class="metric-cell">
+                    <div class="cell-lbl">Max Project Cost</div>
+                    <div class="cell-val">₹50.0 Lakh</div>
+                  </div>
+                  <div class="metric-cell">
+                    <div class="cell-lbl">Own Margin Req</div>
+                    <div class="cell-val">5% – 10%</div>
+                  </div>
+                  <div class="metric-cell">
+                    <div class="cell-lbl">Concessional Debt</div>
+                    <div class="cell-val">60% – 65%</div>
+                  </div>
+                  <div class="metric-cell">
+                    <div class="cell-lbl">Lock-in Period</div>
+                    <div class="cell-val">3 Years</div>
+                  </div>
                 </div>
               </div>
+              <div class="scheme-action-row">
+                <span class="authority">KVIC / DIC Punjab</span>
+                <a href="#cycle-section" class="check-btn">Apply in DPR →</a>
+              </div>
             </div>
 
-            <!-- Bottom Right Floating Badge -->
-            <div class="floating-badge badge-bottom-right" id="badge-financial-status">
-              <div class="metric-label">Sanction Viability</div>
-              <div class="metric-val terracotta" id="growth-viability-val">74 / 100 Grade A</div>
+            <!-- Scheme 2: AIF -->
+            <div class="scheme-product-card" onclick="highlightScheme('aif')">
+              <div>
+                <div class="scheme-card-top">
+                  <span class="scheme-ticker">AIF-AGRI</span>
+                  <span class="subsidy-badge">3% SUBVENTION</span>
+                </div>
+                <h3 class="scheme-title">Agriculture Infrastructure Fund</h3>
+                <p class="scheme-desc">
+                  Interest subvention and credit guarantee for post-harvest management infrastructure &amp; primary processing.
+                </p>
+                <div class="scheme-metrics-table">
+                  <div class="metric-cell">
+                    <div class="cell-lbl">Max Loan Ceiling</div>
+                    <div class="cell-val">₹2.00 Crore</div>
+                  </div>
+                  <div class="metric-cell">
+                    <div class="cell-lbl">Interest Relief</div>
+                    <div class="cell-val">3.0% p.a.</div>
+                  </div>
+                  <div class="metric-cell">
+                    <div class="cell-lbl">Moratorium Period</div>
+                    <div class="cell-val">Up to 24 Mos</div>
+                  </div>
+                  <div class="metric-cell">
+                    <div class="cell-lbl">Tenure</div>
+                    <div class="cell-val">7 Years</div>
+                  </div>
+                </div>
+              </div>
+              <div class="scheme-action-row">
+                <span class="authority">Ministry of Agriculture</span>
+                <a href="#cycle-section" class="check-btn">Apply in DPR →</a>
+              </div>
             </div>
 
-            <!-- Micro Description Banner -->
-            <div style="background: rgba(255,255,255,0.9); padding: 10px 14px; border-radius: var(--radius-sm); border: 1px solid var(--color-outline-variant); font-size: 12px; color: var(--color-on-surface); line-height: 1.4;" id="growth-detail-text">
-              <strong>Jagraon Block (Ludhiana):</strong> Gurpreet contributes ₹1.0L margin savings. GramVest structures a ₹10.0L Milk Chilling Unit with ₹3.15L PMEGP subsidy.
+            <!-- Scheme 3: PMFME -->
+            <div class="scheme-product-card" onclick="highlightScheme('pmfme')">
+              <div>
+                <div class="scheme-card-top">
+                  <span class="scheme-ticker">PMFME-ODOP</span>
+                  <span class="subsidy-badge">35% CREDIT LINKED</span>
+                </div>
+                <h3 class="scheme-title">Micro Food Enterprises Scheme</h3>
+                <p class="scheme-desc">
+                  Targeted assistance for One District One Product (ODOP) spice mills, mustard oil expellers, and agro packaging.
+                </p>
+                <div class="scheme-metrics-table">
+                  <div class="metric-cell">
+                    <div class="cell-lbl">Max Grant Cap</div>
+                    <div class="cell-val">₹10.0 Lakh</div>
+                  </div>
+                  <div class="metric-cell">
+                    <div class="cell-lbl">Own Equity</div>
+                    <div class="cell-val">10% Min</div>
+                  </div>
+                  <div class="metric-cell">
+                    <div class="cell-lbl">Bank Term Loan</div>
+                    <div class="cell-val">90% Coverage</div>
+                  </div>
+                  <div class="metric-cell">
+                    <div class="cell-lbl">Handholding</div>
+                    <div class="cell-val">SNA Support</div>
+                  </div>
+                </div>
+              </div>
+              <div class="scheme-action-row">
+                <span class="authority">MoFPI / Punjab Agro</span>
+                <a href="#cycle-section" class="check-btn">Apply in DPR →</a>
+              </div>
             </div>
+
           </div>
 
-          <!-- Bottom Stat Strip -->
-          <div class="growth-summary-pills">
-            <div class="summary-pill-box">
-              <div class="pill-num" id="stat-project-cost">₹10,00,000</div>
-              <div class="pill-desc">Project Cost</div>
-            </div>
-            <div class="summary-pill-box">
-              <div class="pill-num" style="color: var(--color-secondary);" id="stat-subsidy">₹3,15,000</div>
-              <div class="pill-desc">Govt Subsidy</div>
-            </div>
-            <div class="summary-pill-box">
-              <div class="pill-num" style="color: var(--color-primary-terracotta);" id="stat-dscr">1.62x</div>
-              <div class="pill-desc">DSCR Coverage</div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- SECTION 2: CURRENT GOVERNMENT SCHEMES & FINANCING OPTIONS (BANNERS 2 & 3) -->
-    <section class="schemes-section" id="schemes-section">
-      <div class="section-header-centered">
-        <span class="pill-badge accent">Direct Sovereign Routing</span>
-        <h2>Current Government Schemes & Grants</h2>
-        <p>
-          GramVest deterministically routes your enterprise parameters to eligible central and state capital subsidies. No middlemen, no commissions, direct bank transfer (DBT).
-        </p>
-      </div>
-
-      <!-- 21shares-style Scheme Product Cards -->
-      <div class="schemes-card-grid">
-        
-        <!-- Scheme 1: PMEGP -->
-        <div class="scheme-product-card" onclick="highlightScheme('pmegp')">
-          <div>
-            <div class="scheme-card-top">
-              <span class="scheme-ticker">PMEGP-RURAL</span>
-              <span class="subsidy-badge">35% CAPITAL GRANT</span>
-            </div>
-            <h3 class="scheme-title">Prime Minister Employment Generation</h3>
-            <p class="scheme-desc">
-              Non-repayable capital subsidy for rural manufacturing & processing units up to ₹50 Lakh project cost.
-            </p>
-            <div class="scheme-metrics-table">
-              <div class="metric-cell">
-                <div class="cell-lbl">Max Project Cost</div>
-                <div class="cell-val">₹50.0 Lakh</div>
-              </div>
-              <div class="metric-cell">
-                <div class="cell-lbl">Own Margin Req</div>
-                <div class="cell-val">5% – 10%</div>
-              </div>
-              <div class="metric-cell">
-                <div class="cell-lbl">Concessional Debt</div>
-                <div class="cell-val">60% – 65%</div>
-              </div>
-              <div class="metric-cell">
-                <div class="cell-lbl">Lock-in Period</div>
-                <div class="cell-val">3 Years</div>
-              </div>
-            </div>
-          </div>
-          <div class="scheme-action-row">
-            <span class="authority">KVIC / DIC Punjab</span>
-            <a href="#cycle-section" class="check-btn">Apply in DPR →</a>
-          </div>
-        </div>
-
-        <!-- Scheme 2: AIF -->
-        <div class="scheme-product-card" onclick="highlightScheme('aif')">
-          <div>
-            <div class="scheme-card-top">
-              <span class="scheme-ticker">AIF-AGRI</span>
-              <span class="subsidy-badge">3% SUBVENTION</span>
-            </div>
-            <h3 class="scheme-title">Agriculture Infrastructure Fund</h3>
-            <p class="scheme-desc">
-              Interest subvention and credit guarantee for post-harvest management infrastructure & primary processing.
-            </p>
-            <div class="scheme-metrics-table">
-              <div class="metric-cell">
-                <div class="cell-lbl">Max Loan Ceiling</div>
-                <div class="cell-val">₹2.00 Crore</div>
-              </div>
-              <div class="metric-cell">
-                <div class="cell-lbl">Interest Relief</div>
-                <div class="cell-val">3.0% p.a.</div>
-              </div>
-              <div class="metric-cell">
-                <div class="cell-lbl">Moratorium Period</div>
-                <div class="cell-val">Up to 24 Mos</div>
-              </div>
-              <div class="metric-cell">
-                <div class="cell-lbl">Tenure</div>
-                <div class="cell-val">7 Years</div>
-              </div>
-            </div>
-          </div>
-          <div class="scheme-action-row">
-            <span class="authority">Ministry of Agriculture</span>
-            <a href="#cycle-section" class="check-btn">Apply in DPR →</a>
-          </div>
-        </div>
-
-        <!-- Scheme 3: PMFME -->
-        <div class="scheme-product-card" onclick="highlightScheme('pmfme')">
-          <div>
-            <div class="scheme-card-top">
-              <span class="scheme-ticker">PMFME-ODOP</span>
-              <span class="subsidy-badge">35% CREDIT LINKED</span>
-            </div>
-            <h3 class="scheme-title">Micro Food Enterprises Scheme</h3>
-            <p class="scheme-desc">
-              Targeted assistance for One District One Product (ODOP) spice mills, mustard oil expellers, and agro packaging.
-            </p>
-            <div class="scheme-metrics-table">
-              <div class="metric-cell">
-                <div class="cell-lbl">Max Grant Cap</div>
-                <div class="cell-val">₹10.0 Lakh</div>
-              </div>
-              <div class="metric-cell">
-                <div class="cell-lbl">Own Equity</div>
-                <div class="cell-val">10% Min</div>
-              </div>
-              <div class="metric-cell">
-                <div class="cell-lbl">Bank Term Loan</div>
-                <div class="cell-val">90% Coverage</div>
-              </div>
-              <div class="metric-cell">
-                <div class="cell-lbl">Handholding</div>
-                <div class="cell-val">SNA Support</div>
-              </div>
-            </div>
-          </div>
-          <div class="scheme-action-row">
-            <span class="authority">MoFPI / Punjab Agro</span>
-            <a href="#cycle-section" class="check-btn">Apply in DPR →</a>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Banner 3: Concessional Financing Options & Lending Tiers -->
-      <div class="financing-tiers-banner">
+      <!-- SLIDE 2: CONCESSIONAL FINANCING OPTIONS & LENDING ARCHITECTURE -->
+      <div class="hero-slide-pane" id="hero-slide-2">
+        <div style="max-width: 1360px; margin: 0 auto;">
+<div class="financing-tiers-banner">
         <div class="tiers-header-row">
           <div>
             <span class="pill-badge green" style="margin-bottom: 12px;">Concessional Financing Architecture</span>
@@ -2049,6 +2093,9 @@
 
         </div>
       </div>
+        </div>
+      </div>
+
     </section>
 
     <!-- SECTION 3: THE CYCLE OF BUSINESS & CAPITAL STRUCTURING ENGINE -->
@@ -2638,14 +2685,14 @@
   <!-- JAVASCRIPT: DYNAMIC ANIMATIONS, KKR HERO ROTATOR, AND CAPITAL SIMULATOR   -->
   <!-- ========================================================================= -->
   <script>
-    // --- KKR-INSPIRED KINETIC TYPOGRAPHIC BANNER ENGINE ---
+    // --- UNIFIED TOP HERO SLIDESHOW BANNER ENGINE ---
     let currentSlide = 0;
-    const totalSlides = 4;
+    const totalSlides = 3;
     let isPlaying = true;
     let slideTimer = null;
     let progressTimer = null;
     let progressPct = 0;
-    const slideDuration = 4500; // ms
+    const slideDuration = 6000; // 6 seconds per slide
 
     const growthStages = {
       1: {
@@ -2700,21 +2747,15 @@
     }
 
     function setHeroSlide(index) {
-      // Clear current active
       for (let i = 0; i < totalSlides; i++) {
-        document.getElementById(`headline-${i}`).classList.remove('active');
+        const pane = document.getElementById(`hero-slide-${i}`);
+        const tab = document.getElementById(`slideshow-tab-${i}`);
         const fill = document.getElementById(`fill-${i}`);
+        if (pane) pane.classList.toggle('active', i === index);
+        if (tab) tab.classList.toggle('active', i === index);
         if (fill) fill.style.width = i < index ? "100%" : "0%";
       }
-
       currentSlide = index;
-      document.getElementById(`headline-${currentSlide}`).classList.add('active');
-      document.getElementById('hero-slide-num').innerText = `0${currentSlide + 1} / 04`;
-
-      // Synchronize visual growth stage with headline slide
-      const targetStage = currentSlide === 0 ? 1 : (currentSlide === 1 ? 2 : 3);
-      setGrowthStage(targetStage, false);
-
       progressPct = 0;
     }
 
@@ -2723,11 +2764,29 @@
       setHeroSlide(next);
     }
 
+    function prevHeroSlide() {
+      const prev = (currentSlide - 1 + totalSlides) % totalSlides;
+      setHeroSlide(prev);
+    }
+
     function toggleHeroAnimation() {
       isPlaying = !isPlaying;
-      document.getElementById('icon-pause').style.display = isPlaying ? 'block' : 'none';
-      document.getElementById('icon-play').style.display = isPlaying ? 'none' : 'block';
+      const pauseIcon = document.getElementById('icon-pause');
+      const playIcon = document.getElementById('icon-play');
+      if (pauseIcon) pauseIcon.style.display = isPlaying ? 'block' : 'none';
+      if (playIcon) playIcon.style.display = isPlaying ? 'none' : 'block';
     }
+
+    // Secondary Kinetic Headline Rotator inside Slide 0
+    let kineticIndex = 0;
+    setInterval(() => {
+      if (!isPlaying) return;
+      kineticIndex = (kineticIndex + 1) % 4;
+      for (let i = 0; i < 4; i++) {
+        const el = document.getElementById(`headline-${i}`);
+        if (el) el.classList.toggle('active', i === kineticIndex);
+      }
+    }, 4000);
 
     function setGrowthStage(stageNum, manualClick = true) {
       for (let i = 1; i <= 3; i++) {

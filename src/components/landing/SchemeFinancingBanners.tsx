@@ -253,7 +253,7 @@ export default function SchemeFinancingBanners() {
                     <span className="text-[#8ed081] font-bold">✓</span> Mezzanine cash-flow sharing
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-[#8ed081] font-bold">✓</span> Direct Module 4 portal integration
+                    <span className="text-[#8ed081] font-bold">✓</span> Direct Institution Portal integration
                   </li>
                 </ul>
               </div>

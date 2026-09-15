@@ -133,7 +133,7 @@ export default function KKRHeroBanner() {
             {/* Badges */}
             <div className="flex flex-wrap items-center gap-2.5">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#fbebe4] text-[#9d3e21] border border-[#c75d3e]/20 text-[11px] font-bold uppercase tracking-wider">
-                Module 1 • Decision Engine
+                Hyper-Local Decision Engine
               </span>
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#d4e6c1]/60 text-[#3a6b4c] border border-[#3a6b4c]/20 text-[11px] font-bold uppercase tracking-wider">
                 PMEGP 35% Capital Grant Active

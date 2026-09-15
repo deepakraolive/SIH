@@ -2,8 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import KKRHeroBanner from "@/components/landing/KKRHeroBanner";
-import SchemeFinancingBanners from "@/components/landing/SchemeFinancingBanners";
+import HeroSlideshowBanner from "@/components/landing/HeroSlideshowBanner";
 import BusinessCycleVisualizer from "@/components/landing/BusinessCycleVisualizer";
 import MarketRadarTeaser from "@/components/landing/MarketRadarTeaser";
 
@@ -94,13 +93,10 @@ export default function LandingPage() {
         </div>
       </header>
 
-      {/* Module 1 Components */}
+      {/* Main Experience */}
       <main>
-        {/* Banner 1: KKR-inspired Kinetic Hero Animation */}
-        <KKRHeroBanner />
-
-        {/* Banner 2 & 3: Current Government Schemes & Concessional Financing Options */}
-        <SchemeFinancingBanners />
+        {/* Top Hero Slideshow: Kinetic Typography, What We Do, Govt Schemes & Financing Options */}
+        <HeroSlideshowBanner />
 
         {/* The Cycle of Business & Interactive Capital Structuring Engine */}
         <BusinessCycleVisualizer />
@@ -133,13 +129,13 @@ export default function LandingPage() {
 
             <div>
               <h4 className="text-white font-bold text-sm uppercase tracking-wider mb-4">
-                Platform Modules
+                Platform Navigation
               </h4>
               <ul className="space-y-2.5 text-xs">
-                <li><a href="#" className="hover:text-white transition-colors">Module 1: Landing Page</a></li>
-                <li><a href="#schemes" className="hover:text-white transition-colors">Module 1: Scheme Banners</a></li>
-                <li><a href="#business-cycle" className="hover:text-white transition-colors">Module 1: Business Cycle</a></li>
-                <li><Link href="/institution" className="hover:text-white transition-colors">Module 4: Institution Login</Link></li>
+                <li><a href="#" className="hover:text-white transition-colors">Enterprise Growth Simulator</a></li>
+                <li><a href="#schemes" className="hover:text-white transition-colors">Sovereign Scheme Directory</a></li>
+                <li><a href="#business-cycle" className="hover:text-white transition-colors">Business Cycle &amp; Capital Structuring</a></li>
+                <li><Link href="/institution" className="hover:text-white transition-colors">Institutional Lender Portal</Link></li>
               </ul>
             </div>
 

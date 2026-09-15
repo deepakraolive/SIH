@@ -126,7 +126,7 @@ export default function InstitutionPortal() {
         <div className="bg-[#151311] text-white rounded-3xl p-8 border border-[#332d27] flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-2xl">
           <div>
             <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#c75d3e]/20 text-[#c75d3e] border border-[#c75d3e]/30 text-[11px] font-mono uppercase tracking-wider mb-2">
-              Module 4 • Financial Institution Portal
+              Institutional Underwriting Console
             </span>
             <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
               Lender &amp; Investor Underwriting Console

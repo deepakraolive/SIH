@@ -55,7 +55,7 @@ export default function MarketRadarTeaser() {
             <div className="space-y-3 pt-2 font-mono text-xs">
               <div className="flex justify-between border-b border-[#332d27] pb-2">
                 <span className="text-[#a89f91]">PRIMARY APMC MANDI:</span>
-                <span className="font-bold text-white">Jagraon Grain & Milk Mandi</span>
+                <span className="font-bold text-white">Jagraon Grain &amp; Milk Mandi</span>
               </div>
               <div className="flex justify-between border-b border-[#332d27] pb-2">
                 <span className="text-[#a89f91]">POWER GRID CATEGORY:</span>

@@ -250,6 +250,61 @@
       box-shadow: 0 6px 18px rgba(199, 93, 62, 0.32);
     }
 
+        /* 3 Header Logins */
+    .nav-3-logins {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-login-btn {
+      font-size: 13px;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .nav-login-btn.user-login {
+      background: transparent;
+      color: var(--color-on-surface);
+      border: 1px solid transparent;
+    }
+
+    .nav-login-btn.user-login:hover {
+      background: var(--color-surface-container);
+      border-color: var(--color-outline-variant);
+    }
+
+    .nav-login-btn.dashboard-login {
+      background: #fff;
+      color: var(--color-on-surface);
+      border: 1px solid var(--color-outline-variant);
+    }
+
+    .nav-login-btn.dashboard-login:hover {
+      background: var(--color-surface-container);
+      color: var(--color-primary-terracotta);
+    }
+
+    .nav-login-btn.institution-login {
+      background: var(--color-primary-terracotta);
+      color: #fff;
+      border: 1px solid var(--color-primary-terracotta);
+      box-shadow: 0 2px 8px rgba(199, 93, 62, 0.25);
+    }
+
+    .nav-login-btn.institution-login:hover {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+    }
+
     /* MODULE 1: LANDING PAGE */
     #module-landing {
       display: block;
@@ -1795,21 +1850,39 @@
         <li><a href="#radar-section">Catchment Radar</a></li>
       </ul>
 
-      <!-- Portal Switcher Pill -->
-      <div class="portal-toggle-pill">
-        <button id="btn-portal-msme" class="portal-toggle-btn active" onclick="switchPortal('landing')">
-          MSME Entrepreneur
+            <!-- 3 Nav Logins Requested by User -->
+      <div class="nav-3-logins">
+        <!-- 1. User Login -->
+        <button class="nav-login-btn user-login" id="nav-user-login-btn" onclick="openUserLoginModal()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          <span id="nav-user-label">User Login</span>
         </button>
-        <button id="btn-portal-inst" class="portal-toggle-btn institution-btn" onclick="switchPortal('institution')">
-          Financial Institution
-        </button>
-      </div>
 
-      <!-- Fast Action CTA -->
-      <div id="nav-cta-container">
-        <button class="cta-btn-primary" onclick="scrollToCycle()">
-          <span>Start Feasibility Check</span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <!-- 2. Dashboard Login (Redirects to https://github.com/Quantumspectra7/Webapp_demo) -->
+        <a href="https://github.com/Quantumspectra7/Webapp_demo" target="_blank" rel="noopener noreferrer" class="nav-login-btn dashboard-login" title="Open Webapp Demo Dashboard on GitHub">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="9" rx="1"></rect>
+            <rect x="14" y="3" width="7" height="5" rx="1"></rect>
+            <rect x="14" y="12" width="7" height="9" rx="1"></rect>
+            <rect x="3" y="16" width="7" height="5" rx="1"></rect>
+          </svg>
+          <span>Dashboard</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+        </a>
+
+        <!-- 3. Institution Login -->
+        <button class="nav-login-btn institution-login" id="nav-inst-login-btn" onclick="switchPortal('institution')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 21h18M3 10h18M5 10v11M19 10v11M9 10v11M15 10v11M12 3l9 7H3z"></path>
+          </svg>
+          <span>Institution Login</span>
         </button>
       </div>
     </div>
@@ -2545,7 +2618,66 @@
   </div>
 
   <!-- ========================================================================= -->
-  <!-- MODAL: BANK-READY DETAILED PROJECT REPORT (DPR) DOSSIER                   -->
+    <!-- ========================================================================= -->
+  <!-- MODAL: USER LOGIN (MSME ENTREPRENEUR)                                     -->
+  <!-- ========================================================================= -->
+  <div class="modal-backdrop" id="user-login-modal" onclick="closeUserLoginModal(event)">
+    <div class="dpr-dossier-card" onclick="event.stopPropagation()" style="max-width: 440px; padding: 28px;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+        <div>
+          <span class="pill-badge accent" style="margin-bottom: 8px;">MSME Entrepreneur Portal</span>
+          <h3 style="font-size: 20px; font-weight: 800; margin-top: 4px;">User Login</h3>
+          <p style="font-size: 12px; color: var(--color-on-surface-variant); margin-top: 4px;">
+            Sign in to view your feasibility scorecard, track subsidy claims, and access bank-ready DPRs.
+          </p>
+        </div>
+        <button class="dossier-close-btn" onclick="closeUserLoginModalDirect()">✕</button>
+      </div>
+
+      <div id="user-login-step-phone">
+        <label style="display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 6px;">
+          Mobile Number / Aadhaar
+        </label>
+        <div style="display: flex; margin-bottom: 16px;">
+          <span style="background: var(--color-surface-container); border: 1px solid var(--color-outline-variant); border-right: none; padding: 10px 12px; border-radius: var(--radius-sm) 0 0 var(--radius-sm); font-size: 13px; font-weight: 700;">+91</span>
+          <input type="text" id="user-phone-input" placeholder="98765 43210" style="width: 100%; border: 1px solid var(--color-outline-variant); padding: 10px 14px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; font-size: 13px; font-weight: 600; outline: none;" />
+        </div>
+
+        <button class="cta-btn-primary" style="width: 100%; justify-content: center; margin-bottom: 16px;" onclick="goToOtpStep()">
+          Send OTP Verification Code
+        </button>
+
+        <div style="text-align: center; position: relative; margin: 16px 0;">
+          <hr style="border: none; border-top: 1px solid var(--color-outline-variant);" />
+          <span style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--color-surface); padding: 0 10px; font-size: 11px; font-family: var(--font-mono); color: var(--color-on-surface-variant);">OR FAST DEMO</span>
+        </div>
+
+        <button class="btn-secondary" style="width: 100%; justify-content: center;" onclick="quickDemoLogin('Gurpreet Singh (Dairy MSME)')">
+          <span>⚡ Quick Demo Login: Gurpreet Singh</span>
+        </button>
+      </div>
+
+      <div id="user-login-step-otp" style="display: none;">
+        <label style="display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 4px;">
+          Enter 4-Digit OTP
+        </label>
+        <p style="font-size: 12px; color: var(--color-on-surface-variant); margin-bottom: 12px;">
+          Code sent to mobile (Demo OTP: 1234)
+        </p>
+        <input type="text" id="user-otp-input" maxlength="4" placeholder="1234" style="width: 100%; text-align: center; font-family: var(--font-mono); font-size: 22px; font-weight: 800; letter-spacing: 0.3em; padding: 10px; border: 1px solid var(--color-outline-variant); border-radius: var(--radius-sm); margin-bottom: 16px; outline: none;" />
+
+        <button class="cta-btn-primary" style="width: 100%; justify-content: center; margin-bottom: 12px;" onclick="verifyUserOtp()">
+          Verify &amp; Enter Portal
+        </button>
+
+        <button style="width: 100%; background: none; border: none; font-size: 12px; font-weight: 700; color: var(--color-on-surface-variant); cursor: pointer;" onclick="backToPhoneStep()">
+          ← Back to mobile number
+        </button>
+      </div>
+    </div>
+  </div>
+
+<!-- MODAL: BANK-READY DETAILED PROJECT REPORT (DPR) DOSSIER                   -->
   <!-- ========================================================================= -->
   <div class="modal-backdrop" id="dossier-modal" onclick="closeDossierModal(event)">
     <div class="dpr-dossier-card" onclick="event.stopPropagation()">
@@ -3024,6 +3156,40 @@
         dscr: "1.45x (Solvent)"
       }
     };
+
+        // --- USER LOGIN MODAL FUNCTIONS ---
+    function openUserLoginModal() {
+      document.getElementById('user-login-modal').classList.add('active');
+    }
+
+    function closeUserLoginModal(e) {
+      document.getElementById('user-login-modal').classList.remove('active');
+    }
+
+    function closeUserLoginModalDirect() {
+      document.getElementById('user-login-modal').classList.remove('active');
+    }
+
+    function goToOtpStep() {
+      document.getElementById('user-login-step-phone').style.display = 'none';
+      document.getElementById('user-login-step-otp').style.display = 'block';
+    }
+
+    function backToPhoneStep() {
+      document.getElementById('user-login-step-phone').style.display = 'block';
+      document.getElementById('user-login-step-otp').style.display = 'none';
+    }
+
+    function quickDemoLogin(userName) {
+      document.getElementById('nav-user-label').innerHTML = `<span style="color: #3a6b4c; font-weight: 800;">✓ ${userName}</span>`;
+      closeUserLoginModalDirect();
+    }
+
+    function verifyUserOtp() {
+      const phone = document.getElementById('user-phone-input').value;
+      const label = phone ? `User (${phone.slice(-4)})` : "Gurpreet Singh";
+      quickDemoLogin(label);
+    }
 
     function openDossierModal(applicantKey) {
       const data = dossierData[applicantKey] || dossierData.gurpreet;

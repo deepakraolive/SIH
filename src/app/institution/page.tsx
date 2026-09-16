@@ -26,13 +26,48 @@ export default function InstitutionPage() {
             </span>
           </Link>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* 1. User Login / Portal */}
             <Link
               href="/"
-              className="text-xs font-bold text-[#706c63] hover:text-[#1d1b18] px-3 py-1.5 rounded-md border border-[#ddd6c9] bg-white transition-colors"
+              className="text-xs font-bold text-[#706c63] hover:text-[#1d1b18] px-2.5 py-1.5 rounded-md hover:bg-[#f3ede6] transition-colors flex items-center gap-1"
             >
-              ← Back to MSME Landing Page
+              <svg className="w-3.5 h-3.5 text-[#706c63]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+              <span>User Login</span>
             </Link>
+
+            {/* 2. Dashboard Login (Redirects to https://github.com/Quantumspectra7/Webapp_demo) */}
+            <a
+              href="https://github.com/Quantumspectra7/Webapp_demo"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-bold text-[#1d1b18] hover:text-[#c75d3e] px-2.5 py-1.5 rounded-md border border-[#ddd6c9] bg-white transition-colors flex items-center gap-1 group"
+              title="Open Webapp Demo Dashboard on GitHub"
+            >
+              <svg className="w-3.5 h-3.5 text-[#706c63] group-hover:text-[#c75d3e]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <rect x="3" y="3" width="7" height="9" rx="1" />
+                <rect x="14" y="3" width="7" height="5" rx="1" />
+                <rect x="14" y="12" width="7" height="9" rx="1" />
+                <rect x="3" y="16" width="7" height="5" rx="1" />
+              </svg>
+              <span>Dashboard</span>
+              <svg className="w-3 h-3 text-[#706c63] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
+            </a>
+
+            {/* 3. Active Institution Portal */}
+            <span className="bg-[#c75d3e] text-white text-xs font-bold px-3 py-1.5 rounded-md flex items-center gap-1 shadow-2xs">
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path d="M3 21h18M3 10h18M5 10v11M19 10v11M9 10v11M15 10v11M12 3l9 7H3z" />
+              </svg>
+              <span>Institution Portal</span>
+            </span>
           </div>
         </div>
       </header>

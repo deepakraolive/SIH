@@ -1,12 +1,18 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import HeroSlideshowBanner from "@/components/landing/HeroSlideshowBanner";
 import BusinessCycleVisualizer from "@/components/landing/BusinessCycleVisualizer";
 import MarketRadarTeaser from "@/components/landing/MarketRadarTeaser";
 
 export default function LandingPage() {
+  const [isUserLoginOpen, setIsUserLoginOpen] = useState(false);
+  const [userPhone, setUserPhone] = useState("");
+  const [userOtp, setUserOtp] = useState("");
+  const [loginStep, setLoginStep] = useState<"phone" | "otp">("phone");
+  const [loggedInUser, setLoggedInUser] = useState<string | null>(null);
+
   return (
     <div className="bg-[#fff8f2] text-[#1d1b18] min-h-screen selection:bg-[#c75d3e] selection:text-white">
       
@@ -55,7 +61,7 @@ export default function LandingPage() {
           </Link>
 
           {/* Nav Links */}
-          <nav className="hidden md:flex items-center gap-8 text-sm font-semibold text-[#382f29]">
+          <nav className="hidden lg:flex items-center gap-8 text-sm font-semibold text-[#382f29]">
             <a href="#schemes" className="hover:text-[#c75d3e] transition-colors">
               Govt Schemes
             </a>
@@ -65,33 +71,195 @@ export default function LandingPage() {
             <a href="#market-radar" className="hover:text-[#c75d3e] transition-colors">
               Catchment Radar
             </a>
-            <Link href="/institution" className="hover:text-[#c75d3e] transition-colors">
-              Lender Portal
-            </Link>
           </nav>
 
-          {/* Action CTAs */}
-          <div className="flex items-center gap-3 sm:gap-4">
+          {/* 3 Nav Logins Requested by User */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            
+            {/* 1. User Login */}
+            {loggedInUser ? (
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#d4e6c1]/60 border border-[#3a6b4c]/30 text-xs font-bold text-[#3a6b4c]">
+                <span className="w-2 h-2 rounded-full bg-[#3a6b4c] animate-pulse" />
+                <span className="max-w-[120px] sm:max-w-[150px] truncate">{loggedInUser}</span>
+                <button
+                  onClick={() => { setLoggedInUser(null); setLoginStep("phone"); }}
+                  className="ml-1 text-[#706c63] hover:text-[#1d1b18] text-xs font-extrabold p-0.5"
+                  title="Logout"
+                >
+                  ✕
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => setIsUserLoginOpen(true)}
+                className="text-xs sm:text-sm font-bold text-[#1d1b18] hover:text-[#c75d3e] transition-colors px-2.5 sm:px-3 py-2 rounded-lg hover:bg-[#f3ede6] flex items-center gap-1.5 border border-transparent hover:border-[#ddd6c9]"
+              >
+                <svg className="w-4 h-4 text-[#706c63]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+                <span>User Login</span>
+              </button>
+            )}
+
+            {/* 2. Dashboard Login (Redirects to https://github.com/Quantumspectra7/Webapp_demo) */}
+            <a
+              href="https://github.com/Quantumspectra7/Webapp_demo"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs sm:text-sm font-bold text-[#1d1b18] hover:text-[#c75d3e] transition-colors px-2.5 sm:px-3 py-2 rounded-lg hover:bg-[#f3ede6] flex items-center gap-1.5 border border-[#ddd6c9] bg-white group"
+              title="Open Webapp Demo Dashboard on GitHub"
+            >
+              <svg className="w-4 h-4 text-[#706c63] group-hover:text-[#c75d3e]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <rect x="3" y="3" width="7" height="9" rx="1" />
+                <rect x="14" y="3" width="7" height="5" rx="1" />
+                <rect x="14" y="12" width="7" height="9" rx="1" />
+                <rect x="3" y="16" width="7" height="5" rx="1" />
+              </svg>
+              <span>Dashboard</span>
+              <svg className="w-3 h-3 text-[#706c63] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
+            </a>
+
+            {/* 3. Institution Login */}
             <Link
               href="/institution"
-              className="text-xs sm:text-sm font-bold text-[#1d1b18] hover:text-[#c75d3e] transition-colors px-3 py-2"
+              className="bg-[#c75d3e] hover:bg-[#b04f32] text-white text-xs sm:text-sm font-bold px-3 sm:px-4 py-2 rounded-lg shadow-sm shadow-[#c75d3e]/20 transition-all flex items-center gap-1.5"
             >
-              Institution Login
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path d="M3 21h18M3 10h18M5 10v11M19 10v11M9 10v11M15 10v11M12 3l9 7H3z" />
+              </svg>
+              <span className="hidden sm:inline">Institution Login</span>
+              <span className="sm:hidden">Institution</span>
             </Link>
 
-            <Link
-              href="/onboarding"
-              className="bg-[#c75d3e] hover:bg-[#b04f32] text-white text-xs sm:text-sm font-bold px-4 sm:px-5 py-2.5 rounded-lg shadow-md shadow-[#c75d3e]/20 transition-all flex items-center gap-1.5"
-            >
-              <span>Start Feasibility Check</span>
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </Link>
           </div>
 
         </div>
       </header>
+
+      {/* User Login Modal */}
+      {isUserLoginOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
+          <div className="bg-[#fff8f2] border border-[#ede3d8] rounded-2xl max-w-md w-full p-6 shadow-2xl relative">
+            <button
+              onClick={() => setIsUserLoginOpen(false)}
+              className="absolute top-4 right-4 text-[#706c63] hover:text-[#1d1b18] w-8 h-8 rounded-full flex items-center justify-center hover:bg-[#f3ede6] transition-colors font-bold"
+            >
+              ✕
+            </button>
+
+            <div className="mb-5">
+              <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-[#fbebe4] text-[#9d3e21] text-[11px] font-mono font-bold uppercase tracking-wider mb-2">
+                MSME Entrepreneur Portal
+              </span>
+              <h3 className="text-xl font-extrabold text-[#1d1b18] tracking-tight">
+                User Login
+              </h3>
+              <p className="text-xs text-[#706c63] mt-1">
+                Sign in to view your feasibility scorecard, track subsidy claims, and access bank-ready DPRs.
+              </p>
+            </div>
+
+            {loginStep === "phone" && (
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-xs font-bold text-[#1d1b18] uppercase tracking-wider mb-1.5">
+                    Mobile Number / Aadhaar
+                  </label>
+                  <div className="flex">
+                    <span className="inline-flex items-center px-3 rounded-l-lg border border-r-0 border-[#ddd6c9] bg-[#f3ede6] text-xs font-bold text-[#706c63]">
+                      +91
+                    </span>
+                    <input
+                      type="text"
+                      placeholder="98765 43210"
+                      value={userPhone}
+                      onChange={(e) => setUserPhone(e.target.value)}
+                      className="w-full bg-white border border-[#ddd6c9] rounded-r-lg px-3.5 py-2.5 text-sm font-semibold text-[#1d1b18] outline-none focus:border-[#c75d3e]"
+                    />
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => setLoginStep("otp")}
+                  className="w-full bg-[#c75d3e] hover:bg-[#b04f32] text-white font-bold text-sm py-2.5 rounded-lg shadow-sm transition-all"
+                >
+                  Send OTP Verification Code
+                </button>
+
+                <div className="relative my-4">
+                  <div className="absolute inset-0 flex items-center">
+                    <div className="w-full border-t border-[#ede3d8]" />
+                  </div>
+                  <div className="relative flex justify-center text-xs">
+                    <span className="px-2 bg-[#fff8f2] text-[#706c63] font-mono">OR FAST DEMO</span>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setLoggedInUser("Gurpreet Singh (Dairy MSME)");
+                    setIsUserLoginOpen(false);
+                  }}
+                  className="w-full bg-white hover:bg-[#f3ede6] border border-[#ddd6c9] text-[#1d1b18] font-bold text-xs py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2"
+                >
+                  <span>⚡ Quick Demo Login: Gurpreet Singh</span>
+                  <span className="text-[10px] text-[#3a6b4c] font-mono font-bold bg-[#d4e6c1]/60 px-1.5 py-0.5 rounded">
+                    Score: 74/100
+                  </span>
+                </button>
+              </div>
+            )}
+
+            {loginStep === "otp" && (
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-xs font-bold text-[#1d1b18] uppercase tracking-wider mb-1.5">
+                    Enter 4-Digit OTP
+                  </label>
+                  <p className="text-xs text-[#706c63] mb-2">
+                    Code sent to +91 {userPhone || "98765 43210"} (Demo OTP: 1234)
+                  </p>
+                  <input
+                    type="text"
+                    maxLength={4}
+                    placeholder="1234"
+                    value={userOtp}
+                    onChange={(e) => setUserOtp(e.target.value)}
+                    className="w-full bg-white border border-[#ddd6c9] rounded-lg px-3.5 py-2.5 text-center text-lg font-mono font-bold tracking-widest text-[#1d1b18] outline-none focus:border-[#c75d3e]"
+                  />
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setLoggedInUser(userPhone ? `User (${userPhone.slice(-4)})` : "Gurpreet Singh");
+                    setLoginStep("phone");
+                    setIsUserLoginOpen(false);
+                  }}
+                  className="w-full bg-[#c75d3e] hover:bg-[#b04f32] text-white font-bold text-sm py-2.5 rounded-lg shadow-sm transition-all"
+                >
+                  Verify &amp; Enter Portal
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setLoginStep("phone")}
+                  className="w-full text-xs font-bold text-[#706c63] hover:text-[#1d1b18] text-center"
+                >
+                  ← Back to mobile number
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Main Experience */}
       <main>

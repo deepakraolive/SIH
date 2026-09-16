@@ -121,13 +121,13 @@ export default function UserLoginPage() {
             </div>
           </Link>
 
-          {/* 3 Nav Logins: 1. User Login, 2. Institution Login, 3. Dashboard */}
+          {/* 3 Nav Logins: 1. User Login (Active), 2. Institution Login, 3. Dashboard (Simple Neutral Styling) */}
           <div className="flex items-center gap-2 sm:gap-2.5">
             {/* 1. User Login (Active Page) */}
             <div
-              className="flex items-center gap-1.5 sm:gap-2 bg-[#c25838] text-white text-xs sm:text-[13.5px] font-bold px-3.5 sm:px-4 py-2 rounded-xl shadow-xs shadow-[#c25838]/20 ring-2 ring-white/50 whitespace-nowrap"
+              className="flex items-center gap-1.5 sm:gap-2 bg-[#faf7f2] border-[1.5px] border-[#1d1b18] text-[#1d1b18] text-xs sm:text-[13.5px] font-bold px-3.5 sm:px-4 py-2 rounded-xl shadow-xs whitespace-nowrap"
             >
-              <svg className="w-4 h-4 text-white shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 text-[#1d1b18] shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                 <circle cx="12" cy="7" r="4" />
               </svg>
@@ -139,10 +139,10 @@ export default function UserLoginPage() {
               href="/institution"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 sm:gap-2 bg-[#c25838] hover:bg-[#b04f32] text-white text-xs sm:text-[13.5px] font-bold px-3.5 sm:px-4 py-2 rounded-xl shadow-xs shadow-[#c25838]/20 transition-all whitespace-nowrap"
+              className="flex items-center gap-1.5 sm:gap-2 bg-white border-[1.5px] border-[#e2dbce] hover:border-[#1d1b18]/40 hover:bg-[#faf7f2] text-[#1d1b18] text-xs sm:text-[13.5px] font-bold px-3.5 sm:px-4 py-2 rounded-xl shadow-xs transition-all whitespace-nowrap"
               title="Open Institution Portal in a new page"
             >
-              <svg className="w-4 h-4 text-white shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 text-[#2b2723] shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                 <path d="M3 21h18M3 10h18M5 10v11M19 10v11M9 10v11M15 10v11M12 3l9 7H3z" />
               </svg>
               <span>Institution Login</span>
@@ -153,7 +153,7 @@ export default function UserLoginPage() {
               href="https://webapp-demo-eta.vercel.app/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 sm:gap-2 bg-white border-[1.5px] border-[#e2dbce] hover:border-[#c25838]/50 hover:bg-[#faf7f2] text-[#1d1b18] text-xs sm:text-[13.5px] font-bold px-3.5 sm:px-4 py-2 rounded-xl shadow-xs transition-all whitespace-nowrap group"
+              className="flex items-center gap-1.5 sm:gap-2 bg-white border-[1.5px] border-[#e2dbce] hover:border-[#1d1b18]/40 hover:bg-[#faf7f2] text-[#1d1b18] text-xs sm:text-[13.5px] font-bold px-3.5 sm:px-4 py-2 rounded-xl shadow-xs transition-all whitespace-nowrap group"
               title="Open Webapp Demo Dashboard"
             >
               <svg className="w-4 h-4 text-[#3a3530] shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">

@@ -59,7 +59,7 @@
     .brand-icon {
       width: 36px;
       height: 36px;
-      background: var(--terracotta);
+      background: #ffffff;
       color: #fff;
       border-radius: 10px;
       display: flex;
@@ -93,11 +93,11 @@
     }
     .nav-login-btn.user-login,
     .nav-login-btn.institution-login {
-      background: var(--terracotta);
-      color: #ffffff;
-      border: none;
+      background: #ffffff;
+      color: var(--text);
+      border: 1.5px solid var(--border);
       padding: 8px 15px;
-      box-shadow: 0 2px 8px rgba(194, 88, 56, 0.25);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
     }
     .nav-login-btn.user-login:hover,
     .nav-login-btn.institution-login:hover {
@@ -152,7 +152,7 @@
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: var(--terracotta);
+      background: #ffffff;
     }
     h1 {
       font-size: 28px;
@@ -192,7 +192,7 @@
     input[type="tel"], input[type="text"] {
       flex: 1;
       padding: 12px 16px;
-      border: none;
+      border: 1.5px solid var(--border);
       outline: none;
       font-size: 14px;
       font-weight: 600;
@@ -200,9 +200,9 @@
     }
     .btn-submit {
       width: 100%;
-      background: var(--terracotta);
+      background: #ffffff;
       color: #fff;
-      border: none;
+      border: 1.5px solid var(--border);
       padding: 14px;
       border-radius: 12px;
       font-size: 14px;
@@ -299,7 +299,7 @@
       <div class="nav-3-logins">
         <!-- 1. User Login (Active) -->
         <a href="login.html" class="nav-login-btn user-login" title="MSME Entrepreneur Login">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2b2723" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
             <circle cx="12" cy="7" r="4"></circle>
           </svg>
@@ -308,7 +308,7 @@
 
         <!-- 2. Institution Login (Opens in a different page) -->
         <a href="institution.html" target="_blank" rel="noopener noreferrer" class="nav-login-btn institution-login" title="Open Institution Underwriting Console in a new page">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2b2723" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M3 21h18M3 10h18M5 10v11M19 10v11M9 10v11M15 10v11M12 3l9 7H3z"></path>
           </svg>
           <span>Institution Login</span>

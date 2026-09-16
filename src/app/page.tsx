@@ -50,7 +50,13 @@ export default function LandingPage() {
             <a href="#market-radar" className="hover:text-[#c75d3e] transition-colors">
               Catchment Radar
             </a>
-            <a href="#faqs" className="hover:text-[#c75d3e] transition-colors">
+            <a
+              href="/faqs"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#c75d3e] transition-colors"
+              title="Open Complete FAQ in a new page"
+            >
               FAQ
             </a>
           </nav>
@@ -161,7 +167,7 @@ export default function LandingPage() {
                 <li><a href="#overview" className="hover:text-white transition-colors">Overview</a></li>
                 <li><a href="#business-cycle" className="hover:text-white transition-colors">Business Cycle &amp; Capital Structuring</a></li>
                 <li><a href="#market-radar" className="hover:text-white transition-colors">Spatial Catchment Radar</a></li>
-                <li><a href="#faqs" className="hover:text-white transition-colors">Frequently Asked Questions</a></li>
+                <li><Link href="/faqs" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Frequently Asked Questions ↗</Link></li>
                 <li><Link href="/institution" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Institutional Lender Portal ↗</Link></li>
               </ul>
             </div>

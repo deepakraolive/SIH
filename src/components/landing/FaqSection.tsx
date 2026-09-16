@@ -109,6 +109,27 @@ export default function FaqSection() {
           })}
         </div>
 
+        {/* Link to Dedicated Full FAQ Page */}
+        <div className="mt-10 text-center">
+          <a
+            href="/faqs"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white border border-[#ede3d8] hover:border-[#c75d3e] text-[#1d1b18] hover:text-[#c75d3e] text-xs sm:text-sm font-bold shadow-2xs transition-all group"
+          >
+            <span>Explore Complete FAQ Knowledge Base (Categories, Search & Subsidies)</span>
+            <svg
+              className="w-4 h-4 text-[#c75d3e] transition-transform group-hover:translate-x-1"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              viewBox="0 0 24 24"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+
       </div>
     </section>
   );

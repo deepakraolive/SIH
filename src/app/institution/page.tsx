@@ -14,17 +14,18 @@ export default function InstitutionPage() {
       {/* Top Utility Nav */}
       <header className="sticky top-0 z-40 bg-[#fff8f2]/90 backdrop-blur-md border-b border-[#ede3d8]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-[#c75d3e] flex items-center justify-center text-white font-bold text-base">
-              G
-            </div>
-            <span className="font-extrabold text-lg tracking-tight">
-              Gram<span className="text-[#c75d3e]">Vest</span>
-            </span>
-            <span className="font-mono text-[11px] bg-[#151311] text-white px-2 py-0.5 rounded-md ml-2">
+          <div className="flex items-center gap-3">
+            <Link href="/" className="flex items-center py-1 group">
+              <img
+                src="/gramvest_logo3.png"
+                alt="GramVest"
+                className="h-10 sm:h-11 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
+              />
+            </Link>
+            <span className="font-mono text-[11px] bg-[#151311] text-white px-2.5 py-1 rounded-md hidden sm:inline-block">
               INSTITUTION PORTAL
             </span>
-          </Link>
+          </div>
 
           {/* 3 Nav Logins: 1. User Login, 2. Institution Portal (Active), 3. Dashboard (Simple Styling) */}
           <div className="flex items-center gap-2 sm:gap-2.5">

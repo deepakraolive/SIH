@@ -107,18 +107,12 @@ export default function UserLoginPage() {
       {/* Top Navigation */}
       <header className="sticky top-0 z-40 bg-[#fff8f2]/95 backdrop-blur-md border-b border-[#ede3d8]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="w-9 h-9 rounded-xl bg-[#c25838] flex items-center justify-center text-white font-black text-lg shadow-sm shadow-[#c25838]/30 group-hover:scale-105 transition-transform">
-              G
-            </div>
-            <div className="flex flex-col">
-              <span className="font-extrabold text-xl tracking-tight leading-none">
-                Gram<span className="text-[#c25838]">Vest</span>
-              </span>
-              <span className="text-[10px] font-mono text-[#706c63] tracking-wider uppercase mt-0.5">
-                Rural Enterprise Engine
-              </span>
-            </div>
+          <Link href="/" className="flex items-center py-1 group">
+            <img
+              src="/gramvest_logo3.png"
+              alt="GramVest"
+              className="h-10 sm:h-11 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
+            />
           </Link>
 
           {/* 3 Nav Logins: 1. User Login (Active), 2. Institution Login, 3. Dashboard (Simple Neutral Styling) */}

@@ -1,20 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
-import HeroSlideshowBanner from "@/components/landing/HeroSlideshowBanner";
-import BusinessCycleVisualizer from "@/components/landing/BusinessCycleVisualizer";
-import MarketRadarTeaser from "@/components/landing/MarketRadarTeaser";
+import BannerSlideshowSection from "@/components/landing/BannerSlideshowSection";
 
 export default function LandingPage() {
-  const [isUserLoginOpen, setIsUserLoginOpen] = useState(false);
-  const [userPhone, setUserPhone] = useState("");
-  const [userOtp, setUserOtp] = useState("");
-  const [loginStep, setLoginStep] = useState<"phone" | "otp">("phone");
-  const [loggedInUser, setLoggedInUser] = useState<string | null>(null);
-
   return (
-    <div className="bg-[#fff8f2] text-[#1d1b18] min-h-screen selection:bg-[#c75d3e] selection:text-white">
+    <div className="bg-[#fff8f2] text-[#1d1b18] min-h-screen selection:bg-[#c75d3e] selection:text-white flex flex-col justify-between">
       
       {/* Topology-style Technical Coordinate Bar */}
       <div className="bg-[#151311] text-[#a89f91] font-mono text-[11px] px-4 sm:px-8 py-1.5 border-b border-[#332d27] flex flex-wrap justify-between items-center gap-2">
@@ -32,48 +24,37 @@ export default function LandingPage() {
       </div>
 
       {/* Main Top Header Navigation */}
-      <header className="sticky top-0 z-50 bg-[#fff8f2]/90 backdrop-blur-md border-b border-[#ede3d8]">
+      <header className="sticky top-0 z-50 bg-[#fff8f2]/95 backdrop-blur-md border-b border-[#ede3d8]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           
-          {/* Brand Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#c75d3e] to-[#9d3e21] flex items-center justify-center text-white shadow-md shadow-[#c75d3e]/25 group-hover:scale-105 transition-transform">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24">
-                <path d="M3 21h18" />
-                <path d="M5 21V7l7-4 7 4v14" />
-                <path d="M9 10a3 3 0 1 0 6 0" />
-                <path d="M9 21v-4a3 3 0 0 1 6 0v4" />
-              </svg>
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="font-extrabold text-xl tracking-tight text-[#1d1b18]">
-                  Gram<span className="text-[#c75d3e]">Vest</span>
-                </span>
-                <span className="inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-[#d4e6c1]/60 text-[#3a6b4c] border border-[#3a6b4c]/20">
-                  LIVE
-                </span>
-              </div>
-              <p className="text-[11px] font-semibold text-[#706c63] uppercase tracking-wider">
-                Rural Feasibility Radar
-              </p>
-            </div>
+          {/* Brand Logo - Official logo from https://github.com/Quantumspectra7/Webapp_demo */}
+          <Link href="/" className="flex items-center py-1 group">
+            <img
+              src="/gramvest_logo3.png"
+              alt="GramVest"
+              className="h-11 sm:h-13 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
+            />
           </Link>
 
-          {/* Nav Links */}
+          {/* Clean Nav Links */}
           <nav className="hidden lg:flex items-center gap-8 text-sm font-semibold text-[#382f29]">
-            <a href="#schemes" className="hover:text-[#c75d3e] transition-colors">
-              Govt Schemes
+            <a href="#hero-section" className="hover:text-[#c75d3e] transition-colors">
+              Overview
             </a>
-            <a href="#business-cycle" className="hover:text-[#c75d3e] transition-colors">
-              Business Cycle
+            <a href="#slideshow-section" className="hover:text-[#c75d3e] transition-colors">
+              What We Do
             </a>
-            <a href="#market-radar" className="hover:text-[#c75d3e] transition-colors">
-              Catchment Radar
+            <a
+              href="https://webapp-demo-eta.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#c75d3e] transition-colors"
+            >
+              Simulator ↗
             </a>
           </nav>
 
-          {/* 3 Nav Logins: 1. User Login, 2. Institution Login, 3. Dashboard (Simple, Clean Neutral Styling) */}
+          {/* 3 Nav Logins: 1. User Login, 2. Institution Login, 3. Dashboard (Simple Clean Styling) */}
           <div className="flex items-center gap-2 sm:gap-2.5">
             
             {/* 1. User Login (Opens dedicated /login page) */}
@@ -130,201 +111,133 @@ export default function LandingPage() {
         </div>
       </header>
 
-      {/* User Login Modal */}
-      {isUserLoginOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
-          <div className="bg-[#fff8f2] border border-[#ede3d8] rounded-2xl max-w-md w-full p-6 shadow-2xl relative">
-            <button
-              onClick={() => setIsUserLoginOpen(false)}
-              className="absolute top-4 right-4 text-[#706c63] hover:text-[#1d1b18] w-8 h-8 rounded-full flex items-center justify-center hover:bg-[#f3ede6] transition-colors font-bold"
-            >
-              ✕
-            </button>
-
-            <div className="mb-5">
-              <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-[#fbebe4] text-[#9d3e21] text-[11px] font-mono font-bold uppercase tracking-wider mb-2">
-                MSME Entrepreneur Portal
-              </span>
-              <h3 className="text-xl font-extrabold text-[#1d1b18] tracking-tight">
-                User Login
-              </h3>
-              <p className="text-xs text-[#706c63] mt-1">
-                Sign in to view your feasibility scorecard, track subsidy claims, and access bank-ready DPRs.
-              </p>
-            </div>
-
-            {loginStep === "phone" && (
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-xs font-bold text-[#1d1b18] uppercase tracking-wider mb-1.5">
-                    Mobile Number / Aadhaar
-                  </label>
-                  <div className="flex">
-                    <span className="inline-flex items-center px-3 rounded-l-lg border border-r-0 border-[#ddd6c9] bg-[#f3ede6] text-xs font-bold text-[#706c63]">
-                      +91
-                    </span>
-                    <input
-                      type="text"
-                      placeholder="98765 43210"
-                      value={userPhone}
-                      onChange={(e) => setUserPhone(e.target.value)}
-                      className="w-full bg-white border border-[#ddd6c9] rounded-r-lg px-3.5 py-2.5 text-sm font-semibold text-[#1d1b18] outline-none focus:border-[#c75d3e]"
-                    />
-                  </div>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => setLoginStep("otp")}
-                  className="w-full bg-[#c75d3e] hover:bg-[#b04f32] text-white font-bold text-sm py-2.5 rounded-lg shadow-sm transition-all"
-                >
-                  Send OTP Verification Code
-                </button>
-
-                <div className="relative my-4">
-                  <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-[#ede3d8]" />
-                  </div>
-                  <div className="relative flex justify-center text-xs">
-                    <span className="px-2 bg-[#fff8f2] text-[#706c63] font-mono">OR FAST DEMO</span>
-                  </div>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => {
-                    setLoggedInUser("Gurpreet Singh (Dairy MSME)");
-                    setIsUserLoginOpen(false);
-                  }}
-                  className="w-full bg-white hover:bg-[#f3ede6] border border-[#ddd6c9] text-[#1d1b18] font-bold text-xs py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2"
-                >
-                  <span>⚡ Quick Demo Login: Gurpreet Singh</span>
-                  <span className="text-[10px] text-[#3a6b4c] font-mono font-bold bg-[#d4e6c1]/60 px-1.5 py-0.5 rounded">
-                    Score: 74/100
-                  </span>
-                </button>
-              </div>
-            )}
-
-            {loginStep === "otp" && (
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-xs font-bold text-[#1d1b18] uppercase tracking-wider mb-1.5">
-                    Enter 4-Digit OTP
-                  </label>
-                  <p className="text-xs text-[#706c63] mb-2">
-                    Code sent to +91 {userPhone || "98765 43210"} (Demo OTP: 1234)
-                  </p>
-                  <input
-                    type="text"
-                    maxLength={4}
-                    placeholder="1234"
-                    value={userOtp}
-                    onChange={(e) => setUserOtp(e.target.value)}
-                    className="w-full bg-white border border-[#ddd6c9] rounded-lg px-3.5 py-2.5 text-center text-lg font-mono font-bold tracking-widest text-[#1d1b18] outline-none focus:border-[#c75d3e]"
-                  />
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => {
-                    setLoggedInUser(userPhone ? `User (${userPhone.slice(-4)})` : "Gurpreet Singh");
-                    setLoginStep("phone");
-                    setIsUserLoginOpen(false);
-                  }}
-                  className="w-full bg-[#c75d3e] hover:bg-[#b04f32] text-white font-bold text-sm py-2.5 rounded-lg shadow-sm transition-all"
-                >
-                  Verify &amp; Enter Portal
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setLoginStep("phone")}
-                  className="w-full text-xs font-bold text-[#706c63] hover:text-[#1d1b18] text-center"
-                >
-                  ← Back to mobile number
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-
       {/* Main Experience */}
       <main>
-        {/* Top Hero Slideshow: Kinetic Typography, What We Do, Govt Schemes & Financing Options */}
-        <HeroSlideshowBanner />
-
-        {/* The Cycle of Business & Interactive Capital Structuring Engine */}
-        <BusinessCycleVisualizer />
-
-        {/* Spatial Catchment Intelligence Teaser */}
-        <MarketRadarTeaser />
-      </main>
-
-      {/* Global Footer */}
-      <footer className="bg-[#151311] text-[#a89f91] py-16 border-t border-[#332d27] text-xs sm:text-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-            
-            <div className="space-y-4">
-              <div className="flex items-center gap-2">
-                <span className="font-extrabold text-xl tracking-tight text-white">
-                  Gram<span className="text-[#c75d3e]">Vest</span>
+        
+        {/* ========================================================================= */}
+        {/* FIRST SECTION (Built clean from scratch)                                  */}
+        {/* ========================================================================= */}
+        <section id="hero-section" className="relative py-16 sm:py-24 overflow-hidden border-b border-[#ede3d8]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-4xl mx-auto text-center space-y-7">
+              
+              {/* Status Badge */}
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[#e2dbce] shadow-2xs">
+                <span className="w-2 h-2 rounded-full bg-[#3a6b4c] animate-pulse" />
+                <span className="text-xs font-mono font-bold text-[#1d1b18] uppercase tracking-wider">
+                  Hyper-Local Rural Business Decision Engine
                 </span>
-                <span className="font-mono text-[10px] bg-white/10 text-white px-2 py-0.5 rounded">
+                <span className="text-[10px] font-mono font-bold bg-[#f4eee6] text-[#706c63] px-2 py-0.5 rounded-md">
                   SIH 26091
                 </span>
               </div>
-              <p className="text-xs text-[#a89f91] leading-relaxed">
-                Smart India Hackathon 2026 Problem Statement 26091. Transforming rural micro-entrepreneurs into bank-funded enterprises through spatial feasibility, sovereign subsidy matching, and institutional capital underwriting.
+
+              {/* Headline - Typography inspired by 21shares.com & kkr.com */}
+              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-[#1d1b18] tracking-tight leading-[1.08]">
+                Stop guessing mandi demand. <br />
+                <span className="text-[#3a6b4c]">Grow small business big.</span>
+              </h1>
+
+              {/* Subtitle */}
+              <p className="text-base sm:text-xl text-[#605a52] max-w-2xl mx-auto leading-relaxed font-medium">
+                GramVest eliminates trial-and-error for rural entrepreneurs by modeling genuine village footfall, 3-phase power grid reliability, and pre-qualifying sovereign capital subsidies (<span className="text-[#1d1b18] font-bold">PMEGP, AIF, PMFME</span>).
               </p>
-              <div className="font-mono text-[11px] text-[#8ed081]">
-                ✓ 100% Deterministic Calculations
+
+              {/* Call to Actions */}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-3">
+                <a
+                  href="#slideshow-section"
+                  className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-[#1d1b18] hover:bg-black text-white text-sm font-bold shadow-md transition-all flex items-center justify-center gap-2 group"
+                >
+                  <span>See How Small Business Grows Big</span>
+                  <svg className="w-4 h-4 transition-transform group-hover:translate-y-0.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                    <path d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                  </svg>
+                </a>
+
+                <a
+                  href="https://webapp-demo-eta.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-white border border-[#e2dbce] hover:border-[#1d1b18]/40 hover:bg-[#faf7f2] text-[#1d1b18] text-sm font-bold transition-all flex items-center justify-center gap-2"
+                >
+                  <span>Open Catchment Simulator</span>
+                  <svg className="w-4 h-4 text-[#706c63]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                    <polyline points="15 3 21 3 21 9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
+                  </svg>
+                </a>
               </div>
-            </div>
 
+              {/* Clean Metric Cards (21shares aesthetic) */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-8 border-t border-[#ede3d8]/80 text-left">
+                <div className="p-4 rounded-2xl bg-white border border-[#ede3d8]">
+                  <span className="text-[10px] font-mono font-bold text-[#706c63] uppercase block">Sovereign Grants</span>
+                  <span className="text-xl sm:text-2xl font-black text-[#1d1b18] block mt-1">₹18.4 Cr+</span>
+                  <span className="text-[10px] text-[#3a6b4c] font-bold mt-0.5 block">Mapped &amp; Verified</span>
+                </div>
+
+                <div className="p-4 rounded-2xl bg-white border border-[#ede3d8]">
+                  <span className="text-[10px] font-mono font-bold text-[#706c63] uppercase block">Panchayats Tracked</span>
+                  <span className="text-xl sm:text-2xl font-black text-[#1d1b18] block mt-1">14,200+</span>
+                  <span className="text-[10px] text-[#3a6b4c] font-bold mt-0.5 block">PSPCL Feeder Feeds</span>
+                </div>
+
+                <div className="p-4 rounded-2xl bg-white border border-[#ede3d8]">
+                  <span className="text-[10px] font-mono font-bold text-[#706c63] uppercase block">Average Solvency</span>
+                  <span className="text-xl sm:text-2xl font-black text-[#1d1b18] block mt-1">1.82x DSCR</span>
+                  <span className="text-[10px] text-[#3a6b4c] font-bold mt-0.5 block">Above 1.30x Hurdle</span>
+                </div>
+
+                <div className="p-4 rounded-2xl bg-white border border-[#ede3d8]">
+                  <span className="text-[10px] font-mono font-bold text-[#706c63] uppercase block">Broker Commission</span>
+                  <span className="text-xl sm:text-2xl font-black text-[#3a6b4c] block mt-1">0% Fee</span>
+                  <span className="text-[10px] text-[#706c63] font-bold mt-0.5 block">Direct Sovereign Routing</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        {/* ========================================================================= */}
+        {/* AFTER FIRST SECTION: SLIDESHOW BANNER SECTION                             */}
+        {/* Banner 1: Animation of What We Do (Small Business Grows Big)              */}
+        {/* ========================================================================= */}
+        <div id="slideshow-section">
+          <BannerSlideshowSection />
+        </div>
+
+      </main>
+
+      {/* Global Footer */}
+      <footer className="bg-[#151311] text-[#a89f91] py-14 border-t border-[#332d27] text-xs sm:text-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 pb-8 border-b border-[#2a2520]">
             <div>
-              <h4 className="text-white font-bold text-sm uppercase tracking-wider mb-4">
-                Platform Navigation
-              </h4>
-              <ul className="space-y-2.5 text-xs">
-                <li><a href="#" className="hover:text-white transition-colors">Enterprise Growth Simulator</a></li>
-                <li><a href="#schemes" className="hover:text-white transition-colors">Sovereign Scheme Directory</a></li>
-                <li><a href="#business-cycle" className="hover:text-white transition-colors">Business Cycle &amp; Capital Structuring</a></li>
-                <li><Link href="/institution" className="hover:text-white transition-colors">Institutional Lender Portal</Link></li>
-              </ul>
+              <img
+                src="/gramvest_logo3.png"
+                alt="GramVest"
+                className="h-10 w-auto object-contain brightness-0 invert opacity-90"
+              />
+              <p className="text-xs text-[#a89f91] mt-2 max-w-md">
+                Smart India Hackathon 2026 Problem Statement 26091. Transforming rural micro-enterprises into bank-funded ventures through spatial feasibility and direct sovereign subsidy integration.
+              </p>
             </div>
 
-            <div>
-              <h4 className="text-white font-bold text-sm uppercase tracking-wider mb-4">
-                Sovereign Schemes
-              </h4>
-              <ul className="space-y-2.5 text-xs">
-                <li><a href="#schemes" className="hover:text-white transition-colors">PMEGP 35% Capital Grant</a></li>
-                <li><a href="#schemes" className="hover:text-white transition-colors">AIF 3% Interest Subvention</a></li>
-                <li><a href="#schemes" className="hover:text-white transition-colors">PMFME Micro Subsidy</a></li>
-                <li><a href="#schemes" className="hover:text-white transition-colors">CGTMSE Collateral Guarantee</a></li>
-              </ul>
+            <div className="flex flex-wrap items-center gap-4 text-xs font-semibold">
+              <a href="#hero-section" className="hover:text-white transition-colors">Overview</a>
+              <a href="#slideshow-section" className="hover:text-white transition-colors">What We Do</a>
+              <Link href="/login" className="hover:text-white transition-colors">User Login</Link>
+              <Link href="/institution" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Institution Portal ↗</Link>
+              <a href="https://webapp-demo-eta.vercel.app/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Dashboard Demo ↗</a>
             </div>
-
-            <div>
-              <h4 className="text-white font-bold text-sm uppercase tracking-wider mb-4">
-                Institutional Network
-              </h4>
-              <ul className="space-y-2.5 text-xs">
-                <li><Link href="/institution" className="hover:text-white transition-colors">State Bank of India Lead District</Link></li>
-                <li><Link href="/institution" className="hover:text-white transition-colors">Punjab Gramin Bank</Link></li>
-                <li><Link href="/institution" className="hover:text-white transition-colors">NABARD Rural Infrastructure</Link></li>
-                <li><Link href="/institution" className="hover:text-white transition-colors">SIDBI Concessional Window</Link></li>
-              </ul>
-            </div>
-
           </div>
 
-          <div className="border-t border-[#332d27] pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 font-mono text-xs">
+          <div className="pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 font-mono text-[11px] text-[#787167]">
             <span>© 2026 GRAMVEST • SMART INDIA HACKATHON 2026</span>
-            <span>PUNJAB AGRICULTURAL UNIVERSITY (PAU) BENCHMARKS • FASTAPI & REACT 19</span>
+            <span>PUNJAB AGRICULTURAL UNIVERSITY (PAU) BENCHMARKS • FASTAPI &amp; REACT 19</span>
           </div>
         </div>
       </footer>

@@ -27,14 +27,14 @@ export default function InstitutionPage() {
           </Link>
 
           {/* 3 Nav Logins: 1. User Login, 2. Institution Portal (Active), 3. Dashboard */}
-          <div className="flex items-center gap-3 sm:gap-4">
+          <div className="flex items-center gap-2 sm:gap-2.5">
             {/* 1. User Login / Portal */}
             <Link
               href="/login"
-              className="flex items-center gap-2 bg-[#c25838] hover:bg-[#b04f32] text-white text-[15px] font-bold px-5 py-2.5 rounded-xl shadow-sm shadow-[#c25838]/25 transition-all"
+              className="flex items-center gap-1.5 sm:gap-2 bg-[#c25838] hover:bg-[#b04f32] text-white text-xs sm:text-[13.5px] font-bold px-3.5 sm:px-4 py-2 rounded-xl shadow-xs shadow-[#c25838]/20 transition-all whitespace-nowrap"
               title="Open MSME Entrepreneur Login Page"
             >
-              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 text-white shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                 <circle cx="12" cy="7" r="4" />
               </svg>
@@ -42,29 +42,29 @@ export default function InstitutionPage() {
             </Link>
 
             {/* 2. Active Institution Portal */}
-            <div className="flex items-center gap-2 bg-[#c25838] text-white text-[15px] font-bold px-5 py-2.5 rounded-xl shadow-sm shadow-[#c25838]/25 ring-2 ring-white/50">
-              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+            <div className="flex items-center gap-1.5 sm:gap-2 bg-[#c25838] text-white text-xs sm:text-[13.5px] font-bold px-3.5 sm:px-4 py-2 rounded-xl shadow-xs shadow-[#c25838]/20 ring-2 ring-white/50 whitespace-nowrap">
+              <svg className="w-4 h-4 text-white shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                 <path d="M3 21h18M3 10h18M5 10v11M19 10v11M9 10v11M15 10v11M12 3l9 7H3z" />
               </svg>
               <span>Institution Login</span>
             </div>
 
-            {/* 3. Dashboard (Redirects to https://github.com/Quantumspectra7/Webapp_demo) */}
+            {/* 3. Dashboard (Redirects to https://webapp-demo-eta.vercel.app/) */}
             <a
-              href="https://github.com/Quantumspectra7/Webapp_demo"
+              href="https://webapp-demo-eta.vercel.app/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-white border-[1.5px] border-[#e2dbce] hover:border-[#c25838]/50 hover:bg-[#faf7f2] text-[#1d1b18] text-[15px] font-bold px-4 py-2.5 rounded-xl shadow-xs transition-all group"
-              title="Open Webapp Demo Dashboard on GitHub"
+              className="flex items-center gap-1.5 sm:gap-2 bg-white border-[1.5px] border-[#e2dbce] hover:border-[#c25838]/50 hover:bg-[#faf7f2] text-[#1d1b18] text-xs sm:text-[13.5px] font-bold px-3.5 sm:px-4 py-2 rounded-xl shadow-xs transition-all whitespace-nowrap group"
+              title="Open Webapp Demo Dashboard"
             >
-              <svg className="w-5 h-5 text-[#3a3530]" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 text-[#3a3530] shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                 <rect x="3" y="3" width="7" height="7" rx="1.5" />
                 <rect x="14" y="3" width="7" height="7" rx="1.5" />
                 <rect x="3" y="14" width="7" height="7" rx="1.5" />
                 <rect x="14" y="14" width="7" height="7" rx="1.5" />
               </svg>
               <span>Dashboard</span>
-              <svg className="w-4 h-4 text-[#5c544d] ml-0.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+              <svg className="w-3.5 h-3.5 text-[#5c544d] ml-0.5 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
                 <polyline points="15 3 21 3 21 9" />
                 <line x1="10" y1="14" x2="21" y2="3" />

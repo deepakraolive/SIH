@@ -209,7 +209,7 @@ export default function BusinessCycleVisualizer() {
               <span
                 className={`text-xs font-bold px-3 py-1.5 rounded-full border bg-white ${
                   isHurdlePassed
-                    ? "text-[#3a6b4c] border-[#3a6b4c]/30"
+                    ? "text-[#9d3e21] border-[#c75d3e]/30"
                     : "text-[#c2410c] border-[#c2410c]/30"
                 }`}
               >
@@ -234,7 +234,7 @@ export default function BusinessCycleVisualizer() {
                   Margin {marginPct}%
                 </div>
                 <div
-                  className="bg-[#3a6b4c] flex items-center justify-center transition-all duration-300"
+                  className="bg-[#9d3e21] flex items-center justify-center transition-all duration-300"
                   style={{ width: `${effectiveSubsidyPct}%` }}
                 >
                   Grant {effectiveSubsidyPct}%
@@ -266,10 +266,10 @@ export default function BusinessCycleVisualizer() {
 
               <div className="bg-[#f9f5f0] border border-[#e7e1d8] rounded-xl p-3.5">
                 <div className="flex items-center gap-2 text-[11px] font-bold uppercase text-[#706c63] mb-1">
-                  <span className="w-2.5 h-2.5 rounded-xs bg-[#3a6b4c]" />
+                  <span className="w-2.5 h-2.5 rounded-xs bg-[#9d3e21]" />
                   Govt Grant ({effectiveSubsidyPct}%)
                 </div>
-                <div className="font-mono text-lg font-extrabold text-[#3a6b4c]">
+                <div className="font-mono text-lg font-extrabold text-[#9d3e21]">
                   {formatINR(subsidyAmount)}
                 </div>
                 <div className="text-[11px] text-[#706c63]">

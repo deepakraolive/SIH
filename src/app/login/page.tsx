@@ -291,7 +291,7 @@ export default function UserLoginPage() {
                     <div className="text-[11px] text-[#706c63]">{p.enterprise}</div>
                   </div>
                   <div className="text-right">
-                    <span className="text-[10px] font-mono font-bold text-[#3a6b4c] bg-[#d4e6c1]/60 px-2 py-0.5 rounded-full">
+                    <span className="text-[10px] font-mono font-bold text-[#9d3e21] bg-[#fbebe4] px-2 py-0.5 rounded-full">
                       Score: {p.score}/100
                     </span>
                     <div className="text-[10px] text-[#706c63] mt-0.5">{p.location}</div>
@@ -326,8 +326,8 @@ export default function UserLoginPage() {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#ede3d8]">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="w-3 h-3 rounded-full bg-[#3a6b4c] animate-pulse" />
-                  <span className="text-xs font-mono font-bold text-[#3a6b4c] uppercase tracking-wider">
+                  <span className="w-3 h-3 rounded-full bg-[#c75d3e] animate-pulse" />
+                  <span className="text-xs font-mono font-bold text-[#9d3e21] uppercase tracking-wider">
                     Authenticated Session Active
                   </span>
                 </div>
@@ -359,8 +359,8 @@ export default function UserLoginPage() {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 my-6">
               <div className="bg-[#faf7f2] border border-[#ede3d8] p-4 rounded-2xl">
                 <div className="text-[11px] font-mono text-[#706c63] uppercase">Viability Score</div>
-                <div className="text-2xl font-black text-[#3a6b4c] mt-1">{activeUser?.score}/100</div>
-                <div className="text-[10px] text-[#3a6b4c] font-bold mt-0.5">✓ Bank Grade Ready</div>
+                <div className="text-2xl font-black text-[#9d3e21] mt-1">{activeUser?.score}/100</div>
+                <div className="text-[10px] text-[#9d3e21] font-bold mt-0.5">✓ Bank Grade Ready</div>
               </div>
 
               <div className="bg-[#faf7f2] border border-[#ede3d8] p-4 rounded-2xl">
@@ -378,7 +378,7 @@ export default function UserLoginPage() {
               <div className="bg-[#faf7f2] border border-[#ede3d8] p-4 rounded-2xl">
                 <div className="text-[11px] font-mono text-[#706c63] uppercase">DSCR Coverage</div>
                 <div className="text-2xl font-black text-[#1d1b18] mt-1">{activeUser?.dscr}x</div>
-                <div className="text-[10px] text-[#3a6b4c] font-bold mt-0.5">Threshold &gt; 1.25x</div>
+                <div className="text-[10px] text-[#9d3e21] font-bold mt-0.5">Threshold &gt; 1.25x</div>
               </div>
             </div>
 

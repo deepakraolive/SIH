@@ -153,7 +153,7 @@ export default function InstitutionPortal() {
 
         {/* Success Alert Banner */}
         {sanctionSuccessMsg && (
-          <div className="bg-[#d4e6c1] border border-[#3a6b4c]/30 text-[#254631] px-5 py-3.5 rounded-xl font-semibold text-sm shadow-sm flex items-center justify-between">
+          <div className="bg-[#fbebe4] border border-[#c75d3e]/30 text-[#9d3e21] px-5 py-3.5 rounded-xl font-semibold text-sm shadow-sm flex items-center justify-between">
             <span>{sanctionSuccessMsg}</span>
             <button onClick={() => setSanctionSuccessMsg(null)} className="font-bold">✕</button>
           </div>
@@ -247,7 +247,7 @@ export default function InstitutionPortal() {
           {/* Right: Portfolio Allocation Stats */}
           <div className="lg:col-span-5 bg-white border border-[#ede3d8] rounded-3xl p-6 sm:p-8 shadow-xs space-y-6">
             <div className="flex items-center gap-2 border-b border-[#ede3d8] pb-4">
-              <svg className="w-5 h-5 text-[#3a6b4c]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 text-[#c75d3e]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <line x1="12" y1="1" x2="12" y2="23" />
                 <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
               </svg>
@@ -279,7 +279,7 @@ export default function InstitutionPortal() {
                 <div className="text-[10px] font-bold uppercase text-[#706c63]">
                   Available to Commit
                 </div>
-                <div className="font-mono text-xl font-extrabold text-[#3a6b4c] mt-1">
+                <div className="font-mono text-xl font-extrabold text-[#9d3e21] mt-1">
                   {roleStats.available}
                 </div>
               </div>
@@ -378,12 +378,12 @@ export default function InstitutionPortal() {
                     <td className="py-4 px-3 font-mono font-bold text-[#1d1b18]">{deal.cost}</td>
                     <td className="py-4 px-3 font-mono font-bold text-[#c75d3e]">{deal.debt}</td>
                     <td className="py-4 px-3">
-                      <span className="bg-[#d4e6c1]/70 text-[#3a6b4c] text-xs font-bold px-2.5 py-0.5 rounded-full border border-[#3a6b4c]/20">
+                      <span className="bg-[#fbebe4] text-[#9d3e21] text-xs font-bold px-2.5 py-0.5 rounded-full border border-[#c75d3e]/20">
                         {deal.subsidy}
                       </span>
                     </td>
                     <td className="py-4 px-3">
-                      <span className="bg-[#e8f5e9] text-[#2e7d32] font-mono text-xs font-bold px-2 py-0.5 rounded-md">
+                      <span className="bg-[#fbebe4] text-[#9d3e21] font-mono text-xs font-bold px-2 py-0.5 rounded-md">
                         {deal.viability} / 100
                       </span>
                     </td>
@@ -424,7 +424,7 @@ export default function InstitutionPortal() {
               {/* Header */}
               <div className="bg-[#151311] text-white p-6 rounded-t-3xl flex items-center justify-between sticky top-0 z-10">
                 <div>
-                  <span className="font-mono text-xs text-[#8ed081]">
+                  <span className="font-mono text-xs text-[#c75d3e]">
                     [CMA-REPORT-26091] AUDITABLE BANK DOSSIER
                   </span>
                   <h3 className="text-xl font-extrabold mt-1">
@@ -454,7 +454,7 @@ export default function InstitutionPortal() {
                   </div>
                   <div className="bg-[#f9f3ec] border border-[#ede3d8] rounded-xl p-3 text-center">
                     <div className="text-[10px] font-bold uppercase text-[#706c63]">Capital Grant</div>
-                    <div className="font-mono text-base font-extrabold text-[#3a6b4c]">{selectedDossier.subsidy}</div>
+                    <div className="font-mono text-base font-extrabold text-[#9d3e21]">{selectedDossier.subsidy}</div>
                   </div>
                   <div className="bg-[#f9f3ec] border border-[#ede3d8] rounded-xl p-3 text-center">
                     <div className="text-[10px] font-bold uppercase text-[#706c63]">DSCR Hurdle</div>

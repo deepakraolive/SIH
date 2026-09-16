@@ -63,13 +63,13 @@ export default function MarketRadarTeaser() {
               </div>
               <div className="flex justify-between border-b border-[#332d27] pb-2">
                 <span className="text-[#a89f91]">ACTIVE COMPETITORS:</span>
-                <span className="font-bold text-[#8ed081]">
+                <span className="font-bold text-[#c75d3e]">
                   {radius === 5 ? "1 Unit (40% load)" : "2 Units (under-capacity)"}
                 </span>
               </div>
               <div className="flex justify-between border-b border-[#332d27] pb-2">
                 <span className="text-[#a89f91]">UNSERVED DEMAND DEFICIT:</span>
-                <span className="font-bold text-[#8ed081]">
+                <span className="font-bold text-[#c75d3e]">
                   {radius === 5 ? "68% (~1,850 Ltrs / Day)" : "68% (~3,800 Ltrs / Day)"}
                 </span>
               </div>
@@ -82,20 +82,20 @@ export default function MarketRadarTeaser() {
               
               <div className="flex justify-between text-xs font-mono text-[#a89f91]">
                 <span>RADAR STATUS: ACTIVE</span>
-                <span className="text-[#8ed081]">LAT 30.9010° N / LONG 75.8573° E</span>
+                <span className="text-[#c75d3e]">LAT 30.9010° N / LONG 75.8573° E</span>
               </div>
 
               {/* Radar Grid Screen */}
-              <div className="relative h-48 border border-dashed border-white/20 rounded-xl my-4 flex items-center justify-center bg-radial from-[#8ed081]/10 to-transparent overflow-hidden">
+              <div className="relative h-48 border border-dashed border-white/20 rounded-xl my-4 flex items-center justify-center bg-radial from-[#c75d3e]/10 to-transparent overflow-hidden">
                 {/* Crosshairs */}
                 <div className="absolute w-full h-px bg-white/10" />
                 <div className="absolute h-full w-px bg-white/10" />
                 
                 {/* Center target node */}
-                <div className="w-3 h-3 rounded-full bg-[#8ed081] shadow-lg shadow-[#8ed081]/50 relative z-10" />
+                <div className="w-3 h-3 rounded-full bg-[#c75d3e] shadow-lg shadow-[#c75d3e]/50 relative z-10" />
                 
                 {/* Concentric scan pulse rings */}
-                <div className="absolute w-24 h-24 border border-[#8ed081]/60 rounded-full animate-ping" />
+                <div className="absolute w-24 h-24 border border-[#c75d3e]/60 rounded-full animate-ping" />
                 <div className="absolute w-36 h-36 border border-white/10 rounded-full" />
                 <div className="absolute w-44 h-44 border border-white/5 rounded-full" />
 
@@ -114,7 +114,7 @@ export default function MarketRadarTeaser() {
 
               <div className="flex justify-between text-xs text-[#a89f91] border-t border-[#332d27] pt-3">
                 <span>Catchment Center: Sidhwan Bet</span>
-                <span className="text-[#8ed081] font-bold">✓ High Post-Harvest Viability</span>
+                <span className="text-[#c75d3e] font-bold">✓ High Post-Harvest Viability</span>
               </div>
             </div>
           </div>

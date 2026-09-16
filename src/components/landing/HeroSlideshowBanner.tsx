@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import BusinessGrowthAnimation from "./BusinessGrowthAnimation";
 
 interface SchemeItem {
   ticker: string;
@@ -93,19 +94,22 @@ export default function HeroSlideshowBanner() {
   };
 
   // Small Business to Big Enterprise Growth Data
-  const growthDataMap: Record<number, {
-    tag: string;
-    title: string;
-    desc: string;
-    scaleMetric: string;
-    subMetric: string;
-    dscr: string;
-    radius: string;
-  }> = {
+  const growthDataMap: Record<
+    number,
+    {
+      tag: string;
+      title: string;
+      desc: string;
+      scaleMetric: string;
+      subMetric: string;
+      dscr: string;
+      radius: string;
+    }
+  > = {
     1: {
       tag: "1. Seed Phase",
       title: "Grassroots Savings (₹1.0L)",
-      desc: "Unorganized dairy stall with volatile mandi pricing, high spoilage, and zero formal bank access.",
+      desc: "Unorganized village dairy stall with volatile mandi pricing, high spoilage, and zero formal bank access.",
       scaleMetric: "₹1.0L Own Capital",
       subMetric: "Unorganized",
       dscr: "N/A",
@@ -134,22 +138,23 @@ export default function HeroSlideshowBanner() {
   const growthData = growthDataMap[growthStage] || growthDataMap[1];
 
   return (
-    <section className="relative bg-[#fcfaf7] border-b border-[#e7e1d8] overflow-hidden">
-      {/* Topology-inspired ambient grid lines */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ede6dc_1px,transparent_1px),linear-gradient(to_bottom,#ede6dc_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-40 pointer-events-none" />
+    <section className="relative bg-[#fff8f2] border-b border-[#e7e1d8] overflow-hidden" id="overview">
+      
+      {/* Background Canvas Animation: Small Business Grows Big */}
+      <BusinessGrowthAnimation />
 
       {/* Main Slideshow Container */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-16 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-14 relative z-10">
         
-        {/* Top Slideshow Navigation Tabs (KKR & 21shares style) */}
+        {/* Top Slideshow Navigation Tabs */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8 border-b border-[#e7e1d8] pb-4">
-          <div className="flex items-center gap-2 sm:gap-4 overflow-x-auto w-full sm:w-auto">
+          <div className="flex items-center gap-2 sm:gap-3 overflow-x-auto w-full sm:w-auto">
             <button
               onClick={() => selectSlide(0)}
-              className={`text-xs sm:text-sm font-bold tracking-tight px-3 py-1.5 rounded-lg transition-all flex items-center gap-2 shrink-0 ${
+              className={`text-xs sm:text-sm font-bold tracking-tight px-3.5 py-2 rounded-xl transition-all flex items-center gap-2 shrink-0 ${
                 activeSlide === 0
                   ? "bg-[#1d1b18] text-white shadow-xs"
-                  : "text-[#706c63] hover:text-[#1d1b18]"
+                  : "bg-white/80 border border-[#e2dbce] text-[#706c63] hover:text-[#1d1b18]"
               }`}
             >
               <span className="font-mono text-[11px] opacity-75">01</span>
@@ -158,10 +163,10 @@ export default function HeroSlideshowBanner() {
 
             <button
               onClick={() => selectSlide(1)}
-              className={`text-xs sm:text-sm font-bold tracking-tight px-3 py-1.5 rounded-lg transition-all flex items-center gap-2 shrink-0 ${
+              className={`text-xs sm:text-sm font-bold tracking-tight px-3.5 py-2 rounded-xl transition-all flex items-center gap-2 shrink-0 ${
                 activeSlide === 1
                   ? "bg-[#1d1b18] text-white shadow-xs"
-                  : "text-[#706c63] hover:text-[#1d1b18]"
+                  : "bg-white/80 border border-[#e2dbce] text-[#706c63] hover:text-[#1d1b18]"
               }`}
             >
               <span className="font-mono text-[11px] opacity-75">02</span>
@@ -170,10 +175,10 @@ export default function HeroSlideshowBanner() {
 
             <button
               onClick={() => selectSlide(2)}
-              className={`text-xs sm:text-sm font-bold tracking-tight px-3 py-1.5 rounded-lg transition-all flex items-center gap-2 shrink-0 ${
+              className={`text-xs sm:text-sm font-bold tracking-tight px-3.5 py-2 rounded-xl transition-all flex items-center gap-2 shrink-0 ${
                 activeSlide === 2
                   ? "bg-[#1d1b18] text-white shadow-xs"
-                  : "text-[#706c63] hover:text-[#1d1b18]"
+                  : "bg-white/80 border border-[#e2dbce] text-[#706c63] hover:text-[#1d1b18]"
               }`}
             >
               <span className="font-mono text-[11px] opacity-75">03</span>
@@ -181,7 +186,7 @@ export default function HeroSlideshowBanner() {
             </button>
           </div>
 
-          {/* KKR Progress & Play Controls */}
+          {/* Progress & Play Controls */}
           <div className="flex items-center gap-3 self-end sm:self-auto">
             <button
               onClick={() => setIsPlaying(!isPlaying)}
@@ -200,15 +205,15 @@ export default function HeroSlideshowBanner() {
               )}
             </button>
 
-            <div className="flex items-center gap-1.5 w-24">
+            {/* Segmented Progress Bar */}
+            <div className="flex items-center gap-1 w-24">
               {[0, 1, 2].map((idx) => (
                 <div
                   key={idx}
-                  onClick={() => selectSlide(idx)}
-                  className="h-1 flex-1 bg-[#ddd6c9] rounded-full overflow-hidden cursor-pointer relative"
+                  className="h-1.5 flex-1 bg-[#ddd6c9] rounded-full overflow-hidden"
                 >
                   <div
-                    className="h-full bg-[#c75d3e] rounded-full transition-all duration-100"
+                    className="h-full bg-[#c75d3e] transition-all duration-75"
                     style={{
                       width:
                         activeSlide === idx
@@ -242,67 +247,80 @@ export default function HeroSlideshowBanner() {
         </div>
 
         {/* ================================================================= */}
-        {/* SLIDE 1: WHAT WE DO & SCALING SMALL BUSINESS BIG (KKR + TOPOLOGY) */}
+        {/* SLIDE 1: WHAT WE DO & SCALING SMALL BUSINESS BIG                  */}
         {/* ================================================================= */}
         {activeSlide === 0 && (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center animate-fade-in">
             {/* Left Headline & Value Proposition */}
             <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#fbebe4] border border-[#c75d3e]/25 text-[#9d3e21] text-[11px] font-mono uppercase tracking-wider font-bold">
+              
+              {/* Badge: Hyper-Local Rural Business Decision Engine | SIH 26091 */}
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#fbebe4] border border-[#c75d3e]/25 text-[#9d3e21] text-xs font-mono uppercase tracking-wider font-bold shadow-2xs">
                 <span className="w-2 h-2 rounded-full bg-[#c75d3e] animate-pulse" />
-                <span>Hyper-Local Decision Engine</span>
+                <span>Hyper-Local Rural Business Decision Engine</span>
+                <span className="text-[10px] bg-[#1d1b18] text-white px-2 py-0.5 rounded-md ml-1 font-mono">
+                  SIH 26091
+                </span>
               </div>
 
-              {/* KKR-Style Kinetic High-Impact Typography */}
+              {/* High-Impact Headline: Stop guessing mandi demand. */}
               <div className="space-y-3">
-                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#1d1b18] leading-[1.12]">
-                  We help small businesses{" "}
-                  <span className="text-[#c75d3e] underline decoration-[#c75d3e]/30 decoration-wavy">
-                    grow big
-                  </span>
-                  .
+                <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-[#1d1b18] tracking-tight leading-[1.08]">
+                  Stop guessing mandi demand.
                 </h1>
                 <p className="text-lg sm:text-xl font-medium text-[#706c63] leading-snug">
-                  From streamlining project viability and unlocking government subsidies to securing institutional bank finance.
+                  We turn rural micro-enterprises into bank-funded ventures through spatial feasibility, power feeder telemetry, and sovereign subsidy integration.
                 </p>
               </div>
 
               <p className="text-sm sm:text-base text-[#706c63] max-w-xl leading-relaxed">
-                60% of rural micro-enterprises default in Year 1 due to blind competition. GramVest combines APMC mandi data, OpenStreetMap spatial buffers, and deterministic financial engineering to turn village ideas into bank-approved enterprises in 5 minutes.
+                60% of rural micro-enterprises default in Year 1 due to blind competition. GramVest combines APMC mandi arrivals, OpenStreetMap spatial buffers, and deterministic financial underwriting to turn village ideas into bank-approved enterprises in under 3 minutes.
               </p>
 
-              {/* Action CTAs */}
+              {/* Action CTAs (No simulator button! Explore Business Cycle & View FAQs) */}
               <div className="flex flex-wrap items-center gap-4 pt-2">
                 <a
                   href="#business-cycle"
                   className="bg-[#c75d3e] hover:bg-[#b04f32] text-white font-bold text-sm px-6 py-3.5 rounded-xl shadow-md shadow-[#c75d3e]/25 transition-all flex items-center gap-2 group"
                 >
                   <span>Explore The Business Cycle</span>
-                  <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                  <svg
+                    className="w-4 h-4 transition-transform group-hover:translate-x-1"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    viewBox="0 0 24 24"
+                  >
                     <path d="M5 12h14M12 5l7 7-7 7" />
                   </svg>
                 </a>
 
-                <Link
-                  href="/institution"
-                  className="bg-white hover:bg-[#f3ede6] text-[#1d1b18] border border-[#ddd6c9] font-bold text-sm px-5 py-3.5 rounded-xl transition-all flex items-center gap-2"
+                <a
+                  href="#faqs"
+                  className="bg-white hover:bg-[#faf7f2] text-[#1d1b18] border border-[#ddd6c9] font-bold text-sm px-5 py-3.5 rounded-xl transition-all flex items-center gap-2"
                 >
-                  <svg className="w-4 h-4 text-[#706c63]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                    <path d="M3 21h18M3 10h18M5 10v11M19 10v11M9 10v11M15 10v11M12 3l9 7H3z" />
+                  <span>Frequently Asked Questions</span>
+                  <svg
+                    className="w-4 h-4 text-[#706c63]"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                  >
+                    <polyline points="6 9 12 15 18 9" />
                   </svg>
-                  <span>Institution Portal</span>
-                </Link>
+                </a>
               </div>
             </div>
 
-            {/* Right Visual Stage: The "Small Business Growing Big" Kinetic Visual (KKR-style portal) */}
+            {/* Right Visual Stage: The "Small Business Growing Big" Interactive Progression */}
             <div className="lg:col-span-5">
-              <div className="bg-white border border-[#e7e1d8] rounded-3xl p-6 sm:p-7 shadow-xl shadow-[#1d1b18]/5 relative overflow-hidden">
+              <div className="bg-white/95 backdrop-blur-sm border border-[#e7e1d8] rounded-3xl p-6 sm:p-7 shadow-xl shadow-[#1d1b18]/5 relative overflow-hidden">
                 
                 {/* Stage Controls */}
                 <div className="flex items-center justify-between border-b border-[#ede7e1] pb-3 mb-5">
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-[#3a6b4c] animate-ping" />
+                    <span className="w-2 h-2 rounded-full bg-[#c75d3e] animate-ping" />
                     <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#1d1b18]">
                       Growth Simulator
                     </span>
@@ -313,9 +331,9 @@ export default function HeroSlideshowBanner() {
                       <button
                         key={stg}
                         onClick={() => setGrowthStage(stg)}
-                        className={`text-xs font-bold px-2.5 py-1 rounded-md transition-all ${
+                        className={`text-xs font-bold px-2.5 py-1 rounded-md transition-all cursor-pointer ${
                           growthStage === stg
-                            ? "bg-[#c75d3e] text-white"
+                            ? "bg-[#c75d3e] text-white shadow-xs"
                             : "bg-[#f3ede6] text-[#706c63] hover:text-[#1d1b18]"
                         }`}
                       >
@@ -325,7 +343,7 @@ export default function HeroSlideshowBanner() {
                   </div>
                 </div>
 
-                {/* Central Expanding Circular Visual Portal (KKR-inspired) */}
+                {/* Central Expanding Circular Visual Portal */}
                 <div className="bg-gradient-to-b from-[#f9f5f0] to-[#ede7e1] border border-[#e7e1d8] rounded-2xl p-6 flex flex-col items-center justify-between min-h-[290px] relative overflow-hidden">
                   
                   {/* Top Floating Badge */}
@@ -346,71 +364,51 @@ export default function HeroSlideshowBanner() {
                           ? "w-28 h-28 bg-white border-[#ddd6c9] scale-100 shadow-[#1d1b18]/5"
                           : growthStage === 2
                           ? "w-36 h-36 bg-[#fbebe4] border-[#c75d3e] scale-105 shadow-[#c75d3e]/20"
-                          : "w-44 h-44 bg-gradient-to-br from-[#fbebe4] to-[#d4e6c1] border-[#3a6b4c] scale-110 shadow-[#3a6b4c]/30"
+                          : "w-44 h-44 bg-gradient-to-br from-[#fbebe4] to-[#fcedea] border-[#9d3e21] scale-110 shadow-[#9d3e21]/30"
                       }`}
                     >
-                      {growthStage === 1 && (
-                        <div className="text-center p-2">
-                          <span className="text-2xl">🌱</span>
-                          <span className="text-[10px] font-bold text-[#706c63] uppercase block mt-1">
-                            Grassroots
-                          </span>
-                        </div>
-                      )}
-                      {growthStage === 2 && (
-                        <div className="text-center p-2">
-                          <span className="text-3xl">📊</span>
-                          <span className="text-[10px] font-bold text-[#c75d3e] uppercase block mt-1">
-                            Feasibility Cleared
-                          </span>
-                        </div>
-                      )}
-                      {growthStage === 3 && (
-                        <div className="text-center p-2">
-                          <span className="text-4xl">🏭</span>
-                          <span className="text-[10px] font-bold text-[#3a6b4c] uppercase block mt-1">
-                            Scaled ₹50L Plant
-                          </span>
-                        </div>
-                      )}
+                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#706c63]">
+                        {growthData.tag}
+                      </span>
+                      <span className="font-mono text-sm sm:text-base font-extrabold text-[#1d1b18] text-center px-2 mt-1">
+                        {growthData.scaleMetric}
+                      </span>
+                      <span className="text-[10px] font-bold text-[#c75d3e] uppercase block mt-1">
+                        {growthData.subMetric}
+                      </span>
                     </div>
                   </div>
 
-                  {/* Bottom Floating Badge */}
-                  <div className="bg-white/95 backdrop-blur-sm border border-[#e7e1d8] rounded-xl px-3 py-1.5 shadow-2xs self-end">
-                    <span className="text-[10px] font-mono font-bold uppercase text-[#706c63] block">
-                      DSCR SOLVENCY
-                    </span>
-                    <span className="text-xs font-extrabold text-[#3a6b4c]">
-                      {growthData.dscr}
-                    </span>
+                  {/* Bottom Metrics Pill */}
+                  <div className="w-full bg-white/95 backdrop-blur-sm border border-[#e7e1d8] rounded-xl px-4 py-2.5 flex items-center justify-between">
+                    <div>
+                      <span className="text-[10px] font-mono text-[#706c63] uppercase block">
+                        SOLVENCY DSCR
+                      </span>
+                      <span className="text-xs font-extrabold text-[#c75d3e]">
+                        {growthData.dscr}
+                      </span>
+                    </div>
+                    <div className="text-right">
+                      <span className="text-[10px] font-mono text-[#706c63] uppercase block">
+                        BANKABILITY
+                      </span>
+                      <span className="text-xs font-bold text-[#1d1b18]">
+                        {growthStage === 1 ? "Sub-Grade" : growthStage === 2 ? "Lender Grade" : "Prime Grade"}
+                      </span>
+                    </div>
                   </div>
 
-                  {/* Description Box */}
-                  <div className="w-full bg-white/90 border border-[#e7e1d8] rounded-xl p-3 text-xs text-[#1d1b18] mt-3">
-                    <strong className="text-[#c75d3e] block mb-0.5">{growthData.title}</strong>
-                    {growthData.desc}
-                  </div>
                 </div>
 
-                {/* Bottom Metric Strip */}
-                <div className="grid grid-cols-2 gap-3 mt-4">
-                  <div className="bg-[#f9f5f0] border border-[#e7e1d8] rounded-xl p-3 text-center">
-                    <div className="font-mono text-sm sm:text-base font-extrabold text-[#1d1b18]">
-                      {growthData.scaleMetric}
-                    </div>
-                    <div className="text-[10px] font-bold text-[#706c63] uppercase">
-                      Enterprise Scale
-                    </div>
+                {/* Narrative Description */}
+                <div className="mt-4 pt-3 border-t border-[#ede7e1]">
+                  <div className="text-xs font-bold text-[#1d1b18]">
+                    {growthData.title}
                   </div>
-                  <div className="bg-[#f9f5f0] border border-[#e7e1d8] rounded-xl p-3 text-center">
-                    <div className="font-mono text-sm sm:text-base font-extrabold text-[#3a6b4c]">
-                      {growthData.subMetric}
-                    </div>
-                    <div className="text-[10px] font-bold text-[#706c63] uppercase">
-                      Sovereign Benefit
-                    </div>
-                  </div>
+                  <p className="text-xs text-[#706c63] mt-1 leading-relaxed">
+                    {growthData.desc}
+                  </p>
                 </div>
 
               </div>
@@ -419,76 +417,75 @@ export default function HeroSlideshowBanner() {
         )}
 
         {/* ================================================================= */}
-        {/* SLIDE 2: CURRENT GOVERNMENT SCHEMES & SUBSIDIES (21SHARES STYLE) */}
+        {/* SLIDE 2: GOVERNMENT SCHEMES & CAPITAL SUBSIDIES                   */}
         {/* ================================================================= */}
         {activeSlide === 1 && (
-          <div className="space-y-8 animate-fade-in">
-            <div className="max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#fbebe4] border border-[#c75d3e]/25 text-[#9d3e21] text-[11px] font-mono uppercase tracking-wider font-bold mb-3">
-                <span>Direct Sovereign Routing</span>
+          <div className="animate-fade-in space-y-6">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+              <div>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#fbebe4] border border-[#c75d3e]/25 text-[#9d3e21] text-[11px] font-mono uppercase tracking-wider font-bold">
+                  Sovereign Capital Subsidies
+                </span>
+                <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-[#1d1b18] mt-2">
+                  Pre-Integrated Sovereign Grant Matrix
+                </h2>
+                <p className="text-sm sm:text-base text-[#706c63] mt-1">
+                  Matched deterministically to applicant social demographic and tehsil industrial boundaries.
+                </p>
               </div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#1d1b18] tracking-tight">
-                Current Government Schemes &amp; Subsidies
-              </h2>
-              <p className="text-sm sm:text-base text-[#706c63] mt-2">
-                We eliminate agents and commissions. GramVest deterministically routes your project parameters to official central and state capital subsidy portals.
-              </p>
+
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-mono text-[#706c63]">
+                  100% NON-REPAYABLE GRANTS
+                </span>
+              </div>
             </div>
 
-            {/* 21shares-style Scheme Product Cards */}
+            {/* Scheme Cards Grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {SCHEMES.map((scheme, idx) => (
+              {SCHEMES.map((sch) => (
                 <div
-                  key={idx}
-                  className="bg-white border border-[#e7e1d8] rounded-2xl p-6 shadow-xs hover:shadow-lg hover:border-[#c75d3e] transition-all flex flex-col justify-between group"
+                  key={sch.ticker}
+                  className="bg-white/95 backdrop-blur-sm border border-[#e7e1d8] rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-[#c75d3e]/40 transition-all flex flex-col justify-between"
                 >
-                  <div>
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="font-mono text-xs font-bold bg-[#f9f5f0] border border-[#ddd6c9] px-2.5 py-1 rounded-md text-[#1d1b18]">
-                        {scheme.ticker}
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="font-mono text-xs font-bold text-[#706c63]">
+                        {sch.ticker}
                       </span>
-                      <span className="bg-[#d4e6c1]/70 text-[#3a6b4c] text-xs font-extrabold px-3 py-1 rounded-full border border-[#3a6b4c]/20">
-                        {scheme.badge}
+                      <span className="bg-[#fbebe4] text-[#9d3e21] text-xs font-extrabold px-3 py-1 rounded-full border border-[#c75d3e]/20">
+                        {sch.badge}
                       </span>
                     </div>
 
-                    <h3 className="text-lg font-bold text-[#1d1b18] mb-2 group-hover:text-[#c75d3e] transition-colors">
-                      {scheme.title}
+                    <h3 className="font-extrabold text-base text-[#1d1b18] leading-tight">
+                      {sch.title}
                     </h3>
-                    <p className="text-xs sm:text-sm text-[#706c63] leading-relaxed mb-6">
-                      {scheme.desc}
-                    </p>
 
-                    <div className="bg-[#f9f5f0] rounded-xl p-3.5 grid grid-cols-2 gap-3 mb-5 font-mono text-xs">
-                      <div>
-                        <div className="text-[10px] font-sans font-bold uppercase text-[#706c63]">
-                          Max Project Size
-                        </div>
-                        <div className="font-extrabold text-[#1d1b18]">
-                          {scheme.maxCost}
-                        </div>
-                      </div>
-                      <div>
-                        <div className="text-[10px] font-sans font-bold uppercase text-[#706c63]">
-                          Grant Amount
-                        </div>
-                        <div className="font-extrabold text-[#3a6b4c]">
-                          {scheme.subsidyVal}
-                        </div>
-                      </div>
-                    </div>
+                    <p className="text-xs text-[#706c63] leading-relaxed">
+                      {sch.desc}
+                    </p>
                   </div>
 
-                  <div className="flex items-center justify-between pt-4 border-t border-[#ede7e1]">
-                    <span className="text-xs font-semibold text-[#706c63]">
-                      {scheme.authority}
-                    </span>
-                    <a
-                      href="#business-cycle"
-                      className="text-xs font-bold text-[#c75d3e] hover:text-[#9d3e21] flex items-center gap-1 group-hover:translate-x-0.5 transition-all"
-                    >
-                      Calculate Grant →
-                    </a>
+                  <div className="pt-5 mt-5 border-t border-[#ede7e1] space-y-2 font-mono text-xs">
+                    <div className="flex justify-between">
+                      <span className="text-[#706c63]">MAX PROJECT COST:</span>
+                      <span className="font-bold text-[#1d1b18]">{sch.maxCost}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-[#706c63]">SUBSIDY VALUE:</span>
+                      <div className="font-extrabold text-[#c75d3e]">
+                        {sch.subsidyVal}
+                      </div>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-[#706c63]">DEBT RATIO:</span>
+                      <span className="font-bold text-[#1d1b18]">{sch.debtRatio}</span>
+                    </div>
+                    <div className="flex justify-between pt-1 text-[11px] text-[#706c63]">
+                      <span>AUTHORITY:</span>
+                      <span className="font-semibold text-[#1d1b18]">{sch.authority}</span>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -497,108 +494,124 @@ export default function HeroSlideshowBanner() {
         )}
 
         {/* ================================================================= */}
-        {/* SLIDE 3: FINANCING OPTIONS & CONCESSIONAL DEBT TIERS              */}
+        {/* SLIDE 3: CONCESSIONAL INSTITUTIONAL FINANCING OPTIONS             */}
         {/* ================================================================= */}
         {activeSlide === 2 && (
-          <div className="space-y-8 animate-fade-in">
-            <div className="max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#fbebe4] border border-[#c75d3e]/25 text-[#9d3e21] text-[11px] font-mono uppercase tracking-wider font-bold mb-3">
-                <span>Concessional Credit Architecture</span>
+          <div className="animate-fade-in space-y-6">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+              <div>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#fbebe4] border border-[#c75d3e]/25 text-[#9d3e21] text-[11px] font-mono uppercase tracking-wider font-bold">
+                  Institutional Credit Desk
+                </span>
+                <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-[#1d1b18] mt-2">
+                  Institutional Concessional Financing
+                </h2>
+                <p className="text-sm sm:text-base text-[#706c63] mt-1">
+                  Bridging rural entrepreneurs to RBI Priority Sector Lending (PSL) windows.
+                </p>
               </div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#1d1b18] tracking-tight">
-                Financing Options &amp; Concessional Lending
-              </h2>
-              <p className="text-sm sm:text-base text-[#706c63] mt-2">
-                Under State Channelizing Agency and Lead District Bank guidelines, rural entrepreneurs access multi-tiered concessional rates with statutory moratoriums.
-              </p>
+
+              <Link
+                href="/institution"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-[#1d1b18] hover:bg-black text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors flex items-center gap-1.5 shrink-0"
+              >
+                <span>Access Institution Portal</span>
+                <span>↗</span>
+              </Link>
             </div>
 
+            {/* Tier Breakdown */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               
-              {/* Micro Finance Tier */}
-              <div className="bg-white border border-[#e7e1d8] rounded-2xl p-6 flex flex-col justify-between">
-                <div>
-                  <div className="font-mono text-xs font-bold text-[#706c63] uppercase tracking-wider mb-2">
-                    Tier 1 • Micro Finance (≤ ₹1.40L)
-                  </div>
-                  <div className="font-mono text-3xl font-extrabold text-[#1d1b18] mb-4">
-                    6.5% <span className="text-xs font-normal text-[#706c63]">p.a. concessional</span>
-                  </div>
-                  <ul className="space-y-2.5 text-xs sm:text-sm text-[#706c63] mb-6">
-                    <li className="flex items-center gap-2">
-                      <span className="text-[#3a6b4c] font-bold">✓</span> Up to ₹1,40,000 credit limit
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-[#3a6b4c] font-bold">✓</span> 3-Year quarterly repayment
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-[#3a6b4c] font-bold">✓</span> 3-Month initial moratorium
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-[#3a6b4c] font-bold">✓</span> No physical collateral required
-                    </li>
-                  </ul>
+              {/* Card 1: Micro Credit */}
+              <div className="bg-white/95 backdrop-blur-sm border border-[#e7e1d8] rounded-2xl p-6 shadow-sm space-y-4">
+                <div className="w-10 h-10 rounded-xl bg-[#fbebe4] text-[#c75d3e] font-extrabold flex items-center justify-center text-sm font-mono">
+                  T1
                 </div>
-                <div className="text-[11px] font-mono text-[#706c63] pt-3 border-t border-[#ede7e1]">
-                  State Channelizing Concession
+                <div>
+                  <h3 className="text-base font-extrabold text-[#1d1b18]">
+                    Micro-KCC &amp; Mudra Shishu
+                  </h3>
+                  <p className="text-xs text-[#706c63] mt-1 leading-relaxed">
+                    Designed for working capital bridging, raw milk procurement, and local seed inventories.
+                  </p>
+                </div>
+                <div className="pt-3 border-t border-[#ede7e1] space-y-2 text-xs">
+                  <div className="flex items-center gap-2 text-[#706c63]">
+                    <span className="text-[#c75d3e] font-bold">✓</span> Up to ₹1,40,000 credit limit
+                  </div>
+                  <div className="flex items-center gap-2 text-[#706c63]">
+                    <span className="text-[#c75d3e] font-bold">✓</span> 3-Year quarterly repayment
+                  </div>
+                  <div className="flex items-center gap-2 text-[#706c63]">
+                    <span className="text-[#c75d3e] font-bold">✓</span> 3-Month initial moratorium
+                  </div>
+                  <div className="flex items-center gap-2 text-[#706c63]">
+                    <span className="text-[#c75d3e] font-bold">✓</span> No physical collateral required
+                  </div>
                 </div>
               </div>
 
-              {/* Term Loan Tier */}
-              <div className="bg-white border-2 border-[#c75d3e] rounded-2xl p-6 flex flex-col justify-between shadow-lg shadow-[#c75d3e]/10">
-                <div>
-                  <div className="font-mono text-xs font-bold text-[#c75d3e] uppercase tracking-wider mb-2">
-                    Tier 2 • MSME Term Loan (₹1.4L - ₹50L)
-                  </div>
-                  <div className="font-mono text-3xl font-extrabold text-[#1d1b18] mb-4">
-                    8.0% <span className="text-xs font-normal text-[#706c63]">p.a. term debt</span>
-                  </div>
-                  <ul className="space-y-2.5 text-xs sm:text-sm text-[#706c63] mb-6">
-                    <li className="flex items-center gap-2">
-                      <span className="text-[#3a6b4c] font-bold">✓</span> Up to ₹50,00,000 project capital
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-[#3a6b4c] font-bold">✓</span> 7-Year amortization tenure
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-[#3a6b4c] font-bold">✓</span> 6-Month machinery grace period
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-[#3a6b4c] font-bold">✓</span> CGTMSE credit guarantee backed
-                    </li>
-                  </ul>
+              {/* Card 2: Term Loans & CGTMSE */}
+              <div className="bg-white/95 backdrop-blur-sm border-2 border-[#c75d3e] rounded-2xl p-6 shadow-md relative space-y-4">
+                <div className="absolute top-4 right-4 bg-[#c75d3e] text-white text-[10px] font-mono font-bold px-2 py-0.5 rounded">
+                  MOST POPULAR
                 </div>
-                <div className="text-[11px] font-mono text-[#c75d3e] pt-3 border-t border-[#ede7e1]">
-                  Lead District Bank Standard
+                <div className="w-10 h-10 rounded-xl bg-[#c75d3e] text-white font-extrabold flex items-center justify-center text-sm font-mono">
+                  T2
+                </div>
+                <div>
+                  <h3 className="text-base font-extrabold text-[#1d1b18]">
+                    CGTMSE Bank Term Loan
+                  </h3>
+                  <p className="text-xs text-[#706c63] mt-1 leading-relaxed">
+                    Credit-linked CaPEx for Bulk Milk Chillers, Spice Mills, and cold storage machinery.
+                  </p>
+                </div>
+                <div className="pt-3 border-t border-[#ede7e1] space-y-2 text-xs">
+                  <div className="flex items-center gap-2 text-[#706c63]">
+                    <span className="text-[#c75d3e] font-bold">✓</span> Up to ₹50,00,000 project capital
+                  </div>
+                  <div className="flex items-center gap-2 text-[#706c63]">
+                    <span className="text-[#c75d3e] font-bold">✓</span> 7-Year amortization tenure
+                  </div>
+                  <div className="flex items-center gap-2 text-[#706c63]">
+                    <span className="text-[#c75d3e] font-bold">✓</span> 6-Month machinery grace period
+                  </div>
+                  <div className="flex items-center gap-2 text-[#706c63]">
+                    <span className="text-[#c75d3e] font-bold">✓</span> CGTMSE credit guarantee backed
+                  </div>
                 </div>
               </div>
 
-              {/* Co-Financing & Impact Equity Tier */}
-              <div className="bg-white border border-[#e7e1d8] rounded-2xl p-6 flex flex-col justify-between">
-                <div>
-                  <div className="font-mono text-xs font-bold text-[#706c63] uppercase tracking-wider mb-2">
-                    Tier 3 • Co-Investment &amp; Growth Tranche
-                  </div>
-                  <div className="font-mono text-2xl sm:text-3xl font-extrabold text-[#1d1b18] mb-4">
-                    Syndicated <span className="text-xs font-normal text-[#706c63]">Debt + Equity</span>
-                  </div>
-                  <ul className="space-y-2.5 text-xs sm:text-sm text-[#706c63] mb-6">
-                    <li className="flex items-center gap-2">
-                      <span className="text-[#3a6b4c] font-bold">✓</span> Venture Debt &amp; Impact Angels
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-[#3a6b4c] font-bold">✓</span> Ticket sizes ₹20L to ₹1.5 Crore
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-[#3a6b4c] font-bold">✓</span> Mezzanine cash-flow sharing
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-[#3a6b4c] font-bold">✓</span> Direct Institution Portal access
-                    </li>
-                  </ul>
+              {/* Card 3: Cluster Financing */}
+              <div className="bg-white/95 backdrop-blur-sm border border-[#e7e1d8] rounded-2xl p-6 shadow-sm space-y-4">
+                <div className="w-10 h-10 rounded-xl bg-[#1d1b18] text-white font-extrabold flex items-center justify-center text-sm font-mono">
+                  T3
                 </div>
-                <div className="text-[11px] font-mono text-[#706c63] pt-3 border-t border-[#ede7e1]">
-                  Institutional Syndication Desk
+                <div>
+                  <h3 className="text-base font-extrabold text-[#1d1b18]">
+                    FPO &amp; Cluster Financing
+                  </h3>
+                  <p className="text-xs text-[#706c63] mt-1 leading-relaxed">
+                    Dedicated syndication for Farmer Producer Organizations and multi-panchayat processing hubs.
+                  </p>
+                </div>
+                <div className="pt-3 border-t border-[#ede7e1] space-y-2 text-xs">
+                  <div className="flex items-center gap-2 text-[#706c63]">
+                    <span className="text-[#c75d3e] font-bold">✓</span> Venture Debt &amp; Impact Angels
+                  </div>
+                  <div className="flex items-center gap-2 text-[#706c63]">
+                    <span className="text-[#c75d3e] font-bold">✓</span> Ticket sizes ₹20L to ₹1.5 Crore
+                  </div>
+                  <div className="flex items-center gap-2 text-[#706c63]">
+                    <span className="text-[#c75d3e] font-bold">✓</span> Mezzanine cash-flow sharing
+                  </div>
+                  <div className="flex items-center gap-2 text-[#706c63]">
+                    <span className="text-[#c75d3e] font-bold">✓</span> Direct Institution Portal access
+                  </div>
                 </div>
               </div>
 

@@ -73,41 +73,42 @@ export default function LandingPage() {
             </a>
           </nav>
 
-          {/* 3 Nav Logins - Exact Pixel Match to Reference Design */}
+          {/* 3 Nav Logins: 1. User Login, 2. Institution Login (Identical styling), 3. Dashboard */}
           <div className="flex items-center gap-3 sm:gap-4">
             
-            {/* 1. User Login */}
-            {loggedInUser ? (
-              <div className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#d4e6c1]/60 border border-[#3a6b4c]/30 text-sm font-bold text-[#3a6b4c]">
-                <span className="w-2 h-2 rounded-full bg-[#3a6b4c] animate-pulse" />
-                <span className="max-w-[120px] sm:max-w-[160px] truncate">{loggedInUser}</span>
-                <button
-                  onClick={() => { setLoggedInUser(null); setLoginStep("phone"); }}
-                  className="ml-1 text-[#706c63] hover:text-[#1d1b18] text-xs font-extrabold p-0.5"
-                  title="Logout"
-                >
-                  ✕
-                </button>
-              </div>
-            ) : (
-              <button
-                onClick={() => setIsUserLoginOpen(true)}
-                className="flex items-center gap-2 text-[15px] font-bold text-[#1d1b18] hover:opacity-80 transition-opacity px-2 py-2 cursor-pointer"
-              >
-                <svg className="w-5 h-5 text-[#2b2723]" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                  <circle cx="12" cy="7" r="4" />
-                </svg>
-                <span>User Login</span>
-              </button>
-            )}
+            {/* 1. User Login (Opens dedicated /login page) */}
+            <Link
+              href="/login"
+              className="flex items-center gap-2 bg-[#c25838] hover:bg-[#b04f32] text-white text-[15px] font-bold px-5 py-2.5 rounded-xl shadow-sm shadow-[#c25838]/25 transition-all"
+              title="Open MSME Entrepreneur Login Page"
+            >
+              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+              <span>User Login</span>
+            </Link>
 
-            {/* 2. Dashboard Login (Redirects to https://github.com/Quantumspectra7/Webapp_demo) */}
+            {/* 2. Institution Login (Opens dedicated /institution page in a new tab) */}
+            <Link
+              href="/institution"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-[#c25838] hover:bg-[#b04f32] text-white text-[15px] font-bold px-5 py-2.5 rounded-xl shadow-sm shadow-[#c25838]/25 transition-all"
+              title="Open Institution Portal in a different page"
+            >
+              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                <path d="M3 21h18M3 10h18M5 10v11M19 10v11M9 10v11M15 10v11M12 3l9 7H3z" />
+              </svg>
+              <span>Institution Login</span>
+            </Link>
+
+            {/* 3. Dashboard (Redirects to https://github.com/Quantumspectra7/Webapp_demo) */}
             <a
               href="https://github.com/Quantumspectra7/Webapp_demo"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-white border-[1.5px] border-[#e2dbce] hover:border-[#c75d3e]/50 hover:bg-[#faf7f2] text-[#1d1b18] text-[15px] font-bold px-4 py-2.5 rounded-xl shadow-xs transition-all group"
+              className="flex items-center gap-2 bg-white border-[1.5px] border-[#e2dbce] hover:border-[#c25838]/50 hover:bg-[#faf7f2] text-[#1d1b18] text-[15px] font-bold px-4 py-2.5 rounded-xl shadow-xs transition-all group"
               title="Open Webapp Demo Dashboard on GitHub"
             >
               <svg className="w-5 h-5 text-[#3a3530]" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
@@ -123,17 +124,6 @@ export default function LandingPage() {
                 <line x1="10" y1="14" x2="21" y2="3" />
               </svg>
             </a>
-
-            {/* 3. Institution Login */}
-            <Link
-              href="/institution"
-              className="flex items-center gap-2 bg-[#c25838] hover:bg-[#b04f32] text-white text-[15px] font-bold px-5 py-2.5 rounded-xl shadow-sm shadow-[#c25838]/25 transition-all"
-            >
-              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                <path d="M3 21h18M3 10h18M5 10v11M19 10v11M9 10v11M15 10v11M12 3l9 7H3z" />
-              </svg>
-              <span>Institution Login</span>
-            </Link>
 
           </div>
 

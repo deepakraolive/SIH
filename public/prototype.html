@@ -250,11 +250,11 @@
       box-shadow: 0 6px 18px rgba(199, 93, 62, 0.32);
     }
 
-    /* 3 Header Logins - Pixel Match to Reference */
+    /* 3 Header Logins: 1. User Login & 2. Institution Login (Identical), 3. Dashboard */
     .nav-3-logins {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
     }
 
     .nav-login-btn {
@@ -270,16 +270,21 @@
       font-family: inherit;
     }
 
-    .nav-login-btn.user-login {
-      background: transparent;
-      color: #1d1b18;
+    .nav-login-btn.user-login,
+    .nav-login-btn.institution-login {
+      background: #c25838;
+      color: #ffffff;
       border: none;
-      padding: 8px 10px;
       border-radius: 12px;
+      padding: 10px 20px;
+      box-shadow: 0 2px 8px rgba(194, 88, 56, 0.25);
     }
 
-    .nav-login-btn.user-login:hover {
-      opacity: 0.8;
+    .nav-login-btn.user-login:hover,
+    .nav-login-btn.institution-login:hover {
+      background: #b04f32;
+      opacity: 1;
+      transform: translateY(-1px);
     }
 
     .nav-login-btn.dashboard-login {
@@ -294,19 +299,6 @@
     .nav-login-btn.dashboard-login:hover {
       border-color: rgba(199, 93, 62, 0.4);
       background: #faf7f2;
-    }
-
-    .nav-login-btn.institution-login {
-      background: #c25838;
-      color: #ffffff;
-      border: none;
-      border-radius: 12px;
-      padding: 10px 20px;
-      box-shadow: 0 2px 8px rgba(194, 88, 56, 0.25);
-    }
-
-    .nav-login-btn.institution-login:hover {
-      background: #b04f32;
     }
 
     /* MODULE 1: LANDING PAGE */
@@ -1854,18 +1846,26 @@
         <li><a href="#radar-section">Catchment Radar</a></li>
       </ul>
 
-      <!-- 3 Nav Logins - Exact Pixel Match to Reference Design -->
+      <!-- 3 Nav Logins: 1. User Login, 2. Institution Login, 3. Dashboard -->
       <div class="nav-3-logins">
-        <!-- 1. User Login -->
-        <button class="nav-login-btn user-login" id="nav-user-login-btn" onclick="openUserLoginModal()">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2b2723" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <!-- 1. User Login (Dedicated page) -->
+        <a href="login.html" class="nav-login-btn user-login" id="nav-user-login-btn" title="Open MSME Entrepreneur Login Page">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
             <circle cx="12" cy="7" r="4"></circle>
           </svg>
           <span id="nav-user-label">User Login</span>
-        </button>
+        </a>
 
-        <!-- 2. Dashboard Login (Redirects to https://github.com/Quantumspectra7/Webapp_demo) -->
+        <!-- 2. Institution Login (Opens dedicated institution portal in a new tab) -->
+        <a href="institution.html" target="_blank" rel="noopener noreferrer" class="nav-login-btn institution-login" id="nav-inst-login-btn" title="Open Institution Portal in a different page">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 21h18M3 10h18M5 10v11M19 10v11M9 10v11M15 10v11M12 3l9 7H3z"></path>
+          </svg>
+          <span>Institution Login</span>
+        </a>
+
+        <!-- 3. Dashboard (Redirects to https://github.com/Quantumspectra7/Webapp_demo) -->
         <a href="https://github.com/Quantumspectra7/Webapp_demo" target="_blank" rel="noopener noreferrer" class="nav-login-btn dashboard-login" title="Open Webapp Demo Dashboard on GitHub">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3a3530" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="3" y="3" width="7" height="7" rx="1.5"></rect>
@@ -1880,14 +1880,6 @@
             <line x1="10" y1="14" x2="21" y2="3"></line>
           </svg>
         </a>
-
-        <!-- 3. Institution Login -->
-        <button class="nav-login-btn institution-login" id="nav-inst-login-btn" onclick="switchPortal('institution')">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 21h18M3 10h18M5 10v11M19 10v11M9 10v11M15 10v11M12 3l9 7H3z"></path>
-          </svg>
-          <span>Institution Login</span>
-        </button>
       </div>
     </div>
   </header>

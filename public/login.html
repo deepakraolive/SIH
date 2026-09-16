@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MSME Entrepreneur Login | GramVest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #fff8f2;
+      --surface: #ffffff;
+      --surface-subtle: #faf7f2;
+      --text: #1d1b18;
+      --text-muted: #706c63;
+      --border: #e2dbce;
+      --terracotta: #c25838;
+      --terracotta-hover: #b04f32;
+      --green: #3a6b4c;
+      --green-bg: rgba(212, 230, 193, 0.6);
+      --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(255, 248, 242, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid #ede3d8;
+    }
+    .header-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--terracotta);
+      color: #fff;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 18px;
+    }
+    .brand-text {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    .brand-text span { color: var(--terracotta); }
+    .nav-3-logins {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .nav-login-btn {
+      font-size: 15px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      cursor: pointer;
+      border-radius: 12px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .nav-login-btn.user-login,
+    .nav-login-btn.institution-login {
+      background: var(--terracotta);
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      box-shadow: 0 2px 8px rgba(194, 88, 56, 0.25);
+    }
+    .nav-login-btn.user-login:hover,
+    .nav-login-btn.institution-login:hover {
+      background: var(--terracotta-hover);
+      transform: translateY(-1px);
+    }
+    .nav-login-btn.dashboard-login {
+      background: #ffffff;
+      color: var(--text);
+      border: 1.5px solid var(--border);
+      padding: 10px 18px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    }
+    .nav-login-btn.dashboard-login:hover {
+      background: #faf7f2;
+      border-color: rgba(194, 88, 56, 0.4);
+    }
+    .main-container {
+      flex: 1;
+      max-width: 1280px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 40px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 40px;
+      max-width: 460px;
+      width: 100%;
+      box-shadow: 0 20px 40px -15px rgba(0,0,0,0.06);
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      background: #fbebe4;
+      color: var(--terracotta);
+      font-size: 11px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--terracotta);
+    }
+    h1 {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+    p.subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+    label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+    .input-group {
+      display: flex;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .input-prefix {
+      background: #f7f2eb;
+      padding: 12px 16px;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text-muted);
+      border-right: 1px solid var(--border);
+    }
+    input[type="tel"], input[type="text"] {
+      flex: 1;
+      padding: 12px 16px;
+      border: none;
+      outline: none;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: inherit;
+    }
+    .btn-submit {
+      width: 100%;
+      background: var(--terracotta);
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(194, 88, 56, 0.25);
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .btn-submit:hover {
+      background: var(--terracotta-hover);
+    }
+    .divider {
+      position: relative;
+      margin: 28px 0;
+      text-align: center;
+    }
+    .divider::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 100%;
+      height: 1px;
+      background: #ede3d8;
+    }
+    .divider span {
+      position: relative;
+      background: #fff;
+      padding: 0 12px;
+      font-size: 11px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+    .demo-btn {
+      width: 100%;
+      background: var(--surface-subtle);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s ease;
+    }
+    .demo-btn:hover {
+      background: #f3ede6;
+      border-color: var(--terracotta);
+    }
+    .demo-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .demo-venture {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .demo-score {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      background: var(--green-bg);
+      color: var(--green);
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+    .footer-note {
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      padding: 20px;
+      border-top: 1px solid #ede3d8;
+      background: rgba(255,255,255,0.6);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <a href="prototype.html" class="brand">
+        <div class="brand-icon">G</div>
+        <div class="brand-text">Gram<span>Vest</span></div>
+      </a>
+
+      <!-- 3 Nav Logins: 1. User Login, 2. Institution Login, 3. Dashboard -->
+      <div class="nav-3-logins">
+        <!-- 1. User Login (Active) -->
+        <a href="login.html" class="nav-login-btn user-login" title="MSME Entrepreneur Login">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          <span>User Login</span>
+        </a>
+
+        <!-- 2. Institution Login (Opens in a different page) -->
+        <a href="institution.html" target="_blank" rel="noopener noreferrer" class="nav-login-btn institution-login" title="Open Institution Underwriting Console in a new page">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 21h18M3 10h18M5 10v11M19 10v11M9 10v11M15 10v11M12 3l9 7H3z"></path>
+          </svg>
+          <span>Institution Login</span>
+        </a>
+
+        <!-- 3. Dashboard -->
+        <a href="https://github.com/Quantumspectra7/Webapp_demo" target="_blank" rel="noopener noreferrer" class="nav-login-btn dashboard-login" title="Open Webapp Demo Dashboard on GitHub">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3a3530" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7" rx="1.5"></rect>
+            <rect x="14" y="3" width="7" height="7" rx="1.5"></rect>
+            <rect x="3" y="14" width="7" height="7" rx="1.5"></rect>
+            <rect x="14" y="14" width="7" height="7" rx="1.5"></rect>
+          </svg>
+          <span>Dashboard</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5c544d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 2px;">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <div class="main-container">
+    <div class="card" id="login-box">
+      <div class="badge">
+        <span class="badge-dot"></span>
+        MSME Entrepreneur Portal
+      </div>
+      <h1>User Login</h1>
+      <p class="subtitle">Access your rural feasibility scorecard, monitor sovereign subsidy claims (PMEGP, PMFME, AIF), and download bank-ready DPRs.</p>
+
+      <form id="phone-form" onsubmit="handleSendOtp(event)">
+        <label>Mobile Number / Aadhaar UID</label>
+        <div class="input-group">
+          <span class="input-prefix">+91</span>
+          <input type="tel" id="user-phone-input" placeholder="98765 43210" required />
+        </div>
+        <button type="submit" class="btn-submit">
+          <span>Send OTP Verification Code</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </form>
+
+      <form id="otp-form" onsubmit="handleVerifyOtp(event)" style="display: none;">
+        <label>Enter 4-Digit OTP Code</label>
+        <div style="background:#fdfaf5; border:1px solid #ede3d8; border-radius:10px; padding:8px 12px; font-size:12px; color:#706c63; margin-bottom:12px; display:flex; justify-content:space-between;">
+          <span>Sent to <strong id="display-phone">+91 98765 43210</strong></span>
+          <span style="color:#c25838; font-weight:700;">Demo: 1234</span>
+        </div>
+        <input type="text" id="user-otp-input" placeholder="1234" maxlength="4" style="width:100%; border:1px solid #ddd6c9; border-radius:12px; padding:12px; text-align:center; font-size:20px; font-family:var(--font-mono); font-weight:700; margin-bottom:16px;" required />
+        <button type="submit" class="btn-submit">Verify &amp; Enter Dashboard</button>
+      </form>
+
+      <div class="divider">
+        <span>Or Instant Demo Access</span>
+      </div>
+
+      <button class="demo-btn" onclick="quickLogin('Gurpreet Singh', '1,000L Milk Chilling Unit', 74, '₹3.15L PMEGP')">
+        <div>
+          <div class="demo-name">Gurpreet Singh</div>
+          <div class="demo-venture">1,000L Milk Chilling Unit (Ludhiana)</div>
+        </div>
+        <span class="demo-score">Score: 74/100</span>
+      </button>
+
+      <button class="demo-btn" onclick="quickLogin('Harpreet Kaur', 'Spice & Flour Processing Mill', 79, '₹2.87L PMFME')">
+        <div>
+          <div class="demo-name">Harpreet Kaur</div>
+          <div class="demo-venture">Spice & Flour Mill (Sangrur)</div>
+        </div>
+        <span class="demo-score">Score: 79/100</span>
+      </button>
+    </div>
+
+    <!-- Authenticated Profile View -->
+    <div class="card" id="profile-box" style="display: none; max-width: 600px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #ede3d8; padding-bottom:16px; margin-bottom:20px;">
+        <div>
+          <div style="font-size:11px; font-weight:700; color:var(--green); font-family:var(--font-mono); text-transform:uppercase;">● Session Active</div>
+          <h2 id="profile-name" style="font-size:22px; font-weight:900;">Welcome, Gurpreet Singh</h2>
+          <div id="profile-venture" style="font-size:12px; color:var(--text-muted);">1,000L Bulk Milk Chilling Unit</div>
+        </div>
+        <button onclick="logout()" style="background:#fee2e2; color:#b91c1c; border:none; padding:6px 14px; border-radius:8px; font-size:12px; font-weight:700; cursor:pointer;">Sign Out</button>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:20px;">
+        <div style="background:#faf7f2; padding:12px; border-radius:12px; border:1px solid #ede3d8;">
+          <div style="font-size:11px; color:#706c63; text-transform:uppercase;">Viability Score</div>
+          <div id="profile-score" style="font-size:22px; font-weight:900; color:var(--green);">74/100</div>
+          <div style="font-size:10px; color:var(--green); font-weight:700;">✓ Bank Grade Ready</div>
+        </div>
+        <div style="background:#faf7f2; padding:12px; border-radius:12px; border:1px solid #ede3d8;">
+          <div style="font-size:11px; color:#706c63; text-transform:uppercase;">Subsidy Grant</div>
+          <div id="profile-subsidy" style="font-size:22px; font-weight:900; color:var(--terracotta);">₹3.15L</div>
+          <div style="font-size:10px; color:var(--terracotta); font-weight:700;">Direct Escrow</div>
+        </div>
+      </div>
+
+      <button onclick="alert('DPR Package downloaded successfully!')" class="btn-submit">
+        <span>Download Bank-Ready DPR Package</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    GramVest Sovereign Rural Financing Console • Multi-Agency Underwriting Gateway
+  </div>
+
+  <script>
+    function handleSendOtp(e) {
+      e.preventDefault();
+      const phone = document.getElementById('user-phone-input').value;
+      document.getElementById('display-phone').innerText = '+91 ' + phone;
+      document.getElementById('phone-form').style.display = 'none';
+      document.getElementById('otp-form').style.display = 'block';
+    }
+
+    function handleVerifyOtp(e) {
+      e.preventDefault();
+      quickLogin('Rural Entrepreneur', 'Verified MSME Unit', 76, '₹3.50L PMEGP');
+    }
+
+    function quickLogin(name, venture, score, subsidy) {
+      document.getElementById('login-box').style.display = 'none';
+      document.getElementById('profile-box').style.display = 'block';
+      document.getElementById('profile-name').innerText = 'Welcome, ' + name;
+      document.getElementById('profile-venture').innerText = venture;
+      document.getElementById('profile-score').innerText = score + '/100';
+      document.getElementById('profile-subsidy').innerText = subsidy;
+    }
+
+    function logout() {
+      document.getElementById('profile-box').style.display = 'none';
+      document.getElementById('login-box').style.display = 'block';
+      document.getElementById('phone-form').style.display = 'block';
+      document.getElementById('otp-form').style.display = 'none';
+    }
+  </script>
+</body>
+</html>

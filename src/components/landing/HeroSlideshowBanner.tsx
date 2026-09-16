@@ -98,14 +98,14 @@ export default function HeroSlideshowBanner() {
               </span>
             </div>
 
-            {/* High-Impact Headline: Stop guessing mandi demand. */}
+            {/* High-Impact Headline: We help small business grow big */}
             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-[#1d1b18] tracking-tight leading-[1.08]">
-              Stop guessing mandi demand.
+              We help small business <span className="text-[#c75d3e]">grow big</span>.
             </h1>
 
             {/* Subtitle */}
             <p className="text-base sm:text-xl text-[#605a52] max-w-3xl mx-auto leading-relaxed font-medium">
-              GramVest eliminates trial-and-error for rural entrepreneurs by modeling genuine village footfall, 3-phase power grid reliability, and auto-matching qualifying sovereign capital subsidies (<span className="text-[#1d1b18] font-bold">PMEGP, AIF, PMFME</span>).
+              GramVest transforms grassroots rural micro-enterprises into bank-funded ventures by streamlining feasibility, verifying 3-phase power grid reliability, and auto-matching sovereign capital subsidies (<span className="text-[#1d1b18] font-bold">PMEGP, AIF, PMFME</span>).
             </p>
 
             {/* Action CTAs (No simulator button!) */}

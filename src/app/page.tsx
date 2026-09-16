@@ -73,14 +73,14 @@ export default function LandingPage() {
             </a>
           </nav>
 
-          {/* 3 Nav Logins Requested by User */}
-          <div className="flex items-center gap-2 sm:gap-3">
+          {/* 3 Nav Logins - Exact Pixel Match to Reference Design */}
+          <div className="flex items-center gap-3 sm:gap-4">
             
             {/* 1. User Login */}
             {loggedInUser ? (
-              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#d4e6c1]/60 border border-[#3a6b4c]/30 text-xs font-bold text-[#3a6b4c]">
+              <div className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#d4e6c1]/60 border border-[#3a6b4c]/30 text-sm font-bold text-[#3a6b4c]">
                 <span className="w-2 h-2 rounded-full bg-[#3a6b4c] animate-pulse" />
-                <span className="max-w-[120px] sm:max-w-[150px] truncate">{loggedInUser}</span>
+                <span className="max-w-[120px] sm:max-w-[160px] truncate">{loggedInUser}</span>
                 <button
                   onClick={() => { setLoggedInUser(null); setLoginStep("phone"); }}
                   className="ml-1 text-[#706c63] hover:text-[#1d1b18] text-xs font-extrabold p-0.5"
@@ -92,9 +92,9 @@ export default function LandingPage() {
             ) : (
               <button
                 onClick={() => setIsUserLoginOpen(true)}
-                className="text-xs sm:text-sm font-bold text-[#1d1b18] hover:text-[#c75d3e] transition-colors px-2.5 sm:px-3 py-2 rounded-lg hover:bg-[#f3ede6] flex items-center gap-1.5 border border-transparent hover:border-[#ddd6c9]"
+                className="flex items-center gap-2 text-[15px] font-bold text-[#1d1b18] hover:opacity-80 transition-opacity px-2 py-2 cursor-pointer"
               >
-                <svg className="w-4 h-4 text-[#706c63]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-[#2b2723]" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                   <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                   <circle cx="12" cy="7" r="4" />
                 </svg>
@@ -107,17 +107,17 @@ export default function LandingPage() {
               href="https://github.com/Quantumspectra7/Webapp_demo"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs sm:text-sm font-bold text-[#1d1b18] hover:text-[#c75d3e] transition-colors px-2.5 sm:px-3 py-2 rounded-lg hover:bg-[#f3ede6] flex items-center gap-1.5 border border-[#ddd6c9] bg-white group"
+              className="flex items-center gap-2 bg-white border-[1.5px] border-[#e2dbce] hover:border-[#c75d3e]/50 hover:bg-[#faf7f2] text-[#1d1b18] text-[15px] font-bold px-4 py-2.5 rounded-xl shadow-xs transition-all group"
               title="Open Webapp Demo Dashboard on GitHub"
             >
-              <svg className="w-4 h-4 text-[#706c63] group-hover:text-[#c75d3e]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <rect x="3" y="3" width="7" height="9" rx="1" />
-                <rect x="14" y="3" width="7" height="5" rx="1" />
-                <rect x="14" y="12" width="7" height="9" rx="1" />
-                <rect x="3" y="16" width="7" height="5" rx="1" />
+              <svg className="w-5 h-5 text-[#3a3530]" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                <rect x="3" y="3" width="7" height="7" rx="1.5" />
+                <rect x="14" y="3" width="7" height="7" rx="1.5" />
+                <rect x="3" y="14" width="7" height="7" rx="1.5" />
+                <rect x="14" y="14" width="7" height="7" rx="1.5" />
               </svg>
               <span>Dashboard</span>
-              <svg className="w-3 h-3 text-[#706c63] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 text-[#5c544d] ml-0.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
                 <polyline points="15 3 21 3 21 9" />
                 <line x1="10" y1="14" x2="21" y2="3" />
@@ -127,13 +127,12 @@ export default function LandingPage() {
             {/* 3. Institution Login */}
             <Link
               href="/institution"
-              className="bg-[#c75d3e] hover:bg-[#b04f32] text-white text-xs sm:text-sm font-bold px-3 sm:px-4 py-2 rounded-lg shadow-sm shadow-[#c75d3e]/20 transition-all flex items-center gap-1.5"
+              className="flex items-center gap-2 bg-[#c25838] hover:bg-[#b04f32] text-white text-[15px] font-bold px-5 py-2.5 rounded-xl shadow-sm shadow-[#c25838]/25 transition-all"
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                 <path d="M3 21h18M3 10h18M5 10v11M19 10v11M9 10v11M15 10v11M12 3l9 7H3z" />
               </svg>
-              <span className="hidden sm:inline">Institution Login</span>
-              <span className="sm:hidden">Institution</span>
+              <span>Institution Login</span>
             </Link>
 
           </div>
